@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import roughArrowImg from "@/public/assets/landing/rough-arrow.png";
 import holderImg from "@/public/assets/landing/holder.png";
+import heroImg from "@/public/assets/landing/hero.png";
 import Image from "next/image";
 
 export function Hero(): JSX.Element {
@@ -30,48 +31,54 @@ export function Hero(): JSX.Element {
   return (
     <section className="hero w-full h-fit flex items-center justify-center">
       <div className="wrapper w-full max-w-screen-xl flex py-4 px-5 flex-col gap-6">
-        <div className="introduction-heading flex flex-col gap-1">
-          <div className="heading-or-loading text-white dark:text-neutral-100 text-3xl font-mono tracking-tighter">
-            Hey there!
+        <div className="intro-desc-wrapper relative flex flex-col gap-6">
+          <div className="bg-image-floating absolute">
+            <Image alt="bg-img" src={heroImg} className="opacity-30" />
           </div>
-          <div className="relative name-intro-or-loading text-white w-fit h-fit dark:text-white text-4xl font-mono">
-            <div className="text relative w-fit h-fit">
-              I'm <span className="text-[#c778dd]">Manas</span>
+          <div className="introduction-heading relative z-10 flex flex-col gap-1 w-fit h-fit">
+            <div className="heading-or-loading text-white dark:text-neutral-100 text-3xl font-mono tracking-tighter">
+              Hey there!
             </div>
-            <div className="svg-container absolute w-full h-full inset-0 bottom-0 flex items-end">
-              <svg
-                id="rough-line"
-                className={clsx(
-                  `rough-line h-[10px] relative translate-y-3 transition-all duration-300 ${
-                    isRendered ? "w-full" : "w-0"
-                  }`
-                )} // Set an explicit height
-                viewBox="0 0 320 40" // Adjust viewBox to fit the line
-                preserveAspectRatio="none"
-              ></svg>
+            <div className="relative name-intro-or-loading text-white w-fit h-fit dark:text-white text-4xl font-mono">
+              <div className="text relative w-fit h-fit">
+                I'm <span className="text-[#c778dd]">Manas</span>
+              </div>
+              <div className="svg-container absolute w-full h-full inset-0 bottom-0 flex items-end">
+                <svg
+                  id="rough-line"
+                  className={clsx(
+                    `rough-line h-[10px] relative translate-y-3 transition-all duration-300 ${
+                      isRendered ? "w-full" : "w-0"
+                    }`
+                  )} // Set an explicit height
+                  viewBox="0 0 320 40" // Adjust viewBox to fit the line
+                  preserveAspectRatio="none"
+                ></svg>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="my-description font-mono text-white text-lg">
-          Stepped into programming and development in 2023, and I'm now a{" "}
-          <span className="w-fit h-fit">
-            <span className="text-[#c778dd]">Full-Stack Developer</span>
-            <span></span>
-          </span>
-          . I began with{" "}
-          <span className="text-[#c778dd]">C++, Python, and JavaScript</span>,
-          and have transitioned to{" "}
-          <span className="text-[#c778dd]">TypeScript</span>. I excel in writing
-          clean, scalable code and have experience building mobile applications
-          with <span className="text-[#c778dd]">React Native</span>.
-          Additionally, I have a basic understanding of{" "}
-          <span className="text-[#c778dd]">GCP and AWS</span>.
-        </div>
-        <div className="more-about-me text-base font-mono text-white">
-          I am still crazy about{" "}
-          <span className="text-[#c778dd]">cartoons</span> 🧙 (pokemon,
-          beyblade, shinchan, etc), When I'm not with my laptop, you will see
-          reading (fictional) 🤓 or talking to my mom.
+          <div className="my-description relative z-10 font-mono text-white text-lg w-fit h-fit">
+            Stepped into programming and development in 2023, and I'm now a{" "}
+            <span className="w-fit h-fit">
+              <span className="text-[#c778dd]">Full-Stack Developer</span>
+              <span></span>
+            </span>
+            . I began with{" "}
+            <span className="text-[#c778dd]">C++, Python, and JavaScript</span>,
+            and have transitioned to{" "}
+            <span className="text-[#c778dd]">TypeScript</span>. I excel in
+            writing clean, scalable code and have experience building mobile
+            applications with{" "}
+            <span className="text-[#c778dd]">React Native</span>. Additionally,
+            I have a basic understanding of{" "}
+            <span className="text-[#c778dd]">GCP and AWS</span>.
+          </div>
+          <div className="more-about-me text-base font-mono text-white w-fit h-fit">
+            I am still crazy about{" "}
+            <span className="text-[#c778dd]">cartoons</span> 🧙 (pokemon,
+            beyblade, shinchan, etc), When I'm not with my laptop, you will see
+            reading (fictional) 🤓 or talking to my mom.
+          </div>
         </div>
         <div className="relative chad-quote-component w-full h-fit text-white dark:text-white font-mono mt-6 flex items-center justify-center flex-col gap-14">
           <div className="heading-chad w-full h-fit text-xl flex flex-row items-center gap-1">

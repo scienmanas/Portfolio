@@ -1,6 +1,9 @@
 import { Hero } from "@/app/ui/landing/Hero";
 import { Skills } from "@/app/ui/landing/Skills";
 import { Projects } from "@/app/ui/landing/Projects";
+import { Flex } from "@/app/ui/landing/Flex";
+import { CommunityWork } from "@/app/ui/landing/CommunityWork";
+import { MoreAboutMe } from "@/app/ui/landing/MoreAboutMe";
 
 export default function Home() {
   return (
@@ -8,6 +11,9 @@ export default function Home() {
       <Hero />
       <Skills />
       <Projects />
+      <Flex />
+      <CommunityWork />
+      <MoreAboutMe />
     </div>
   );
 }

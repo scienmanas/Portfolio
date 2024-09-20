@@ -138,7 +138,7 @@ export function Projects(): JSX.Element {
     <section className="projects w-full h-fit flex items-center justify-center">
       <div className="wrapper w-full h-fit max-w-screen-xl flex items-start flex-col gap-10 px-5">
         <div className="head w-full h-fit flex items-start">
-          <h1 className="heading w-fit h-fit text-2xl text-white">
+          <h1 className="heading w-fit h-fit text-2xl text-white flex items-end gap-1">
             <span className="text-[#c778dd]">$</span>
             <span className="font-mono">projects</span>
           </h1>
@@ -157,22 +157,22 @@ export function Projects(): JSX.Element {
               />
             ))}
           </div>
-          <div className="further-info-and-comments font-mono text-neutral-100 flex flex-col gap-4 ">
-            <div className="info-text">
+          <div className="further-info-and-comments font-mono text-neutral-100">
+            <div className="info-text ">
               Apart from these deployed projects I have also made Gen-AI powered
-              discord bots by use of gemini-api, wrote terminal based games in
-              python during my initial journey.
-            </div>
-            <div className="more-projects w-fit h-fit flex flex-row gap-2">
-              <span>Some of them includes:</span>
-              <div className="all-bot-project-wrapper flex flex-row  gap-1">
-                {botProjectData.map((project, index) => (
-                  <Link href={project.link} className="w-fit h-fit">
-                    <span>{project.name}</span>
-                    {index < botProjectData.length - 1 && <span>,</span>}
-                  </Link>
-                ))}
-              </div>
+              discord bots by use of gemini-api and wrote terminal based games.
+              Some of these are:{" "}
+              {botProjectData.map((project, index) => (
+                <Link
+                  key={index}
+                  href={project.link}
+                  className="w-auto h-auto text-cyan-200 "
+                >
+                  <span className="hover:underline">{project.name}</span>
+                  {index < botProjectData.length - 1 && <span>, </span>}
+                </Link>
+              ))}
+              {"."}
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@ function ProjectCard({
             alt={`${name}-img`}
             width={340}
             height={270}
-            className="flex object-cover w-[340px] h-[270px] group-hover:scale-105 rounded-t-md duration-300"
+            className="flex object-cover w-[340px] h-[270px] group-hover:scale-105 rounded-t-md duration-300 pointer-events-none"
           />
         </div>
       </div>
@@ -219,7 +219,7 @@ function ProjectCard({
               )}
             </div>
           </div>
-          <div className="description w-fit h-fit text-sm text-neutral-300">
+          <div className="description w-fit h-fit text-sm text-neutral-200">
             {description.split(/\s+/).filter((element) => {
               return element.length !== 0;
             }).length > 15
@@ -230,7 +230,7 @@ function ProjectCard({
         <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
           {techStack.map((tech, index) => (
             <div
-              className="tech px-2 py-1 rounded-sm border border-dashed border-pink-200 text-xs text-yellow-300"
+              className="tech px-2 py-1 rounded-sm border-dotted border-[0.5px] border-pink-200 text-xs text-yellow-300"
               key={index}
             >
               {tech.toLocaleLowerCase()}

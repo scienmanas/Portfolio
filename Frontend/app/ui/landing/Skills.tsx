@@ -118,16 +118,14 @@ export function Skills(): JSX.Element {
 
   return (
     <section className="skills w-full flex items-center justify-center h-fit">
-      <div className="wrapper w-full max-w-screen-xl h-fit px-5 font-mono flex flex-col gap-4 items-start justify-center">
-        <div className="heading w-full h-fit text-neutral-100 dark:text-neutral-100 text-2xl flex gap-2">
-          <span className="text-[#c778dd] dark:text-[#c778dd] w-fit h-fit">
+      <div className="wrapper w-full max-w-screen-xl h-fit px-5 flex flex-col gap-4 items-start justify-center">
+        <div className="heading w-full h-fit text-neutral-100 dark:text-neutral-100 text-2xl flex gap-1 items-center">
+          <span className="text-[#c778dd] dark:text-[#c778dd] w-fit h-fitl">
             $
           </span>
-          <span className="decoration-wavy underline decoration-yellow-300 w-fit h-fit">
-            skills
-          </span>
+          <span className="w-fit h-fit font-mono translate-y-1">skills</span>
         </div>
-        <div className="content-wrapper flex flex-col w-full items-start gap-5">
+        <div className="content-wrapper flex flex-col w-full items-start gap-5 font-mono">
           <div className="description text-base w-full  h-fit text-neutral-100 dark:text-neutral-100">
             I am someone who tries many things out, gets in trouble, and
             eventually solves it. Being a{" "}

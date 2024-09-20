@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
-// import { Footer } from "@/app/ui/universal/Footer";
+import { Footer } from "@/app/ui/universal/Footer";
 import { Navbar } from "@/app/ui/universal/Navbar";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiase dark:bg-[#282c33] bg-[#282c33]`}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="wrapper flex flex-col w-full h-fit gap-10">
             <section className="navbar w-full h-fit">
               <Navbar />
@@ -27,7 +27,7 @@ export default function RootLayout({
               {children}
             </section>
             <section className="footer w-full h-fit flex items-center justify-center">
-              {/* <Footer /> */}
+              <Footer />
             </section>
           </div>
         </ThemeProvider>
