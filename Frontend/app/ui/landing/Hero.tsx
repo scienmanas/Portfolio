@@ -36,7 +36,7 @@ export function Hero(): JSX.Element {
             <Image
               alt="bg-img"
               src={heroImg}
-              className="dark:opacity-30 opacity-25"
+              className="dark:opacity-30 opacity-15"
             />
           </div>
           <div className="introduction-heading relative z-10 flex flex-col gap-1 w-fit h-fit">

@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiase dark:bg-[#282c33] bg-[#282c33]`}>
+      <body className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="wrapper flex flex-col w-full h-fit gap-10">
             <section className="navbar w-full h-fit">

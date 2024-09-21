@@ -28,5 +28,5 @@
 
 .markdown a {
   color: blue;
-  @apply underline dark:decoration-yellow-500 decoration-yellow-500;
+  @apply underline dark:decoration-yellow-500 decoration-yellow-500 text-blue-800 dark:text-cyan-500;
 }

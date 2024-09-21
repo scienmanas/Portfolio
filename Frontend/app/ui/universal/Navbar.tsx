@@ -36,6 +36,7 @@ export function Navbar(): JSX.Element {
     setMounted(true);
     if (mounted && theme) {
       setTheme(theme);
+      setWebsiteTheme(theme);
     }
   }, [theme, mounted]);
 
