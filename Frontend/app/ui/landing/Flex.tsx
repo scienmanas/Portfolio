@@ -55,14 +55,14 @@ export function Flex(): JSX.Element {
   return (
     <section className="w-full h-fit flex items-center justify-center">
       <div className="wrapper w-full h-fit max-w-screen-xl flex flex-col gap-5 px-5 items-start">
-        <div className="heading flex flex-row gap-1 w-fit h-fit items-center text-white dark:text-white text-2xl font-semibold">
-          <span className="text-[#c788dd]">$</span>
-          <span className="font-mono translate-y-1">flex</span>
+        <div className="heading flex flex-row gap-1 w-fit h-fit items-center text-neutral-900 dark:text-white text-xl sm:text-2xl font-semibold">
+          <span className="dark:text-[#c788dd] text-[#6d2f7f]">$</span>
+          <span className="font-mono sm:translate-y-1">flex</span>
         </div>
-        <div className="some-words text-white font-mono flex flex-col gap-6">
-          <div className="w-fit h-fit">
+        <div className="some-words font-mono flex flex-col gap-6">
+          <div className="w-fit h-fit text-neutral-800 dark:text-white text-sm sm:text-base">
             The thing I really flex is my{" "}
-            <span className="text-[#c778dd]">
+            <span className="dark:text-[#c778dd] text-[#6d2f7f]">
               consistency, commitment & straightforwardness
             </span>
             , I give to the task which I take. I always try to do up to the
@@ -70,33 +70,36 @@ export function Flex(): JSX.Element {
             anymore. I have a simple policy, I don't give a fcuk to anything
             which comes twisted to me.
           </div>
-          <div className="info-plus-data-achievements flex flex-col gap-10 items-start">
+          <div className="info-plus-data-achievements flex flex-col gap-10 items-start text-sm sm:text-base">
             <div className="more-info-2nd-para w-fit h-fit">
               Okay, I said enough, some of my{" "}
-              <span className="text-[#c778dd]">on-paper achievements</span>:
+              <span className="dark:text-[#c778dd] text-[#6d2f7f]">
+                on-paper achievements
+              </span>
+              :
             </div>
-            <div className="timeline flex flex-col gap-5 border-l-2 py-5 rounded-lg relative">
+            <div className="timeline flex flex-col gap-5 border-neutral-900  dark:border-neutral-300  border-l-2 py-5 rounded-lg relative">
               {achievementsData.map((achievement, index) => (
                 <div
                   key={index}
-                  className="timeline-item relative px-5 before:absolute before:w-3 before:h-3 before:bg-white before:-left-[7px] before:border before:border-red-400 before:rounded-full "
+                  className="timeline-item relative px-5 before:absolute before:w-3 before:h-3 dark:before:bg-white before:bg-pink-800 before:-left-[7px] before:border before:border-cyan-400 dark:before:border-red-400 before:rounded-full "
                 >
                   <div className="timeline-content">
-                    <span className="text-[#d4a3e6] dark:text-[#d4a3e6] font-semibold">
+                    <span className="text-[#6d2f7f] dark:text-[#d4a3e6] font-semibold">
                       {achievement.name}:{" "}
                     </span>
-                    <span className="text-neutral-300 text-sm">
+                    <span className="dark:text-neutral-300 text-neutral-700 text-xs sm:text-sm">
                       {achievement.description}{" "}
                     </span>
                     {achievement.date && (
-                      <span className="text-neutral-500 text-xs">
+                      <span className="dark:text-neutral-500 text-neutral-500 text-[0.6rem] sm:text-xs">
                         ({achievement.date}){" "}
                       </span>
                     )}
                     {achievement.link && (
                       <Link
                         href={achievement.link}
-                        className="text-blue-400 hover:text-blue-300 duration-300 text-xs"
+                        className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 duration-300 text-[0.6rem] sm:text-xs"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

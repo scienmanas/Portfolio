@@ -9,3 +9,24 @@
   }
 }
 
+
+.markdown p {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  /* Adjust as necessary */
+}
+
+.markdown pre {
+  width: fit-content;
+  height: fit-content;
+}
+
+.markdown code {
+  text-wrap: wrap;
+  font-size: medium;
+}
+
+.markdown a {
+  color: blue;
+  @apply underline dark:decoration-yellow-500 decoration-yellow-500;
+}

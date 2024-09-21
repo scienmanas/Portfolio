@@ -59,7 +59,6 @@ export function Projects(): JSX.Element {
         "Mongo DB",
         "Gen-AI",
         "GCP",
-        "shell",
       ],
       github: "https://github.com/scienmanas/CertiMailer",
       deployedLink: "https://certimailer.xyz/",
@@ -138,8 +137,8 @@ export function Projects(): JSX.Element {
     <section className="projects w-full h-fit flex items-center justify-center">
       <div className="wrapper w-full h-fit max-w-screen-xl flex items-start flex-col gap-10 px-5">
         <div className="head w-full h-fit flex items-start">
-          <h1 className="heading w-fit h-fit text-2xl text-white flex items-end gap-1">
-            <span className="text-[#c778dd]">$</span>
+          <h1 className="heading w-fit h-fit text-xl sm:text-2xl dark:text-white text-neutral-900 flex items-end gap-1">
+            <span className="dark:text-[#c778dd] text-[#6d2f7f]">$</span>
             <span className="font-mono">projects</span>
           </h1>
         </div>
@@ -157,7 +156,7 @@ export function Projects(): JSX.Element {
               />
             ))}
           </div>
-          <div className="further-info-and-comments font-mono text-neutral-100">
+          <div className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
             <div className="info-text ">
               Apart from these deployed projects I have also made Gen-AI powered
               discord bots by use of gemini-api and wrote terminal based games.
@@ -166,7 +165,7 @@ export function Projects(): JSX.Element {
                 <Link
                   key={index}
                   href={project.link}
-                  className="w-auto h-auto text-cyan-200 "
+                  className="w-auto h-auto dark:text-cyan-200 text-cyan-800 font-semibold"
                 >
                   <span className="hover:underline">{project.name}</span>
                   {index < botProjectData.length - 1 && <span>, </span>}
@@ -190,36 +189,36 @@ function ProjectCard({
   deployedLink,
 }: projectDataType): JSX.Element {
   return (
-    <div className="project-card  w-[340px] h-fit rounded-md flex flex-col">
-      <div className="relative image-box w-fit h-fit">
-        <div className="image group w-[340px] h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
+    <div className="project-card  max-w-[340px] h-fit rounded-md flex flex-col">
+      <div className="relative image-box w-full h-fit">
+        <div className="image group w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
           <Image
             src={image}
             alt={`${name}-img`}
             width={340}
             height={270}
-            className="flex object-cover w-[340px] h-[270px] group-hover:scale-105 rounded-t-md duration-300 pointer-events-none"
+            className="flex object-cover w-full h-[270px] group-hover:scale-105 rounded-t-md duration-300 pointer-events-none"
           />
         </div>
       </div>
-      <div className="all-contents flex flex-col w-full h-[220px] py-2 px-3 bg-[#46344e] items-start gap-4">
+      <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#46344e] bg-white items-start gap-4">
         <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
           <div className="name-links w-full h-fit flex flex-row items-center justify-between">
-            <div className="name w-fit h-fit text-lg font-semibold text-white">
+            <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900">
               {name}
             </div>
             <div className="links w-fit h-fit flex flex-row gap-2 items-center">
               <Link href={github} className="w-fit h-fit">
-                <FiGithub className="text-white text-lg" />
+                <FiGithub className="dark:text-white text-neutral-900 text-base sm:text-lg" />
               </Link>
               {deployedLink && (
                 <Link href={deployedLink as string} className="w-fit h-fit">
-                  <LuExternalLink className="text-white text-lg" />
+                  <LuExternalLink className="dark:text-white text-neutral-900 text-base sm:text-lg" />
                 </Link>
               )}
             </div>
           </div>
-          <div className="description w-fit h-fit text-sm text-neutral-200">
+          <div className="description w-fit h-fit text-xs sm:text-sm text-neutral-800 dark:text-neutral-200">
             {description.split(/\s+/).filter((element) => {
               return element.length !== 0;
             }).length > 15
@@ -230,7 +229,7 @@ function ProjectCard({
         <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
           {techStack.map((tech, index) => (
             <div
-              className="tech px-2 py-1 rounded-sm border-dotted border-[0.5px] border-pink-200 text-xs text-yellow-300"
+              className="tech px-2 py-1 rounded-sm border-dotted border-[0.5px] border-pink-500 dark:border-pink-200 text-[0.6rem] sm:text-xs dark:text-yellow-300 text-yellow-800"
               key={index}
             >
               {tech.toLocaleLowerCase()}

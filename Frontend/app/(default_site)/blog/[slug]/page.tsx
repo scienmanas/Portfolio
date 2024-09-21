@@ -41,7 +41,7 @@ export async function generateMetadata({
     metadataBase: new URL(process.env.DOMAIN as string), // Base URL for metadata
     title: `${blogData.head} - Blogs`, // Dynamic title for SEO
     description: blogData.title, // Blog description for SEO
-    keywords: ["reading", "article", "tech", "knowledge"], // Relevant keywords
+    keywords: ["reading", "article", "tech", "knowledge", "poetry"], // Relevant keywords
     robots: "index, follow", // Instructions for search engine indexing
     openGraph: {
       title: blogData.title, // OpenGraph title
@@ -49,7 +49,7 @@ export async function generateMetadata({
       url: `${process.env.DOMAIN}/blog/${params.slug}`, // Dynamic URL for the blog post
       images: [ogImageURL], // Dynamic image for OpenGraph
       type: "article", // OpenGraph type
-      siteName: `Landify`, // Site name for OpenGraph
+      siteName: `Manas Blogs`, // Site name for OpenGraph
       locale: "en_US", // Locale for OpenGraph
     },
     twitter: {
@@ -57,7 +57,7 @@ export async function generateMetadata({
       title: blogData.title, // Twitter title
       description: blogData.description, // Twitter description
       images: [ogImageURL], // Dynamic image for Twitter
-      creator: "@ScientistManas", // Twitter handle of the creator
+      creator: "@scienmanas", // Twitter handle of the creator
     },
   };
 }
@@ -131,7 +131,7 @@ export default function BlogsPage({ params }: BlogPageProps): JSX.Element {
 
   // JSX for rendering the blog page content
   return (
-    <section className="w-full p-4 h-fit flex items-center justify-center mt-16">
+    <section className="w-full p-4 h-fit flex items-center justify-center">
       <div className="wrapper w-full h-fit max-w-screen-xl flex items-center justify-center">
         <article className="post p-2 flex flex-col gap-6 w-[900px] h-fit items-center justify-center">
           <section className="title-time-description-and-image flex flex-col items-center justify-center w-full h-fit gap-4">

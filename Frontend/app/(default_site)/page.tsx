@@ -4,6 +4,7 @@ import { Projects } from "@/app/ui/landing/Projects";
 import { Flex } from "@/app/ui/landing/Flex";
 import { CommunityWork } from "@/app/ui/landing/CommunityWork";
 import { MoreAboutMe } from "@/app/ui/landing/MoreAboutMe";
+import { Contact } from "@/app/ui/landing/Contact";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Flex />
       <CommunityWork />
       <MoreAboutMe />
+      {/* <Contact /> */}
     </div>
   );
 }

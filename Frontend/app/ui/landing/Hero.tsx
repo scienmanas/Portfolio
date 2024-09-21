@@ -33,15 +33,22 @@ export function Hero(): JSX.Element {
       <div className="wrapper w-full max-w-screen-xl flex py-4 px-5 flex-col gap-6">
         <div className="intro-desc-wrapper relative flex flex-col gap-6">
           <div className="bg-image-floating absolute">
-            <Image alt="bg-img" src={heroImg} className="opacity-30" />
+            <Image
+              alt="bg-img"
+              src={heroImg}
+              className="dark:opacity-30 opacity-25"
+            />
           </div>
           <div className="introduction-heading relative z-10 flex flex-col gap-1 w-fit h-fit">
-            <div className="heading-or-loading text-white dark:text-neutral-100 text-3xl font-mono tracking-tighter">
+            <div className="heading-or-loading text-neutral-800 dark:text-neutral-100 text-2xl sm:text-3xl font-mono tracking-tighter">
               Hey there!
             </div>
-            <div className="relative name-intro-or-loading text-white w-fit h-fit dark:text-white text-4xl font-mono">
-              <div className="text relative w-fit h-fit">
-                I'm <span className="text-[#c778dd]">Manas</span>
+            <div className="relative name-intro-or-loading text-white w-fit h-fit dark:text-white text-3xl sm:text-4xl font-mono">
+              <div className="text relative w-fit h-fit dark:text-neutral-100 text-neutral-700">
+                I'm{" "}
+                <span className="dark:text-[#c778dd] text-[#593563]">
+                  Manas
+                </span>
               </div>
               <div className="svg-container absolute w-full h-full inset-0 bottom-0 flex items-end">
                 <svg
@@ -57,41 +64,53 @@ export function Hero(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="my-description relative z-10 font-mono text-white text-lg w-fit h-fit">
+          <div className="my-description relative z-10 font-mono dark:text-white text-base text-neutral-800 sm:text-lg w-fit h-fit">
             Stepped into programming and development in 2023, and I'm now a{" "}
             <span className="w-fit h-fit">
-              <span className="text-[#c778dd]">Full-Stack Developer</span>
-              <span></span>
+              <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
+                Full-Stack Developer
+              </span>
             </span>
             . I began with{" "}
-            <span className="text-[#c778dd]">C++, Python, and JavaScript</span>,
-            and have transitioned to{" "}
-            <span className="text-[#c778dd]">TypeScript</span>. I excel in
-            writing clean, scalable code and have experience building mobile
-            applications with{" "}
-            <span className="text-[#c778dd]">React Native</span>. Additionally,
-            I have a basic understanding of{" "}
-            <span className="text-[#c778dd]">GCP and AWS</span>.
+            <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
+              C++, Python, and JavaScript
+            </span>
+            , and have transitioned to{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
+              TypeScript
+            </span>
+            . I excel in writing clean, scalable code and have experience
+            building mobile applications with{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
+              React Native
+            </span>
+            . Additionally, I have a basic understanding of{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
+              GCP and AWS
+            </span>
+            .
           </div>
-          <div className="more-about-me text-base font-mono text-white w-fit h-fit">
+          <div className="more-about-me text-sm sm:text-base font-mono dark:text-white text-neutral-800 w-fit h-fit">
             I am still crazy about{" "}
-            <span className="text-[#c778dd]">cartoons</span> 🧙 (pokemon,
-            beyblade, shinchan, etc), When I'm not with my laptop, you will see
-            reading (fictional) 🤓 or talking to my mom.
+            <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
+              cartoons
+            </span>{" "}
+            🧙 (pokemon, beyblade, shinchan, etc), When I'm not with my laptop,
+            you will see reading (fictional) 🤓 or talking to my mom.
           </div>
         </div>
-        <div className="relative chad-quote-component w-full h-fit text-white dark:text-white font-mono mt-6 flex items-center justify-center flex-col gap-14">
-          <div className="heading-chad w-full h-fit text-xl flex flex-row items-center gap-1">
-            <span className="text-xl text-[#c778dd] dark:text-[#c778dd]">
+        <div className="relative chad-quote-component w-full h-fit mt-6 flex items-center justify-center flex-col gap-14">
+          <div className="heading-chad w-full h-fit text-lg sm:text-xl flex flex-row items-center gap-1">
+            <span className="text-xl text-[#6d2f7f] dark:text-[#c778dd]">
               $
             </span>
-            <span>
-              <span className="text-cyan-400 underline">sudo</span> apt install
+            <span className="w-fit h-fit font-mono dark:text-white text-neutral-700">
+              <span className="dark:text-cyan-400 text-cyan-800 underline">sudo</span> apt install
               "quote"
             </span>
           </div>
-          <div className="quote-and-appreciation-wrapper w-full h-fit flex flex-col gap-10 items-center justify-center">
-            <div className="relative quote w-full text-center h-fit border border-neutral-200 border-dashed px-4 pt-6 pb-10 flex flex-row gap-2 flex-wrap items-center justify-center">
+          <div className="quote-and-appreciation-wrapper w-full h-fit flex flex-col gap-10 items-center justify-center font-mono">
+            <div className="relative quote w-full text-center h-fit border dark:border-neutral-200 border-neutral-700 border-dashed px-4 pt-6 pb-10 flex flex-row gap-2 flex-wrap items-center justify-center">
               <div className="banner absolute -top-9 left-10">
                 <Image
                   width={40}
@@ -115,11 +134,11 @@ export function Hero(): JSX.Element {
               <div className="corner-dots absolute h-2 w-2 border border-pink-400 bg-cyan-400 rounded-full -left-1 -bottom-1"></div>
               <div className="corner-dots absolute h-2 w-2 border border-pink-400 bg-cyan-400 rounded-full -right-1 -bottom-1"></div>
               <div className="wrapper w-fit h-fit">
-                <span className="relative quote w-fit h-fit">
+                <span className="relative quote w-fit h-fit text-sm sm:text-base">
                   “The present is theirs; the future, for which I really worked,
                   is mine.”
                 </span>
-                <span className="relative text-[#c778dd] -bottom-6 w-fit h-fit">
+                <span className="relative dark:text-[#c778dd] text-[#6d2f7f] -bottom-6 w-fit h-fit text-sm sm:text-base">
                   ~ Nikola Tesla
                 </span>
               </div>
@@ -133,7 +152,7 @@ export function Hero(): JSX.Element {
                 className="pointer-events-none"
               />
             </div>
-            <div className="chad-answer relative w-full h-fit">
+            <div className="chad-answer relative w-full h-fit text-neutral-900 dark:text-white text-sm sm:text-base">
               I regard him my ideal :)
             </div>
           </div>

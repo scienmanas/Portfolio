@@ -8,14 +8,14 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(process.env.DOMAIN as string), // Base URL for metadata
     title: `Blogs - ${process.env.SITE_NAME}`, // Dynamic title for SEO
     description: "Read the blogs, discover phenomenal things happening around", // Description for SEO
-    keywords: ["reading", "article", "tech", "knowledge"], // Keywords for SEO
+    keywords: ["reading", "article", "tech", "knowledge", "poetry"], // Keywords for SEO
     robots: "index, follow", // Instructions for search engine indexing
     openGraph: {
       title: `Blogs - ${process.env.SITE_NAME}`, // OpenGraph title
       description:
-        "Read the blogs, discover phenomenal things happening around", // OpenGraph description
+        "Read my blogs, I write about tech, do some poetry, and makes memes.", // OpenGraph description
       url: `${process.env.DOMAIN}/blog`, // URL for OpenGraph
-    //   images: [metaDataImg.src], // Image for OpenGraph
+      //   images: [metaDataImg.src], // Image for OpenGraph
       type: "article", // OpenGraph type
       siteName: `${process.env.SITE_NAME}`, // Site name for OpenGraph
       locale: "en_US", // Locale for OpenGraph
@@ -24,9 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image", // Twitter card type
       title: `Blogs - ${process.env.SITE_NAME}`, // Twitter title
       description:
-        "Read the blogs, discover phenomenal things happening around", // Twitter description
-    //   images: [metaDataImg.src], // Image for Twitter
-      creator: "@ScientistManas", // Twitter handle of the content creator
+        "Read my blogs, I write about tech, do some poetry, and makes memes.", // Twitter description
+      //   images: [metaDataImg.src], // Image for Twitter
+      creator: "@scienmanas", // Twitter handle of the content creator
     },
   };
 }
