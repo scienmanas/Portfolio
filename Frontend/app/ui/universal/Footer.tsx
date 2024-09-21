@@ -8,8 +8,6 @@ import { FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io5";
 import { SiFarcaster } from "react-icons/si";
 import { IconType } from "react-icons";
-import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
 
 interface socialLinksType {
   name: string;
@@ -19,8 +17,6 @@ interface socialLinksType {
 }
 
 export function Footer(): JSX.Element {
-  const [mounted, setMounted] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme();
 
   const socialLinks: socialLinksType[] = [
     {
@@ -61,14 +57,7 @@ export function Footer(): JSX.Element {
     },
   ];
 
-  // Set mounted state to true after the component has mounted - for button management
-  useEffect(() => {
-    setMounted(true);
-    if (theme) {
-      console.log(theme);
-      setTheme(theme);
-    }
-  }, [theme]);
+
 
   return (
     <footer className="w-full h-fit flex items-center justify-center mt-10">

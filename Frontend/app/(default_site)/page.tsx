@@ -15,7 +15,7 @@ export default function Home() {
       <Flex />
       <CommunityWork />
       <MoreAboutMe />
-      {/* <Contact /> */}
+      <Contact />
     </div>
   );
 }

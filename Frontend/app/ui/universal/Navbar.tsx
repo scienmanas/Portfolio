@@ -34,10 +34,10 @@ export function Navbar(): JSX.Element {
   // Set mounted state to true after the component has mounted - for button management
   useEffect(() => {
     setMounted(true);
-    if (theme) {
+    if (mounted && theme) {
       setTheme(theme);
     }
-  }, [theme]);
+  }, [theme, mounted]);
 
   return (
     <nav className={`w-full h-fit flex items-center justify-center`}>
