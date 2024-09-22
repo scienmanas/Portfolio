@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { SubmissionLoader } from "@/app/ui/loaders";
+// import { useState } from "react";
+// import { SubmissionLoader } from "@/app/ui/loaders";
 
 export function Contact(): JSX.Element {
   // Submission management
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  // const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
   const handleFormSubmission = async () => {};
 
@@ -92,14 +92,14 @@ export function Contact(): JSX.Element {
                 className="relative z-10 w-28 h-10 dark:bg-[#794189] bg-[#6d2f7f] text-white dark:text-white font-bold text-center rounded-md border dark:border-orange-800 border-neutral-700 hover:scale-105 duration-300 active:scale-95 flex flex-row gap-2 items-center justify-center transition-all"
               >
                 <span>Submit</span>
-                {isSubmitting && (
+                {/* {isSubmitting && (
                   <SubmissionLoader
                     color="pink"
                     height={20}
                     width={20}
                     key={1}
                   />
-                )}
+                )} */}
               </button>
               <div className="gradient absolute z-0 w-[102%] h-[102%] bg-transparent bg-gradient-to-tr from-yellow-500 to-pink-400 dark:from-yellow-800 dark:bg-pink-800 blur-md"></div>
             </label>
