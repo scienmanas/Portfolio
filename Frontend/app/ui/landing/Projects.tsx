@@ -57,7 +57,6 @@ export function Projects(): JSX.Element {
         "Next Js",
         "Express",
         "Mongo DB",
-        "Gen-AI",
         "GCP",
       ],
       github: "https://github.com/scienmanas/CertiMailer",
@@ -84,7 +83,7 @@ export function Projects(): JSX.Element {
     {
       name: "Valentiner",
       description:
-        "Wanna prpose your crush so that she can't say no - here you go, website with beautiful background and easy setup. Good luck!",
+        "Wanna propose to your crush so that she can't say no - here you go, website with beautiful background and easy setup. Good luck!",
       image: valentinerImg,
       techStack: ["React Js", "crazy"],
       github: "https://github.com/scienmanas/ValenTiner",
@@ -110,9 +109,9 @@ export function Projects(): JSX.Element {
     {
       name: "Microsoft Landing Page",
       description:
-        "A landing page clone made for practice purposes, completely clone of microsoft webiste at that time stamp",
+        "A landing page clone made for practice purposes, complete clone of Microsoft's website at that time stamp",
       image: microsoftlandingpageImg,
-      techStack: ["HTML", "Tawilind CSS"],
+      techStack: ["HTML", "Tailwind CSS"],
       github: "https://github.com/scienmanas/StickerSmash",
       deployedLink: "https://sticker-smash-one.vercel.app/",
     },
@@ -128,7 +127,7 @@ export function Projects(): JSX.Element {
       link: "https://github.com/scienmanas/JourneyGenie",
     },
     {
-      name: "CeletialAlert",
+      name: "CelestialAlert",
       link: "https://github.com/scienmanas/CelestialAlert",
     },
   ];
@@ -158,7 +157,7 @@ export function Projects(): JSX.Element {
           </div>
           <div className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
             <div className="info-text ">
-              Apart from these deployed projects I have also made Gen-AI powered
+              Apart from these deployed projects I have also built Gen-AI powered
               discord bots by use of gemini-api and wrote terminal based games.
               Some of these are:{" "}
               {botProjectData.map((project, index) => (

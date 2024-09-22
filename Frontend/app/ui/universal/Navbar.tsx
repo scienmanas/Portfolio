@@ -18,16 +18,16 @@ export function Navbar(): JSX.Element {
 
   const navbarTabs: navBarTabsType[] = [
     {
-      name: "Projects",
-      link: "#projects",
+      name: "Home",
+      link: "/",
     },
     {
       name: "Blog",
       link: "/blog",
     },
     {
-      name: "About",
-      link: "#about",
+      name: "Resume",
+      link: "/Manas_CV.pdf",
     },
   ];
 

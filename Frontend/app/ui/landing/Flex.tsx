@@ -65,10 +65,9 @@ export function Flex(): JSX.Element {
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
               consistency, commitment & straightforwardness
             </span>
-            , I give to the task which I take. I always try to do up to the
-            level till I am completely exhausted/tired and cannot handle
-            anymore. I have a simple policy, I don't give a fcuk to anything
-            which comes twisted to me.
+            , I give to the task which I take. I always push myself until I am
+            completely exhausted and can't handle any more. I have a simple
+            policy, I don't give a fcuk to anything which comes twisted to me.
           </div>
           <div className="info-plus-data-achievements flex flex-col gap-10 items-start text-sm sm:text-base">
             <div className="more-info-2nd-para w-fit h-fit">

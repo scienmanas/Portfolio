@@ -1,5 +1,5 @@
 import { Metadata } from "next"; // Import the Metadata type from Next.js
-// import metaDataImg from "@/public/assets/metadata/blog/display.png"; // Import image for OpenGraph and Twitter meta
+import metaDataImg from "@/public/assets/metadata/blog.png"; // Import image for OpenGraph and Twitter meta
 
 // Generate the metadata for the blogs page
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,18 +15,19 @@ export async function generateMetadata(): Promise<Metadata> {
       description:
         "Read my blogs, I write about tech, do some poetry, and makes memes.", // OpenGraph description
       url: `${process.env.DOMAIN}/blog`, // URL for OpenGraph
-      //   images: [metaDataImg.src], // Image for OpenGraph
+      images: [metaDataImg.src], // Image for OpenGraph
       type: "article", // OpenGraph type
       siteName: `${process.env.SITE_NAME}`, // Site name for OpenGraph
       locale: "en_US", // Locale for OpenGraph
     },
     twitter: {
-      card: "summary_large_image", // Twitter card type
+      card: "summary", // Twitter card type
       title: `Blogs - ${process.env.SITE_NAME}`, // Twitter title
       description:
         "Read my blogs, I write about tech, do some poetry, and makes memes.", // Twitter description
-      //   images: [metaDataImg.src], // Image for Twitter
+      images: [metaDataImg.src], // Image for Twitter
       creator: "@scienmanas", // Twitter handle of the content creator
+      site: `${process.env.DOMAIN}/blog`,
     },
   };
 }

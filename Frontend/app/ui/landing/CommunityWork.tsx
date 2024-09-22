@@ -12,30 +12,29 @@ export function CommunityWork(): JSX.Element {
           <div className="flex-work-item-1">
             To flex, I have some of the stuff, I coordinated my college{" "}
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
-              [Indian Institute of Technology(IIT) Tiruapti]
+              [Indian Institute of Technology(IIT) Tirupati]
             </span>
             , astronomy club - Gagan Vedhi for continously 2 years dealing with
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
               {" "}
-              oragnization and team mamagement stuff
+              organization and team mamagement
             </span>
-            . From incresing the reputation to making it one of the top
-            community loved club in my college, I made it do. to some I did put
-            lot of effort in doing this and now I think it's already on right
-            way to building.
+            . From increasing its reputation to making it one of the most loved
+            communities in my college, I put a lot of effort into making this
+            happen. and now I think it's already on the right path to building.
           </div>
           <div className="flex-work-item-2">
             I have also done work which i don't think it's which I should flex,
             but here it goes: "I have conducted gen-ai bot building workshops,
-            unoffically helping other club's team -{" "}
+            unofficially helping other club's team with advice -{" "}
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
               gyan fekhna
             </span>
-            , etc." Also I active in raising an{" "}
+            , etc.I'm also active in raising an{" "}
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
               issue on github
             </span>{" "}
-            coz bugs gets attached to many times.
+            coz bugs gets attached to me often.
           </div>
         </div>
       </div>

@@ -8,3 +8,10 @@ export type BlogPostMetaDataProps = {
     slug: string;
   };
 };
+
+
+export type submissionLoaderProps = {
+  width: number;
+  height: number;
+  color: string;
+};

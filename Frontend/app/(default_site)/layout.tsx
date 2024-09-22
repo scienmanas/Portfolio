@@ -3,11 +3,35 @@ import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Footer } from "@/app/ui/universal/Footer";
 import { Navbar } from "@/app/ui/universal/Navbar";
+import metaDataImg from "@/public/assets/metadata/landing.png";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.DOMAIN as string),
   title: "Manas | Portfolio",
   description:
-    "Portfolio website of me (Manas), showcasing my all projects and work",
+    "Portfolio website of me (Manas), showcasing my all projects, skills and work",
+  keywords: ["portfolio", "template", "anime-based", "blogs"],
+  authors: { name: "Manas", url: process.env.SITE_NAME as string },
+  robots: "index, follow",
+  openGraph: {
+    title: "Manas | Portfolio",
+    description:
+      "Portfolio website of me (Manas), showcasing my all projects, skills and work",
+    url: process.env.DOMAIN,
+    type: "profile",
+    locale: "en_US",
+    siteName: process.env.SITE_NAME as string,
+    images: metaDataImg.src,
+  },
+  twitter: {
+    card: "summary",
+    title: "Manas | Portfolio",
+    description:
+      "Portfolio website of me (Manas), showcasing my all projects, skills and work",
+    creator: "@scienmanas",
+    site: process.env.SITE_NAME as string,
+    images: metaDataImg.src,
+  },
 };
 
 export default function RootLayout({

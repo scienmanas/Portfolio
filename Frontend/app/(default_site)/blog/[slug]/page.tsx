@@ -39,12 +39,12 @@ export async function generateMetadata({
   // Return the metadata object, including OpenGraph and Twitter details
   return {
     metadataBase: new URL(process.env.DOMAIN as string), // Base URL for metadata
-    title: `${blogData.head} - Blogs`, // Dynamic title for SEO
-    description: blogData.title, // Blog description for SEO
-    keywords: ["reading", "article", "tech", "knowledge", "poetry"], // Relevant keywords
+    title: `${blogData.title} - Blogs`, // Dynamic title for SEO
+    description: blogData.description, // Blog description for SEO
+    keywords: blogData.tags, // Relevant keywords
     robots: "index, follow", // Instructions for search engine indexing
     openGraph: {
-      title: blogData.title, // OpenGraph title
+      title: `${blogData.title} - Blogs`, // OpenGraph title
       description: blogData.description, // OpenGraph description
       url: `${process.env.DOMAIN}/blog/${params.slug}`, // Dynamic URL for the blog post
       images: [ogImageURL], // Dynamic image for OpenGraph
@@ -58,6 +58,7 @@ export async function generateMetadata({
       description: blogData.description, // Twitter description
       images: [ogImageURL], // Dynamic image for Twitter
       creator: "@scienmanas", // Twitter handle of the creator
+      site: `${process.env.DOMAIN}/blog/${params.slug}`,
     },
   };
 }

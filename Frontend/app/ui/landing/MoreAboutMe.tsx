@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function MoreAboutMe(): JSX.Element {
   return (
     <section className="more-about-me w-full h-fit flex items-center justify-center">
@@ -12,14 +14,25 @@ export function MoreAboutMe(): JSX.Element {
           <div className="more-about-me-para-1">
             Apart from these tech stuff, I listen to a lot of music, play
             synthesizer 🎹, like to read thriller + romantic novels , and watch
-            cartoons and magic shows. Yes, I am a "porter head", Hogwarts is my
-            home. Being a JEE student, I think I have always loved Physics , and
-            I'm crazy about discussions on Black Holes, Dark Matter, Dark
-            Energy, etc. That's why I chose to lead my college Astronomy Club!
+            cartoons and magic shows. Yes, I'm a Potterhead,{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f]">
+              Hogwarts is my home
+            </span>
+            . Being a JEE student, I think I have always loved Physics , and I'm
+            crazy about discussions on Black Holes, Dark Matter, Dark Energy,
+            etc. That's why I chose to lead my college Astronomy Club!
           </div>
           <div className="more-about-me-para-2">
-            I also do a little bit of poetry; you can read that in the blogs.
-            Yeah, that's it! You read quite far. Thanks for sticking around! 🙌
+            I also do a little bit of{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f]">poetry</span>;{" "}
+            you can read that in the{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f] underline decoration-pink-500 ">
+              <Link href={"/blog"} className="w-fit h-fit">
+                blogs
+              </Link>
+            </span>
+            . Yeah, that's it! You read quite far. Thanks for sticking around!
+            🙌
           </div>
         </div>
       </div>
