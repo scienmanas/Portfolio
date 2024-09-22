@@ -56,7 +56,6 @@ export function getBlogPostData(folderPath: string, slug: string) {
     // Construct blog metadata including image path
     return {
       title: matterResult.data.title,
-      head: matterResult.data.head,
       publishedDate: matterResult.data.publishedDate,
       description: matterResult.data.description,
       tags: matterResult.data.tags,

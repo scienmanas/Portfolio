@@ -96,7 +96,7 @@ export function Hero(): JSX.Element {
               cartoons
             </span>{" "}
             🧙 (pokemon, beyblade, shinchan, etc), When I'm not with my laptop,
-            you will see reading (fictional) 🤓 or talking to my mom.
+            you'll find me reading (fictional) 🤓 or talking to my mom.
           </div>
         </div>
         <div className="relative chad-quote-component w-full h-fit mt-6 flex items-center justify-center flex-col gap-14">
@@ -105,8 +105,10 @@ export function Hero(): JSX.Element {
               $
             </span>
             <span className="w-fit h-fit font-mono dark:text-white text-neutral-700">
-              <span className="dark:text-cyan-400 text-cyan-800 underline">sudo</span> apt install
-              "quote"
+              <span className="dark:text-cyan-400 text-cyan-800 underline">
+                sudo
+              </span>{" "}
+              apt install "quote"
             </span>
           </div>
           <div className="quote-and-appreciation-wrapper w-full h-fit flex flex-col gap-10 items-center justify-center font-mono">
@@ -153,7 +155,7 @@ export function Hero(): JSX.Element {
               />
             </div>
             <div className="chad-answer relative w-full h-fit text-neutral-900 dark:text-white text-sm sm:text-base">
-              I regard him my ideal :)
+              I regard him as my ideal :)
             </div>
           </div>
         </div>

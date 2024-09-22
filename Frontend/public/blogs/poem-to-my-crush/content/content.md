@@ -1,6 +1,5 @@
 ---
 publishedDate: 2024-09-21T00:00:00Z
-head: A Poem to my crush
 title: A Poem to my crush.
 description: I wrote a poem for my crush (doesn't exits 😅). But I think you may like it. Who doesn't have a crush in his lifetime 🤨,
 tags:
@@ -33,7 +32,7 @@ Radiant and steady, shinning like a guiding pole star.
 
 Everytime when I saw her, I felt ligher, like a feather,
 Felt like I was recarnated to a new world, a new weather.
-The busy now seems to have a magic glaze,
+The busy day now seems to have a magic glaze,
 All becuase of the rose, and her gentle stare. [go slow here]
 ```
 

@@ -132,7 +132,7 @@ export function Skills(): JSX.Element {
             <span className="dark:text-[#c888dd] text-[#6d2f7f]">
               self-taught guy
             </span>{" "}
-            (with GPT and docs), I didn't follow any specific path. I have tried
+            (with GPT and docs), I haven't followed any specific path. I have tried
             out 🛡️ cyber security, ✏️ CAD designing, a bit of Arduino 🤖, but
             then shifted to development 💻.
           </div>
@@ -159,7 +159,7 @@ export function Skills(): JSX.Element {
                       }}
                     >
                       <skill.icon className="dark:text-white text-neutral-900 w-[48px] h-[48px] scale-90" />
-                      <div className="placeholder w-auto whitespace-nowrap h-fit absolute -top-7 hidden group-hover:flex transition-all transform duration-300 flex-col items-center justify-center">
+                      <div className="placeholder w-auto whitespace-nowrap h-fit absolute -top-7 opacity-0 group-hover:opacity-100 flex transition-all transform flex-col items-center justify-center duration-300">
                         <div className="content-holder relative w-fit h-fit flex flex-col items-center justify-center">
                           <span className="dark:bg-neutral-700 bg-neutral-300 text-neutral-900 dark:text-neutral-300 rounded-md text-nowrap w-fit h-fit py-1 px-2 text-xs">
                             {skill.name}
