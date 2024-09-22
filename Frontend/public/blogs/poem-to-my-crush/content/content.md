@@ -21,15 +21,15 @@ I saw a rose blooming, radiant and gentle.
 In the midst of the rush, she was a spark so bright,
 I was lost in her beauty, she was a sight.
 
-The worl looked a little different today,
+The world looked a little different today,
 Beacuse my eyes went to a different world, I must say.
 At the same she passed besides me,
 Making my heart skip a beat,
 
 Her presence changed the essence of environment perceived to me,
-Making me stand there like a new born petal on the steam,
+Making me stand there like a new born petal on the stem,
 In the crowd she seemed like a distinguished bright star,
-Radiant and steady, shinning like a guiding pole star
+Radiant and steady, shinning like a guiding pole star.
 
 Everytime when I saw her, I felt ligher, like a feather,
 Felt like I was recarnated to a new world, a new weather.
