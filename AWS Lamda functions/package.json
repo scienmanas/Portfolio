@@ -1,0 +1,14 @@
+{
+  "name": "email-function",
+  "version": "1.0.0",
+  "description": "Managing the email service for the domain",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manas",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.9.15"
+  }
+}
