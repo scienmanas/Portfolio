@@ -1,14 +1,82 @@
 "use client";
 
-// import { useState } from "react";
-// import { SubmissionLoader } from "@/app/ui/loaders";
+import { useState } from "react";
+import { SubmissionLoader } from "@/app/ui/loaders";
+
+interface emailDataTyoes {
+  fromName: string;
+  toName: string;
+  toEmail: string;
+  subject: string;
+  message: string;
+}
 
 export function Contact(): JSX.Element {
   // Submission management
-  // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  // const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  const handleFormSubmission = async () => {};
+  const handleFormSubmission: React.FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
+    // Prevent reloading
+    e.preventDefault();
+
+    const EMAIL_API =
+      "https://vf9my4pvd4.execute-api.us-east-1.amazonaws.com/Production";
+
+    // Graphics and state chnage
+    setIsSubmitting(true);
+
+    // destructure the form data
+    const formData = new FormData(e.target as HTMLFormElement);
+    const name: string = formData.get("name") as string;
+    const email: string = formData.get("email") as string;
+    const message: string = formData.get("message") as string;
+
+    try {
+      // Send email to the person filling form
+      let emailData: emailDataTyoes = {
+        fromName: "Manas",
+        toName: name,
+        toEmail: email,
+        subject: `Thanks ${name}! 😊 I'll connect with you soon!`,
+        message:
+          "Hi there! ✨\n\nThank you for reaching out—you're awesome! 🤩 Just a quick note to let you know that I've received your message, and I'll get back to you as soon as I can.\n\nEven though this is an automated email sent from the server, I check my inbox regularly 📬, so feel free to reply if you'd like! Don’t think of this as just another automated message—I personally wrote the template at least 😉.\n\nAlright, that’s all for now! I’ll respond to your message soon. Until then, take care and cheers! 🥂\n\n--\n\nManas Poddar\n📧 Email: manas@scienmanas.xyz\n🐙 Github: https://github.com/scienmanas\n🌐 Web: https://scienmanas.xyz",
+      };
+      await fetch(EMAIL_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailData),
+      });
+
+      // Send email to me (Manas) - for notification
+      emailData = {
+        fromName: "Manas",
+        toName: "Manas",
+        toEmail: "iamscientistmanas@gmail.com",
+        subject: `Email from Portfolio website - ${name}`,
+        message: `Hi Manas!\n\n${name} has sent you message. His/her email id is: ${email}, I know you are super busy and brave person so try to respond him asap. The message he sent is given below:\n\n${message}\n\nCheers,\nMyself (Manas)`,
+      };
+      await fetch(EMAIL_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emailData),
+      });
+    } catch (error) {
+      console.log(error);
+      return;
+    } finally {
+      setIsSubmitting(false);
+    }
+
+    // Change the states
+    setIsSubmitted(true);
+  };
 
   return (
     <section className="contact w-full h-fit flex items-center justify-center">
@@ -42,10 +110,12 @@ export function Contact(): JSX.Element {
                 className="name relative w-[49.5%] sm:w-fit h-fit"
               >
                 <input
+                  minLength={2}
+                  disabled={isSubmitting || isSubmitted}
                   required
                   placeholder="Tell me 🤓!"
                   type="text"
-                  name=""
+                  name="name"
                   id=""
                   className="relative z-0 rounded-md px-2 py-1 border-2 border-neutral-300 dark:border-neutral-500 w-full sm:w-60 h-10 bg-white dark:bg-[#2b2a33] text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 text-neutral-800 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
                 />
@@ -58,10 +128,11 @@ export function Contact(): JSX.Element {
                 className="email relative w-[49.5%] sm:w-fit h-fit"
               >
                 <input
+                  disabled={isSubmitting || isSubmitted}
                   required
                   placeholder="I need it 🙄."
                   type="email"
-                  name=""
+                  name="email"
                   id=""
                   className="relative z-0 rounded-md px-2 py-1 border-2 border-neutral-300 dark:border-neutral-500 w-full sm:w-60 h-10 bg-white dark:bg-[#2b2a33] text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 text-neutral-800 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
                 />
@@ -73,8 +144,10 @@ export function Contact(): JSX.Element {
             </div>
             <label htmlFor="" className="message relative w-full h-fit">
               <textarea
+                minLength={4}
                 required
-                name=""
+                disabled={isSubmitting || isSubmitted}
+                name="message"
                 id=""
                 className="relative z-0 rounded-md w-full border-2 border-neutral-300 dark:border-neutral-500 h-28 px-3 py-3 text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
                 placeholder="Hmm, I think I am gonna get a special message today😏."
@@ -89,17 +162,25 @@ export function Contact(): JSX.Element {
             >
               <button
                 type="submit"
-                className="relative z-10 w-28 h-10 dark:bg-[#794189] bg-[#6d2f7f] text-white dark:text-white font-bold text-center rounded-md border dark:border-orange-800 border-neutral-700 hover:scale-105 duration-300 active:scale-95 flex flex-row gap-2 items-center justify-center transition-all"
+                disabled={isSubmitting || isSubmitted}
+                className={`relative z-10 w-28 h-10 dark:bg-[#794189] bg-[#6d2f7f] text-white dark:text-white font-bold text-center rounded-md border dark:border-orange-800 border-neutral-700 duration-300  flex flex-row gap-2 items-center justify-center transition-all  ${
+                  isSubmitting || isSubmitted
+                    ? "opacity-75 cursor-not-allowed"
+                    : "hover:scale-105 active:scale-95"
+                }`}
               >
-                <span>Submit</span>
-                {/* {isSubmitting && (
+                <span className="text-white w-fit h-fit">
+                  {" "}
+                  {isSubmitted ? "Hurray !" : "Submit"}
+                </span>
+                {isSubmitting && (
                   <SubmissionLoader
                     color="pink"
                     height={20}
                     width={20}
                     key={1}
                   />
-                )} */}
+                )}
               </button>
               <div className="gradient absolute z-0 w-[102%] h-[102%] bg-transparent bg-gradient-to-tr from-yellow-500 to-pink-400 dark:from-yellow-800 dark:bg-pink-800 blur-md"></div>
             </label>

@@ -11,6 +11,7 @@ const nextConfig = {
 
         return config;
     },
+    reactStrictMode: false  // Turn off because the world is rendering twice
 };
 
 export default nextConfig;

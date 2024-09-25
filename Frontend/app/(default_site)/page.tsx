@@ -5,6 +5,7 @@ import { Flex } from "@/app/ui/landing/Flex";
 import { CommunityWork } from "@/app/ui/landing/CommunityWork";
 import { MoreAboutMe } from "@/app/ui/landing/MoreAboutMe";
 import { Contact } from "@/app/ui/landing/Contact";
+// import PhysicsComponent from "../ui/components/physics-compenets";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <CommunityWork />
       <MoreAboutMe />
       <Contact />
+      {/* <PhysicsComponent /> */}
     </div>
   );
 }
