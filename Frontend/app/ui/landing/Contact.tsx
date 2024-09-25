@@ -23,7 +23,7 @@ export function Contact(): JSX.Element {
     e.preventDefault();
 
     const EMAIL_API =
-      "https://vf9my4pvd4.execute-api.us-east-1.amazonaws.com/Production";
+      "https://73lxhcmd35.execute-api.us-east-1.amazonaws.com/Production";
 
     // Graphics and state chnage
     setIsSubmitting(true);
