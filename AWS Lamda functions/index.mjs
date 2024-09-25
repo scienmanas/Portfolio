@@ -7,15 +7,11 @@ const PORT = 465
 export const handler = async (event) => {
   // Destrcture
   const { fromName, toName, toEmail, subject, message } = event;
-  console.log(fromName)
-  console.log(toName)
-  console.log(toEmail)
-  console.log(subject)
-  console.log(message)
+
 
   // Get the environment variables
-  const EMAIL = "test@certimailer.xyz";
-  const PASSWORD = "SZ4PN8a2bq6M";
+  const EMAIL = process.env.EMAIL;
+  const PASSWORD = process.env.PASSWORD;
 
 
   // Create a transporter object
@@ -59,15 +55,9 @@ export const handler = async (event) => {
       statusCode: 500,
       body: JSON.stringify({
         message: "Failed to send email",
-        error: error
+        error: error,
       }),
     };
   }
 
 };
-
-
-// A zip file needs to be created of all the files in AWS Lambda Function folder and then uploaded to AWS
-// This can be invoked by hitting the post url with the down mentioned paramters
-const EMAIL = "test@certimailer.xyz";
-const PASSWORD = "SZ4PN8a2bq6M";
