@@ -22,7 +22,8 @@ export function Contact(): JSX.Element {
     // Prevent reloading
     e.preventDefault();
 
-    const EMAIL_API = "https://rhljp2dd4l.execute-api.us-east-1.amazonaws.com/Prod/send-email";
+    const EMAIL_API =
+      "https://rhljp2dd4l.execute-api.us-east-1.amazonaws.com/Prod/send-email";
 
     // Graphics and state chnage
     setIsSubmitting(true);
