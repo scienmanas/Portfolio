@@ -57,8 +57,8 @@ export function Contact(): JSX.Element {
         fromName: "Manas",
         toName: "Manas",
         toEmail: "iamscientistmanas@gmail.com",
-        subject: `Email from Portfolio website - ${name}`,
-        message: `Hi Manas!\n\n${name} has sent you message. His/her email id is: ${email}, I know you are super busy and brave person so try to respond him asap. The message he sent is given below:\n\n${message}\n\nCheers,\nMyself (Manas)`,
+        subject: `You've got mail! 🎉 - ${name} from your Portfolio`,
+        message: `Hey Manas! 👋\n\nLooks like ${name} has just reached out via your portfolio website. Here are their details:\n\n📧 Email: ${email}\n\n📝 Message: ${message}\n\nI know you're probably caught up with a million things, but don't forget to give them a quick reply when you get a chance! 💪\n\nTake care and keep rocking! 🤘\n\nCheers,\nYour Automated Buddy (Manas) 🤖`,
       };
       await fetch(EMAIL_API, {
         method: "POST",
@@ -149,7 +149,7 @@ export function Contact(): JSX.Element {
                 disabled={isSubmitting || isSubmitted}
                 name="message"
                 id=""
-                className="relative z-0 rounded-md w-full border-2 border-neutral-300 dark:border-neutral-500 h-28 px-3 py-3 text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
+                className="relative z-0 bg-white dark:bg-[#2b2a33] rounded-md w-full border-2 border-neutral-300 dark:border-neutral-500 h-28 px-3 py-3 text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
                 placeholder="Hmm, I think I am gonna get a special message today😏."
               ></textarea>
               <div className="placeholder absolute z-10 top-0 left-0 translate-x-2 text-sm -translate-y-[9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-gradient-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">

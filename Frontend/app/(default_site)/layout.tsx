@@ -43,16 +43,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="wrapper flex flex-col w-full h-fit gap-10">
-            <section className="navbar w-full h-fit">
-              <Navbar />
-            </section>
-            <section className="w-full h-full page-contents">
-              {children}
-            </section>
-            <section className="footer w-full h-fit flex items-center justify-center">
-              <Footer />
-            </section>
+          <div className="wrapper flex w-full h-fit">
+            <div className="gradient-blurred absolute w-full h-full z-0 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-25% opacity-30 blur-md"></div>
+            <div className="contents-wrapper flex flex-col w-full h-fit gap-10 z-10">
+              <section className="navbar w-full h-fit">
+                <Navbar />
+              </section>
+              <section className="w-full h-full page-contents">
+                {children}
+              </section>
+              <section className="footer w-full h-fit flex items-center justify-center">
+                <Footer />
+              </section>
+            </div>
           </div>
         </ThemeProvider>
       </body>
