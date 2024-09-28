@@ -30,3 +30,17 @@
   color: blue;
   @apply underline dark:decoration-yellow-500 decoration-yellow-500 text-blue-800 dark:text-cyan-500;
 }
+
+/* styles.css */
+.cursor-light {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c778dd 50%, #3a3f49 100%);
+  opacity: 0.1;
+  pointer-events: none;  /* To ensure that other elements remains unclickable */ 
+  transform: translate(-50%, -100%);
+  mix-blend-mode: screen;
+  filter: blur(35px);
+}

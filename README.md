@@ -22,22 +22,16 @@ This project requirement .env configuration in `Frontend` folder to handle the d
 | `SITE_NAME` | Name of the site (Here I kept it- Manas)             |
 
 
-## 🔨 Setting Up
-
-- `This project doesn't requires backend, the backend is only given only to store the newsletter user and send emails`
-
-
 
 ## Few Notes
 
-- The backend is only used to store the newsletter user and send emails.
 - To add new blog just add files according to the format in `Frontend/public/blog` folder. The blog will be automatically added to the website.
 - The beackend in turned off in the frontend, so the newsletter will not work in the frontend, you need to uncomment the onsubmit function in the form (in Footer.tsx - Frontend)
 
 ## Deployment
 
 - The frontend can be deployed on `vercel`, `netlify`, `github pages`, `render.com` etc.
-- The backend can be deployed on `EC2`, `render.com`, `heroku`, `netlify`, `vercel` etc.
+- The AWS Lambda function can be deployed on `aws` served via `api-gateway`.
 
 1. To deploy the frontend, run the following command in the `Frontend` folder:
 
@@ -45,16 +39,6 @@ This project requirement .env configuration in `Frontend` folder to handle the d
 - `npm install`
 - `npm run build`
 
-2. To deploy the backend, run the following command in the `Backend` folder:
-
-- `configure the .env file`
-- `npm run build`
-- `npm deplloy`
-
-## ⚡ Features
-
-- Very easy to customize and deploy just be changing variables values
-- Static blog section, which doesn't require backend setup.
 
 ## 📁 File Structure :
 
