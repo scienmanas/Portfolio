@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+        <ThemeProvider attribute="class" defaultTheme="light">
           <div className="wrapper flex w-full h-fit">
             <div className="gradient-blurred absolute w-full h-full z-0 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-25% opacity-30 blur-md"></div>
             <div className="contents-wrapper flex flex-col w-full h-fit gap-10 z-10">

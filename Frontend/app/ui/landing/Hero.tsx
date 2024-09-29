@@ -7,10 +7,13 @@ import roughArrowImg from "@/public/assets/landing/rough-arrow.png";
 import holderImg from "@/public/assets/landing/holder.png";
 import heroImg from "@/public/assets/landing/hero.png";
 import Image from "next/image";
+import { ReactTyped } from "react-typed";
+import { motion } from "framer-motion";
 
 export function Hero(): JSX.Element {
   // For rough line animation
   const [isRendered, setIsRendered] = useState<boolean>(false);
+  const [showCursor, setShowCursor] = useState<boolean>(true);
 
   useEffect(() => {
     const svg = document.getElementById(
@@ -39,7 +42,12 @@ export function Hero(): JSX.Element {
               className="dark:opacity-30 opacity-15"
             />
           </div>
-          <div className="introduction-heading relative z-10 flex flex-col gap-1 w-fit h-fit">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1, type: "spring" }}
+            className="introduction-heading relative z-10 flex flex-col gap-1 w-fit h-fit"
+          >
             <div className="heading-or-loading text-neutral-800 dark:text-neutral-100 text-2xl sm:text-3xl font-mono tracking-tighter">
               Hey there!
             </div>
@@ -47,7 +55,12 @@ export function Hero(): JSX.Element {
               <div className="text relative w-fit h-fit dark:text-neutral-100 text-neutral-700">
                 I'm{" "}
                 <span className="dark:text-[#c778dd] text-[#593563]">
-                  Manas
+                  <ReactTyped
+                    strings={["Manas"]}
+                    startDelay={1500}
+                    typeSpeed={100}
+                    showCursor={true}
+                  />
                 </span>
               </div>
               <div className="svg-container absolute w-full h-full inset-0 bottom-0 flex items-end">
@@ -63,8 +76,13 @@ export function Hero(): JSX.Element {
                 ></svg>
               </div>
             </div>
-          </div>
-          <div className="my-description relative z-10 font-mono dark:text-white text-base text-neutral-800 sm:text-lg w-fit h-fit">
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 2, duration: 1, type: "spring" }}
+            className="my-description relative z-10 font-mono dark:text-white text-base text-neutral-800 sm:text-lg w-fit h-fit"
+          >
             Stepped into programming and development in 2023, and I'm now a{" "}
             <span className="w-fit h-fit">
               <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
@@ -89,18 +107,28 @@ export function Hero(): JSX.Element {
               GCP and AWS
             </span>
             .
-          </div>
-          <div className="more-about-me text-sm sm:text-base font-mono dark:text-white text-neutral-800 w-fit h-fit">
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 3, duration: 1, type: "spring" }}
+            className="more-about-me text-sm sm:text-base font-mono dark:text-white text-neutral-800 w-fit h-fit"
+          >
             I am still crazy about{" "}
             <span className="dark:text-[#c778dd] text-[#6d2f7f] font-semibold">
               cartoons
             </span>{" "}
             🧙 (pokemon, beyblade, shinchan, etc), When I'm not with my laptop,
             you'll find me reading (fictional) 🤓 or talking to my mom.
-          </div>
+          </motion.div>
         </div>
         <div className="relative chad-quote-component w-full h-fit mt-6 flex items-center justify-center flex-col gap-14">
-          <div className="heading-chad w-full h-fit text-lg sm:text-xl flex flex-row items-center gap-1">
+          <motion.div
+            initial={{ x: 30, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 4, duration: 1, type: "spring" }}
+            className="heading-chad w-full h-fit text-lg sm:text-xl flex flex-row items-center gap-1"
+          >
             <span className="text-xl text-[#6d2f7f] dark:text-[#c778dd]">
               $
             </span>
@@ -110,9 +138,14 @@ export function Hero(): JSX.Element {
               </span>{" "}
               apt install "quote"
             </span>
-          </div>
+          </motion.div>
           <div className="quote-and-appreciation-wrapper w-full h-fit flex flex-col gap-10 items-center justify-center font-mono">
-            <div className="relative quote w-full text-center h-fit border dark:border-neutral-200 border-neutral-700 border-dashed px-4 pt-6 pb-10 flex flex-row gap-2 flex-wrap items-center justify-center">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 4, duration: 1, type: "spring" }}
+              className="relative quote w-full text-center h-fit border dark:border-neutral-200 border-neutral-700 border-dashed px-4 pt-6 pb-10 flex flex-row gap-2 flex-wrap items-center justify-center"
+            >
               <div className="banner absolute -top-9 left-10">
                 <Image
                   width={40}
@@ -144,8 +177,13 @@ export function Hero(): JSX.Element {
                   ~ Nikola Tesla
                 </span>
               </div>
-            </div>
-            <div className="arrow-rough absolute bottom-10 left-0 -rotate-45 w-fit h-fit">
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1, rotate: "-45deg" }}
+              transition={{ delay: 5, duration: 1, type: "spring" }}
+              className="arrow-rough absolute bottom-10 left-0  w-fit h-fit"
+            >
               <Image
                 src={roughArrowImg}
                 alt="rough-arrow"
@@ -153,10 +191,15 @@ export function Hero(): JSX.Element {
                 height={100}
                 className="pointer-events-none"
               />
-            </div>
-            <div className="chad-answer relative w-full h-fit text-neutral-900 dark:text-white text-sm sm:text-base">
+            </motion.div>
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 5, duration: 1, type: "spring" }}
+              className="chad-answer relative w-full h-fit text-neutral-900 dark:text-white text-sm sm:text-base"
+            >
               I regard him as my ideal :)
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
