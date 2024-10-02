@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { motion } from "framer-motion";
 import { WebsiteLoader } from "@/app/ui/loaders";
@@ -37,17 +37,14 @@ export function Navbar(): JSX.Element {
     if (mounted && theme) {
       setTheme(theme);
       setWebsiteTheme(theme);
+      document.body.style.overflow = "auto";
     }
   }, [theme, mounted]);
 
   return (
     <Fragment>
-      {!mounted && (
-        <WebsiteLoader
-        //  mounted={mounted}
-        />
-      )}
-      <nav className={`w-full h-fit flex items-center justify-center`}>
+      <WebsiteLoader mounted={mounted} />
+      <nav className={`relative w-full h-fit flex items-center justify-center`}>
         <div className="wrapper w-full max-w-screen-xl flex flex-row flex-wrap items-center justify-around sm:justify-between px-6 pt-8 gap-2">
           <motion.div
             initial={{ y: -20, opacity: 0 }}

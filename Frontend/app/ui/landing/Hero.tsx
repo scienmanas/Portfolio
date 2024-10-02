@@ -45,7 +45,7 @@ export function Hero(): JSX.Element {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1, type: "spring" }}
+            transition={{ duration: 0.6, type: "spring" }}
             className="introduction-heading relative z-10 flex flex-col gap-1 w-fit h-fit"
           >
             <div className="heading-or-loading text-neutral-800 dark:text-neutral-100 text-2xl sm:text-3xl font-mono tracking-tighter">
@@ -57,7 +57,7 @@ export function Hero(): JSX.Element {
                 <span className="dark:text-[#c778dd] text-[#593563]">
                   <ReactTyped
                     strings={["Manas"]}
-                    startDelay={1500}
+                    startDelay={400}
                     typeSpeed={100}
                     showCursor={true}
                   />
@@ -80,7 +80,7 @@ export function Hero(): JSX.Element {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 2, duration: 1, type: "spring" }}
+            transition={{ delay: 1, duration: 1, type: "spring" }}
             className="my-description relative z-10 font-mono dark:text-white text-base text-neutral-800 sm:text-lg w-fit h-fit"
           >
             Stepped into programming and development in 2023, and I'm now a{" "}
@@ -111,7 +111,7 @@ export function Hero(): JSX.Element {
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 3, duration: 1, type: "spring" }}
+            transition={{ delay: 2, duration: 1, type: "spring" }}
             className="more-about-me text-sm sm:text-base font-mono dark:text-white text-neutral-800 w-fit h-fit"
           >
             I am still crazy about{" "}
@@ -126,7 +126,7 @@ export function Hero(): JSX.Element {
           <motion.div
             initial={{ x: 30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 4, duration: 1, type: "spring" }}
+            transition={{ delay: 3, duration: 1, type: "spring" }}
             className="heading-chad w-full h-fit text-lg sm:text-xl flex flex-row items-center gap-1"
           >
             <span className="text-xl text-[#6d2f7f] dark:text-[#c778dd]">
@@ -143,7 +143,7 @@ export function Hero(): JSX.Element {
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 4, duration: 1, type: "spring" }}
+              transition={{ delay: 3, duration: 1, type: "spring" }}
               className="relative quote w-full text-center h-fit border dark:border-neutral-200 border-neutral-700 border-dashed px-4 pt-6 pb-10 flex flex-row gap-2 flex-wrap items-center justify-center"
             >
               <div className="banner absolute -top-9 left-10">
@@ -181,7 +181,7 @@ export function Hero(): JSX.Element {
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1, rotate: "-45deg" }}
-              transition={{ delay: 5, duration: 1, type: "spring" }}
+              transition={{ delay: 4, duration: 1, type: "spring" }}
               className="arrow-rough absolute bottom-10 left-0  w-fit h-fit"
             >
               <Image
@@ -195,7 +195,7 @@ export function Hero(): JSX.Element {
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 5, duration: 1, type: "spring" }}
+              transition={{ delay: 4, duration: 1, type: "spring" }}
               className="chad-answer relative w-full h-fit text-neutral-900 dark:text-white text-sm sm:text-base"
             >
               I regard him as my ideal :)

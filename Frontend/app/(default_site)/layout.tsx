@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Footer } from "@/app/ui/universal/Footer";
 import { Navbar } from "@/app/ui/universal/Navbar";
+import { CursorLight } from "../ui/components/cursor-light";
 import metaDataImg from "@/public/assets/metadata/landing.png";
 
 export const metadata: Metadata = {
@@ -41,15 +42,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}>
+      <body 
+      style={{
+        overflow: "hidden"
+      }}
+      className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}>
         <ThemeProvider attribute="class" defaultTheme="light">
-          <div className="wrapper flex w-full h-fit">
-            <div className="gradient-blurred absolute w-full h-full z-0 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-25% opacity-30 blur-md"></div>
-            <div className="contents-wrapper flex flex-col w-full h-fit gap-10 z-10">
-              <section className="navbar w-full h-fit">
+          <CursorLight />
+          <div className="wrapper flex w-full h-fit relative">
+            <div className="gradient-blurred absolute w-full h-dvh -z-10 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-45% opacity-30 blur-md"></div>
+            <div className="contents-wrapper relative flex flex-col w-full h-fit gap-10 z-10">
+              <section className="navbar w-full h-fit relative z-20">
                 <Navbar />
               </section>
-              <section className="w-full h-full page-contents">
+              <section className="w-full h-full page-contents relative z-10">
                 {children}
               </section>
               <section className="footer w-full h-fit flex items-center justify-center">
