@@ -14,7 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}>
+      <body
+        style={{
+          overflow: "hidden",
+        }}
+        className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}
+      >
         <ThemeProvider attribute="class" defaultTheme="light">
           {children}
           <Analytics />

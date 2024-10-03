@@ -17,7 +17,6 @@ interface socialLinksType {
 }
 
 export function Footer(): JSX.Element {
-
   const socialLinks: socialLinksType[] = [
     {
       name: "github",
@@ -28,7 +27,7 @@ export function Footer(): JSX.Element {
     {
       name: "linkedin",
       icon: FaLinkedin,
-      link: "https://www.linkedin.com/in/manas-poddar-5a0098227/",
+      link: "https://www.linkedin.com/in/scienmanas",
       clasName: "dark:text-blue-400 text-blue-600",
     },
     {
@@ -53,11 +52,10 @@ export function Footer(): JSX.Element {
       name: "farcaster",
       icon: SiFarcaster,
       link: "https://warpcast.com/scienmanas",
-      clasName: "text-purple-700 dark:text-purple-700 dark:bg-white bg-white rounded-2xl",
+      clasName:
+        "text-purple-700 dark:text-purple-700 dark:bg-white bg-white rounded-2xl",
     },
   ];
-
-
 
   return (
     <footer className="w-full h-fit flex items-center justify-center mt-10">

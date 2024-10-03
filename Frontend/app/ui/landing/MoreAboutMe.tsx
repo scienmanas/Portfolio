@@ -21,6 +21,7 @@ export function MoreAboutMe(): JSX.Element {
             duration: 0.6,
             ease: "easeInOut",
           }}
+          viewport={{ once: true }}
           className="heading flex items-center flex-row w-fit h-fit text-xl sm:text-2xl font-semibold gap-1"
         >
           <span className="dark:text-[#c778dd] text-[#6d2f7f]">$</span>
@@ -44,6 +45,7 @@ export function MoreAboutMe(): JSX.Element {
             duration: 0.6,
             ease: "easeInOut",
           }}
+          viewport={{ once: true }}
           className="more-about-me-text w-fit h-fit dark:text-neutral-200 text-neutral-800 text-sm sm:text-base font-mono flex flex-col gap-4"
         >
           <div className="more-about-me-para-1">

@@ -58,7 +58,7 @@ export default function RootLayout({
               <section className="w-full h-full page-contents relative z-10">
                 {children}
               </section>
-              <section className="footer w-full h-fit flex items-center justify-center">
+              <section className="footer w-full h-fit flex items-center justify-center z-10">
                 <Footer />
               </section>
             </div>

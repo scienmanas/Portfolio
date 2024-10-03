@@ -152,6 +152,7 @@ export function Projects(): JSX.Element {
             duration: 0.6,
             ease: "easeIn",
           }}
+          viewport={{ once: true }}
           className="head w-full h-fit flex items-start"
         >
           <h1 className="heading w-fit h-fit text-xl sm:text-2xl dark:text-white text-neutral-900 flex items-end gap-1">
@@ -187,6 +188,7 @@ export function Projects(): JSX.Element {
               duration: 0.6,
               ease: "easeIn",
             }}
+            viewport={{ once: true }}
             className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base"
           >
             <div className="info-text ">
@@ -235,6 +237,7 @@ function ProjectCard({
         duration: 0.6,
         ease: "easeIn",
       }}
+      viewport={{ once: true }}
       className="project-card  max-w-[340px] h-fit rounded-md flex flex-col"
     >
       <div className="relative image-box w-full h-fit">

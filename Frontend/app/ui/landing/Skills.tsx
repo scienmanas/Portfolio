@@ -76,6 +76,7 @@ export function Skills(): JSX.Element {
           initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
+          viewport={{ once: true }}
           className="heading w-full h-fit text-neutral-800 dark:text-neutral-100 text-xl sm:text-2xl flex gap-1 items-center"
         >
           <span className="text-[#6d2f7f] dark:text-[#c778dd] w-fit h-fit">
@@ -89,6 +90,7 @@ export function Skills(): JSX.Element {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.6, ease: "easeIn" }}
+            viewport={{ once: true }}
             className="description text-sm sm:text-base w-full h-fit text-neutral-800 dark:text-neutral-100"
           >
             I am someone who tries many things out, gets in trouble, and
@@ -111,9 +113,10 @@ export function Skills(): JSX.Element {
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   transition={{
-                    delay: 1 + index1*0.2,
+                    delay: 1 + index1 * 0.2,
                     duration: 0.2,
                   }}
+                  viewport={{ once: true }}
                   className="skill-category text-[#6d2f7f] dark:text-[#c891d7] font-semibold text-sm sm:text-base"
                 >
                   {skillData.category}:
@@ -130,6 +133,7 @@ export function Skills(): JSX.Element {
                         delay: 1 + 0.6 + index2 * 0.2,
                         ease: "easeInOut",
                       }}
+                      viewport={{ once: true }}
                     >
                       {typeof skill.icon === "string" ? (
                         <img

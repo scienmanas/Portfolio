@@ -20,6 +20,7 @@ export function CommunityWork(): JSX.Element {
             duration: 0.6,
             ease: "easeInOut",
           }}
+          viewport={{ once: true }}
           className="heading w-fit h-fit text-xl sm:text-2xl flex items-center gap-1 font-semibold"
         >
           <span className="dark:text-[#c788dd] text-[#6d2f7f]">$</span>
@@ -42,6 +43,7 @@ export function CommunityWork(): JSX.Element {
             type: "spring",
             damping: 5,
           }}
+          viewport={{ once: true }}
           className="gyan-dena font-mono dark:text-neutral-200 text-neutral-800 flex flex-col gap-4 text-sm sm:text-base"
         >
           <div className="flex-work-item-1">

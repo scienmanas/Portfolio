@@ -9,7 +9,7 @@ import { Contact } from "@/app/ui/landing/Contact";
 
 export default function Home() {
   return (
-    <div className="home relative w-full h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden">
+    <div className="home relative w-full h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden py-4">
       <Hero />
       <Skills />
       <Projects />
