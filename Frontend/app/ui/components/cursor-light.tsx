@@ -24,7 +24,7 @@ export function CursorLight(): JSX.Element {
 
   return (
     <div
-      className="cursor-light"
+      className="cursor-light z-50"
       style={{ top: `${position.y}px`, left: `${position.x}px` }}
     />
   );

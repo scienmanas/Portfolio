@@ -1,14 +1,51 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export function CommunityWork(): JSX.Element {
   return (
     <section className="community-work w-full h-fit flex items-center justify-center">
       <div className="wrapper w-full max-w-screen-xl h-fit flex flex-col gap-6 items-start px-5">
-        <div className="heading w-fit h-fit text-xl sm:text-2xl flex items-center gap-1 font-semibold">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -10,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            delay: 0.4,
+            duration: 0.6,
+            ease: "easeInOut",
+          }}
+          viewport={{ once: true }}
+          className="heading w-fit h-fit text-xl sm:text-2xl flex items-center gap-1 font-semibold"
+        >
           <span className="dark:text-[#c788dd] text-[#6d2f7f]">$</span>
           <span className="font-mono dark:text-white text-neutral-800 sm:translate-y-1">
             community work
           </span>
-        </div>
-        <div className="gyan-dena font-mono dark:text-neutral-200 text-neutral-800 flex flex-col gap-4 text-sm sm:text-base">
+        </motion.div>
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 30,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            delay: 0.4,
+            duration: 0.6,
+            type: "spring",
+            damping: 5,
+          }}
+          viewport={{ once: true }}
+          className="gyan-dena font-mono dark:text-neutral-200 text-neutral-800 flex flex-col gap-4 text-sm sm:text-base"
+        >
           <div className="flex-work-item-1">
             To flex, I have some of the stuff, I coordinated my college{" "}
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
@@ -36,7 +73,7 @@ export function CommunityWork(): JSX.Element {
             </span>{" "}
             coz bugs gets attached to me often.
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

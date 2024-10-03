@@ -1,5 +1,8 @@
+// 'use client'
+
 import { getBlogPostMetadata } from "@/app/utils/getBlogData"; // Import utility to fetch blog metadata
 import { BlogCard } from "@/app/ui/blog/blog-card"; // Import BlogCard component to render individual blog posts
+// import { motion } from "framer-motion";
 
 export default function Blog(): JSX.Element {
   // Fetch all blog post metadata

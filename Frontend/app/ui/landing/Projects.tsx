@@ -1,6 +1,9 @@
+"use client";
+
 import { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 // Projects image import
 import mybuddyImg from "@/public/assets/projects/my-buddy.png";
@@ -135,12 +138,28 @@ export function Projects(): JSX.Element {
   return (
     <section className="projects w-full h-fit flex items-center justify-center">
       <div className="wrapper w-full h-fit max-w-screen-xl flex items-start flex-col gap-10 px-5">
-        <div className="head w-full h-fit flex items-start">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 10,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            delay: 0.4,
+            duration: 0.6,
+            ease: "easeIn",
+          }}
+          viewport={{ once: true }}
+          className="head w-full h-fit flex items-start"
+        >
           <h1 className="heading w-fit h-fit text-xl sm:text-2xl dark:text-white text-neutral-900 flex items-end gap-1">
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">$</span>
             <span className="font-mono">projects</span>
           </h1>
-        </div>
+        </motion.div>
         <div className="content w-full h-fit flex flex-col gap-10">
           <div className="projects w-fit h-fit flex flex-row flex-wrap gap-10 items-center justify-center font-mono">
             {projectData.map((project, index) => (
@@ -155,11 +174,27 @@ export function Projects(): JSX.Element {
               />
             ))}
           </div>
-          <div className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.95,
+            }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              delay: 0.4,
+              duration: 0.6,
+              ease: "easeIn",
+            }}
+            viewport={{ once: true }}
+            className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base"
+          >
             <div className="info-text ">
-              Apart from these deployed projects I have also built Gen-AI powered
-              discord bots by use of gemini-api and wrote terminal based games.
-              Some of these are:{" "}
+              Apart from these deployed projects I have also built Gen-AI
+              powered discord bots by use of gemini-api and wrote terminal based
+              games. Some of these are:{" "}
               {botProjectData.map((project, index) => (
                 <Link
                   key={index}
@@ -172,7 +207,7 @@ export function Projects(): JSX.Element {
               ))}
               {"."}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -188,7 +223,23 @@ function ProjectCard({
   deployedLink,
 }: projectDataType): JSX.Element {
   return (
-    <div className="project-card  max-w-[340px] h-fit rounded-md flex flex-col">
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 10,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      transition={{
+        delay: 0.4,
+        duration: 0.6,
+        ease: "easeIn",
+      }}
+      viewport={{ once: true }}
+      className="project-card  max-w-[340px] h-fit rounded-md flex flex-col"
+    >
       <div className="relative image-box w-full h-fit">
         <div className="image group w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
           <Image
@@ -236,6 +287,6 @@ function ProjectCard({
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { SubmissionLoader } from "@/app/ui/loaders";
+import { motion } from "framer-motion";
+import JSConfetti from "js-confetti";
+import { v4 as uuidv4 } from "uuid";
 
-interface emailDataTyoes {
+interface emailDataTypes {
   fromName: string;
   toName: string;
   toEmail: string;
@@ -15,6 +18,10 @@ export function Contact(): JSX.Element {
   // Submission management
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [formId, setFormId] = useState<string>("");
+
+  // Confetti canvas ref
+  const confettiRef = useRef<HTMLCanvasElement>(null);
 
   const handleFormSubmission: React.FormEventHandler<HTMLFormElement> = async (
     e
@@ -33,73 +40,146 @@ export function Contact(): JSX.Element {
     const name: string = formData.get("name") as string;
     const email: string = formData.get("email") as string;
     const message: string = formData.get("message") as string;
+    const formIdCheck: string = formData.get("formId") as string;
 
-    try {
-      // Send email to the person filling form
-      let emailData: emailDataTyoes = {
-        fromName: "Manas",
-        toName: name,
-        toEmail: email,
-        subject: `Thanks ${name}! 😊 I'll connect with you soon!`,
-        message:
-          "Hi there! ✨\n\nThank you for reaching out—you're awesome! 🤩 Just a quick note to let you know that I've received your message, and I'll get back to you as soon as I can.\n\nEven though this is an automated email sent from the server, I check my inbox regularly 📬, so feel free to reply if you'd like! Don’t think of this as just another automated message—I personally wrote the template at least 😉.\n\nAlright, that’s all for now! I’ll respond to your message soon. Until then, take care and cheers! 🥂\n\n--\n\nManas Poddar\n📧 Email: manas@scienmanas.xyz\n🐙 Github: https://github.com/scienmanas\n🌐 Web: https://scienmanas.xyz",
-      };
-      await fetch(EMAIL_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(emailData),
-      });
+    // From prevention of script attack
+    if (formId === formIdCheck) {
+      try {
+        // Send email to the person filling form
+        let emailData: emailDataTypes = {
+          fromName: "Manas",
+          toName: name,
+          toEmail: email,
+          subject: `Thanks ${name}! 😊 I'll connect with you soon!`,
+          message:
+            "Hi there! ✨\n\nThank you for reaching out—you're awesome! 🤩 Just a quick note to let you know that I've received your message, and I'll get back to you as soon as I can.\n\nEven though this is an automated email sent from the server, I check my inbox regularly 📬, so feel free to reply if you'd like! Don’t think of this as just another automated message—I personally wrote the template at least 😉.\n\nAlright, that’s all for now! I’ll respond to your message soon. Until then, take care and cheers! 🥂\n\n--\n\nManas Poddar\n📧 Email: manas@scienmanas.xyz\n🐙 Github: https://github.com/scienmanas\n🌐 Web: https://scienmanas.xyz",
+        };
+        await fetch(EMAIL_API, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(emailData),
+        });
 
-      // Send email to me (Manas) - for notification
-      emailData = {
-        fromName: "Manas",
-        toName: "Manas",
-        toEmail: "iamscientistmanas@gmail.com",
-        subject: `You've got mail! 🎉 - ${name} from your Portfolio`,
-        message: `Hey Manas! 👋\n\nLooks like ${name} has just reached out via your portfolio website. Here are their details:\n\n📧 Email: ${email}\n\n📝 Message: ${message}\n\nI know you're probably caught up with a million things, but don't forget to give them a quick reply when you get a chance! 💪\n\nTake care and keep rocking! 🤘\n\nCheers,\nYour Automated Buddy (Manas) 🤖`,
-      };
-      await fetch(EMAIL_API, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(emailData),
-      });
-    } catch (error) {
-      console.log(error);
-      return;
-    } finally {
+        // Send email to me (Manas) - for notification
+        emailData = {
+          fromName: "Manas",
+          toName: "Manas",
+          toEmail: "iamscientistmanas@gmail.com",
+          subject: `You've got mail! 🎉 - ${name} from your Portfolio`,
+          message: `Hey Manas! 👋\n\nLooks like ${name} has just reached out via your portfolio website. Here are their details:\n\n📧 Email: ${email}\n\n📝 Message: ${message}\n\nI know you're probably caught up with a million things, but don't forget to give them a quick reply when you get a chance! 💪\n\nTake care and keep rocking! 🤘\n\nCheers,\nYour Automated Buddy (Manas) 🤖`,
+        };
+        await fetch(EMAIL_API, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(emailData),
+        });
+      } catch (error) {
+        console.log(error);
+        return;
+      } finally {
+        setIsSubmitting(false);
+      }
+      // Change the states
+      setIsSubmitted(true);
+    } else {
       setIsSubmitting(false);
     }
-
-    // Change the states
-    setIsSubmitted(true);
   };
 
+  useEffect(() => {
+    // Generate a random uuid
+    const id = uuidv4();
+    setFormId(id);
+  }, []);
+
+  // For confetti
+  useEffect(() => {
+    if (confettiRef.current) {
+      const jsConfetti = new JSConfetti({ canvas: confettiRef.current });
+      if (isSubmitted) {
+        setTimeout(() => {
+          jsConfetti.addConfetti();
+        }, 500);
+      }
+    }
+  }, [isSubmitted]);
+
   return (
-    <section className="contact w-full h-fit flex items-center justify-center">
+    <section className="contact relative w-full h-fit flex items-center justify-center">
+      <canvas
+        ref={confettiRef}
+        id="confetti-canvas"
+        className="fixed -z-20 bottom-0 w-full h-full"
+      ></canvas>
       <div className="wrapper w-full max-w-screen-xl h-fit items-start px-5 flex flex-col gap-6">
         <div className="heading-andd-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
-          <div className="head font-semibold">
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -10,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{ once: true }}
+            transition={{
+              delay: 0.4,
+              duration: 0.6,
+            }}
+            className="head font-semibold"
+          >
             <span className="w-fit h-fit dark:text-[#c778dd] text-[#6d2f7f]">
               ${" "}
             </span>
             <span className="font-mono w-fit h-fit text-neutral-800 dark:text-neutral-200">
               contact
             </span>
-          </div>
-          <div className="description font-mono w-fit h-fit text-sm sm:text-base">
+          </motion.div>
+          <motion.div
+            initial={{
+              y: 15,
+              opacity: 0,
+            }}
+            whileInView={{
+              y: 0,
+              opacity: 1,
+            }}
+            transition={{
+              delay: 0.4,
+              duration: 0.6,
+              ease: "easeInOut",
+            }}
+            viewport={{ once: true }}
+            className="description font-mono w-fit h-fit text-sm sm:text-base"
+          >
             👋 Hola! I'm always{" "}
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">
               reachable through email
             </span>{" "}
             📧, but if you're as lazy as me 😄, just fill out the form below and
             submit it. You’ll see some nice animations to make it fun ✨.
-          </div>
+          </motion.div>
         </div>
-        <form
+        <motion.form
+          initial={{
+            y: 15,
+            opacity: 0,
+          }}
+          whileInView={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            delay: 1.1,
+            duration: 0.6,
+            ease: "easeInOut",
+          }}
+          viewport={{ once: true }}
           onSubmit={handleFormSubmission}
           className="relative flex w-full items-center justify-center sm:justify-start h-fit sm:items-start"
         >
@@ -156,9 +236,17 @@ export function Contact(): JSX.Element {
                 Message
               </div>
             </label>
+            {/* To prevent attaching from attackers */}
+            <input
+              readOnly
+              type="text"
+              className="hidden"
+              name="formId"
+              value={formId}
+            />
             <label
               htmlFor=""
-              className="relative w-fit h-fit flex items-center justify-center group sm:mt-2"
+              className="relative w-fit h-fit flex items-center justify-center group mt-2"
             >
               <button
                 type="submit"
@@ -182,12 +270,10 @@ export function Contact(): JSX.Element {
                   />
                 )}
               </button>
-              <div className="gradient absolute z-0 w-[102%] h-[102%] bg-transparent bg-gradient-to-tr from-yellow-500 to-pink-400 dark:from-yellow-800 dark:bg-pink-800 blur-md"></div>
+              <div className="gradient absolute z-0 w-[100%] h-[100%] bg-transparent bg-gradient-to-tr from-yellow-500 to-pink-400 dark:from-yellow-800 dark:bg-pink-800 blur-sm"></div>
             </label>
-            {/* To prevent attaching from attackers */}
-            <input type="text" className="hidden" />
           </div>
-        </form>
+        </motion.form>
       </div>
     </section>
   );
