@@ -1,5 +1,4 @@
 import { submissionLoaderProps } from "@/app/lib/definitions";
-import { motion } from "framer-motion";
 
 export function SubmissionLoader({
   width,

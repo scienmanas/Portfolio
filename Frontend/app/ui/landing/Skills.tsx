@@ -18,6 +18,7 @@ import dockerSvg from "@/public/assets/svg/docker.svg";
 import gcpSvg from "@/public/assets/svg/google-cloud.svg";
 import awslambdaSvg from "@/public/assets/svg/awslambda.svg";
 import { IconType } from "react-icons";
+import Image from "next/image";
 
 interface Skill {
   name: string;
@@ -136,7 +137,7 @@ export function Skills(): JSX.Element {
                       viewport={{ once: true }}
                     >
                       {typeof skill.icon === "string" ? (
-                        <img
+                        <Image
                           src={skill.icon}
                           alt={skill.name}
                           className="dark:text-white text-neutral-900 w-[48px] h-[48px] scale-90"

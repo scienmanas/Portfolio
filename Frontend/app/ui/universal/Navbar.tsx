@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { motion } from "framer-motion";
 import { WebsiteLoader } from "@/app/ui/loaders";
