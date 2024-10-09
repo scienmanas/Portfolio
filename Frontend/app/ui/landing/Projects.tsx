@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 // Projects image import
 import mybuddyImg from "@/public/assets/projects/my-buddy.png";
+import portfolioImg from '@/public/assets/projects/portfolio.png'
 import certimailerImg from "@/public/assets/projects/certimailer.png";
 import landifyImg from "@/public/assets/projects/landify.png";
 import infopulseImg from "@/public/assets/projects/infopulse.png";
@@ -48,6 +49,19 @@ export function Projects(): JSX.Element {
       ],
       github: "https://github.com/scienmanas/My-Buddy",
       deployedLink: "https://my-buddy-ten.vercel.app/",
+    },
+    {
+      name: "Portfolio",
+      description: "An terminal themed portfolio webisted build using framer, Next JS and lambda function ",
+      image: portfolioImg,
+      techStack: [
+        "Next Js",
+        "Framer-motion",
+        "lambda",
+        "Typescript"
+      ],
+      github: "https://github.com/scienmanas/Portfolio",
+      deployedLink: "https://scienmanas.xyz"
     },
     {
       name: "CertiMailer",

@@ -37,7 +37,7 @@ export function Navbar(): JSX.Element {
     if (mounted && theme) {
       setTheme(theme);
       setWebsiteTheme(theme);
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto";
     }
   }, [theme, mounted]);
 
