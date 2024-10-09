@@ -4,7 +4,7 @@ import { ThemeProvider } from "next-themes";
 import { Footer } from "@/app/ui/universal/Footer";
 import { Navbar } from "@/app/ui/universal/Navbar";
 import { CursorLight } from "../ui/components/cursor-light";
-import metaDataImg from "@/public/assets/metadata/landing.png";
+import metaDataImg from "@/public/assets/metadata/blog.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.DOMAIN as string),
