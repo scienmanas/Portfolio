@@ -16,7 +16,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         style={{
-          overflow: "hidden",
+          overflowX: "hidden",
+          overflowY: "hidden",
         }}
         className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}
       >
