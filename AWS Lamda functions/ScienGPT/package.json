@@ -1,0 +1,17 @@
+{
+  "name": "sciengpt",
+  "version": "1.0.0",
+  "description": "Chat Assistant",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "genai"
+  ],
+  "author": "Manas",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  }
+}
