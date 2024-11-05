@@ -1,9 +1,7 @@
 # 🔰 Portfolio
 
 - This repository hold the code for my portfolio website deployed at **[link](https://scienmanas.xyz)**, The website used NextJS as frontend and framer for animaitions. Additionally aws lambda function is used to send emails upon form filling leviaging the power of serverless.
-
 - The frontend is deployed on `vercel` and the lambda function is deplyed on `aws api-gateway`. Additonally for security, only `scienmanas.xyz` is allowed to access the lambda function, preventing attacks on the service.
-
 - `Vercel Analytics` is can be enabled for user monitoring.
 
 ## 📚 Tech Stack
@@ -15,18 +13,34 @@
 
 This project requirement .env configuration in `Frontend` folder to handle the dynamicity of the metadata generated when deployed everytime. The `.env` file should be created in the `Frontend` folder with the following variables:
 
-
-| Varibale    | Description                                         |
-| :---------- | :-------------------------------------------------- |
+| Varibale      | Description                                         |
+| :------------ | :-------------------------------------------------- |
 | `DOMAIN`    | Domain name of the website (https://scienmanas.xyz) |
-| `SITE_NAME` | Name of the site (Here I kept it- Manas)             |
-
-
+| `SITE_NAME` | Name of the site (Here I kept it- Manas)            |
 
 ## Few Notes
 
 - To add new blog just add files according to the format in `Frontend/public/blog` folder. The blog will be automatically added to the website.
 - The beackend in turned off in the frontend, so the newsletter will not work in the frontend, you need to uncomment the onsubmit function in the form (in Footer.tsx - Frontend)
+
+## APIs
+
+The project uses rest APIs hosted on AWS which is made using lambda functions. the API is protected using CORS policy
+
+| Endpoint    | Purpose                                                 |
+| ----------- | ------------------------------------------------------- |
+| /send-email | Send notification to the contacted person as well as me |
+| /scienGPT   | Used to get response from Fine-tuned AI model           |
+
+Additionally to make these API works, we need to `environment` variables for both the lambda functions
+
+| Variables      | Description                            |
+| -------------- | -------------------------------------- |
+| EMAIL          | Email                                  |
+| PASSWORD       | App password of email id               |
+| GEMINI_API_KEY | Gemini API Key (from google AI Studio) |
+
+`Also need to note here is that change the model to your fined tuned model in index.mjs of scienGPT lambda function folder. Additionally this function can be removed by just removing scienGPT component in the page.tsx in root of default_site folder.`
 
 ## Deployment
 
@@ -39,16 +53,15 @@ This project requirement .env configuration in `Frontend` folder to handle the d
 - `npm install`
 - `npm run build`
 
-
 ## 📁 File Structure :
 
 ```
 .
 ├── AWS Lambda Function
-│   │── index.mjs
-│   │── package.json
-│   │── package-lock.json
-│   └── aws-lambda-emailer.zip (zipped file for deployment, node_modules are included)
+│   │── ScienGPT
+│   │   └── Files for aws lambda function 
+│   └── Emailer
+│     	└── Files for aws lambda function 
 ├── Frontend
 │   │── app
 │   │   ├── (default_site)

@@ -4,9 +4,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
-// Get the tuned model & generation config
+// Get the tuned model & generation config 
 const model = genAI.getGenerativeModel({
-    model: "tunedModels/sciengpt-yx234nfwm8jt"
+    model: "tunedModels/sciengpt-ui3orhh7v19d"
 });
 const generationConfig = {
     temperature: 1,
@@ -35,6 +35,7 @@ export const handler = async (event) => {
         }
     }
     catch (error) {
+        console.log(error)
         return {
             statusCode: 500,
             body: JSON.stringify({
