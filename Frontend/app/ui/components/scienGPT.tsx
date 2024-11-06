@@ -21,14 +21,14 @@ interface chatHostoryType {
 export function ScienGPT(): JSX.Element {
   // variable to save chat history
   const [userQuery, setUserQuery] = useState<string>("");
-  const [isResponding, setIsResponding] = useState<boolean>(true);
+  const [isResponding, setIsResponding] = useState<boolean>(false);
   const [chatHistory, setChatHistory] = useState<chatHostoryType[] | null>(
     null
   );
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
 
   // function to send message to GPT
-  const handleUserQuery = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleUserQuery = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Fetching response from GPT");
     console.log("User: Hi");
@@ -70,7 +70,8 @@ export function ScienGPT(): JSX.Element {
     <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit font-mono">
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
-        className="opener-icons relative z-20 p-3 rounded-3xl bg-[#7726d9] cursor-pointer"
+        disabled={isChatOpened}
+        className="opener-icons relative z-20 p-3 rounded-3xl bg-[#7726d9]"
         animate={{
           y: isChatOpened ? 20 : 0,
           opacity: isChatOpened ? 0 : 1,
@@ -98,7 +99,7 @@ export function ScienGPT(): JSX.Element {
         <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded">
           <div className="about-content-ai-bot">
             <h1 className="font-bold text-white">scienGPT</h1>
-            <p className="w-fit h-fit text-neutral-100">
+            <p className="w-fit h-fit text-neutral-100 text-xs sm:text-sm">
               Talk to my AI version 😎
             </p>
           </div>
@@ -117,17 +118,38 @@ export function ScienGPT(): JSX.Element {
             </button>
           </div>
         </div>
-        <div className="input-box absolute bottom-0 w-full">
-          <div className="input-box flex flex-row w-full h-12 bg-pink-300">
-            <input
-              type="text"
-              value={userQuery}
-              onChange={(e) => setUserQuery(e.target.value)}
-              className="w-full h-full border-none outline-none bg-pink-300 text-white p-2"
-              placeholder="Type your message"
-            />
-            <button onClick={handleUserQuery}></button>
-          </div>
+        <div className="chats h-full backdrop-blur-sm "></div>
+        <div className="input-box absolute bottom-0 w-full h-[3.3rem] p-2 flex items-center justify-center">
+          <form
+            onSubmit={handleUserQuery}
+            className="input-box flex flex-row items-center w-full h-full rounded-xl gap-1 focus:outline-1  duration-300"
+          >
+            <div className="group w-full flex">
+              <div className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400 group-focus-within:border-opacity-60 transition-colors duration-300">
+                <input
+                  type="text"
+                  value={userQuery}
+                  disabled={isResponding}
+                  onChange={(e) => setUserQuery(e.target.value)}
+                  className="w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-none dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm"
+                  placeholder="Type your message"
+                />
+                <button
+                  disabled={isResponding}
+                  className="p-1 hover:bg-neutral-400 dark:hover:bg-neutral-700 rounded-2xl duration-200"
+                >
+                  <MdOutlineKeyboardVoice className="text-xl text-neutral-800 dark:text-neutral-200" />
+                </button>
+              </div>
+            </div>
+            <button
+              disabled={isResponding}
+              type="submit"
+              className="bg-green-700 hover:bg-green-800 duration-200 p-2 rounded-2xl w-fit h-fit"
+            >
+              <FiSend className="text-base text-neutral-200" />
+            </button>
+          </form>
         </div>
       </motion.div>
     </section>
