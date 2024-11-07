@@ -56,3 +56,22 @@ export function WebsiteLoader({ mounted }: { mounted: boolean }): JSX.Element {
     </div>
   );
 }
+
+export function GPTResponseLoader({
+  width,
+  height,
+  color,
+}: submissionLoaderProps): JSX.Element {
+  return (
+    <div className="flex justify-center items-center w-fit h-fit">
+      <div
+        style={{
+          width: width,
+          height: height,
+          backgroundColor: color,
+        }}
+        className="animate-spin"
+      ></div>
+    </div>
+  );
+}

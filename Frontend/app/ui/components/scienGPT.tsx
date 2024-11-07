@@ -2,41 +2,60 @@
 
 import { motion } from "framer-motion";
 import { ReactTyped } from "react-typed";
-import { useState, useEffect } from "react";
-import { SubmissionLoader } from "@/app/ui/loaders";
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import markdownit from "markdown-it";
+import { GPTResponseLoader } from "@/app/ui/loaders";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FiSend } from "react-icons/fi";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { MdOutlineResetTv } from "react-icons/md";
-import { RiChatSmileLine } from "react-icons/ri";
+import logoImg from "@/public/assets/logo/logo.png";
+
+// Initialize markdown-it
+const md = new markdownit();
 
 const scienGPTUri =
   "https://kyczueqpgk.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
 
 interface chatHostoryType {
-  user: string;
-  gpt: string;
+  role: "user" | "gpt";
+  message: string;
 }
 
 export function ScienGPT(): JSX.Element {
+  // Refence variables
+  const conversationAreaRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   // variable to save chat history
   const [userQuery, setUserQuery] = useState<string>("");
   const [isResponding, setIsResponding] = useState<boolean>(false);
-  const [chatHistory, setChatHistory] = useState<chatHostoryType[] | null>(
-    null
-  );
+  const [chatHistory, setChatHistory] = useState<chatHostoryType[]>([]);
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
+  const [isResponseBlocked, setIsResponseBlocked] = useState<boolean>(false);
 
   // function to send message to GPT
   const handleUserQuery = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Fetching response from GPT");
-    console.log("User: Hi");
 
-    // Chhange the state to loading
+    // Change the state to loading
     setIsResponding(true);
 
-    const prompt = "Hi";
+    // Get the form data
+    const formData = new FormData(e.currentTarget);
+    const userQuery: string = formData.get("query") as string;
+    const userQueryFormatted: string = `Query from  user: ${userQuery}. If user gives explicit content or out of context query, then block the response or just return: blocked.`;
+    setUserQuery("");
+
+    // update chat history with user query
+    setChatHistory((prevChats) => [
+      ...prevChats,
+      {
+        role: "user",
+        message: userQuery,
+      },
+    ]);
 
     // fetch the response from GPT
     try {
@@ -46,28 +65,91 @@ export function ScienGPT(): JSX.Element {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt: prompt,
+          prompt: userQuery,
         }),
       });
 
       if (response.status === 200) {
         const data = await response.json();
-        console.log(data);
-        // Update the chat history
+
+        // now parse the body
+        const parsedBody = JSON.parse(data.body);
+        if (parsedBody.message === "blocked") {
+          setIsResponseBlocked(true);
+          // Update chat history with error message
+          setChatHistory((prevChats) => [
+            ...prevChats,
+            {
+              role: "gpt",
+              message: "Sorry, I'm not able to respond at the moment",
+            },
+          ]);
+        } else {
+          setChatHistory((prevChats) => [
+            ...prevChats,
+            {
+              role: "gpt",
+              message: parsedBody.message,
+            },
+          ]);
+        }
       } else {
         console.error("Failed to fetch response from GPT");
         // Update the chat history with error message, and warning the user for exiplicit content
+        setIsResponding(true);
+        // Update chat historu with error message
+        setChatHistory((prevChats) => [
+          ...prevChats,
+          {
+            role: "gpt",
+            message: "Sorry, I'm not able to respond at the moment",
+          },
+        ]);
       }
     } catch (error) {
       console.error(error);
+      setIsResponding(true);
       // Update chat historu with error message
+      setChatHistory((prevChats) => [
+        ...prevChats,
+        {
+          role: "gpt",
+          message: "Sorry, I'm not able to respond at the moment",
+        },
+      ]);
     } finally {
       setIsResponding(false);
     }
   };
 
+  // AutoScrolling
+  useEffect(() => {
+    const chatContainer = conversationAreaRef.current;
+    if (chatContainer) {
+      // set smooth scrolling
+      chatContainer.style.scrollBehavior = "smooth";
+      // Create a MutationObserver to detect changes in the chat container
+      const observer = new MutationObserver(() => {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      });
+
+      // Start observing the chat container for child list changes
+      observer.observe(chatContainer, { childList: true, subtree: true });
+
+      // Cleanup the observer on component unmount
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  // Focus on input field
+  useEffect(() => {
+    if (isResponding && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isResponding]);
+
   return (
-    <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit font-mono">
+    <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit">
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
         disabled={isChatOpened}
@@ -89,14 +171,16 @@ export function ScienGPT(): JSX.Element {
       <motion.div
         initial={{
           opacity: 0,
+          backdropFilter: "blur(5px)",
         }}
-        className="ai-chat-container absolute z-10 bottom-2 right-2 w-96 h-96 rounded-2xl shadow-lg flex flex-col justify-between overflow-hidden"
         animate={{
+          height: isChatOpened ? "25rem" : "0",
           y: isChatOpened ? -10 : 0,
           opacity: isChatOpened ? 1 : 0,
         }}
+        className="ai-chat-container sm:absolute absolute z-10 bottom-2 right-2 w-72 sm:w-96 sm:h-[25rem] h-[20rem] rounded-2xl shadow-lg flex flex-col justify-between overflow-x-hidden overflow-y-scroll"
       >
-        <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded">
+        <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded font-mono">
           <div className="about-content-ai-bot">
             <h1 className="font-bold text-white">scienGPT</h1>
             <p className="w-fit h-fit text-neutral-100 text-xs sm:text-sm">
@@ -106,7 +190,10 @@ export function ScienGPT(): JSX.Element {
           <div className="close-and-reset flex flex-row gap-1 items-center">
             <button
               className="p-2 bg-red-800 rounded-lg hover:bg-red-900 duration-200 border border-pink-800"
-              onClick={() => setChatHistory(null)}
+              onClick={() => {
+                setChatHistory([]);
+                setIsResponseBlocked(false);
+              }}
             >
               <MdOutlineResetTv className="text-xl text-white" />
             </button>
@@ -118,60 +205,143 @@ export function ScienGPT(): JSX.Element {
             </button>
           </div>
         </div>
-        <div className="chats h-full backdrop-blur-sm "></div>
-        <div className="input-box absolute bottom-0 w-full h-[3.3rem] p-2 flex items-center justify-center">
-          <form
-            onSubmit={handleUserQuery}
-            className="input-box flex flex-row items-center w-full h-full rounded-xl gap-1 focus:outline-1  duration-300"
-          >
-            <div className="group w-full flex">
-              <div className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400 group-focus-within:border-opacity-60 transition-colors duration-300">
-                <input
-                  type="text"
-                  value={userQuery}
-                  disabled={isResponding}
-                  onChange={(e) => setUserQuery(e.target.value)}
-                  className="w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-none dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm"
-                  placeholder="Type your message"
+        <div
+          ref={conversationAreaRef}
+          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 pb-14 hide-scrollbar"
+        >
+          {chatHistory.length === 0 && (
+            <div
+              className="no-conversation-screen w-full h-full items-center justify-center p-4 flex flex-col gap-1
+            "
+            >
+              <div className="say-hi text-base sm:text-lg font-semibold w-fit h-fit text-center ">
+                <ReactTyped
+                  typeSpeed={20}
+                  startDelay={100}
+                  strings={["Say Hi 👋"]}
                 />
-                <button
-                  disabled={isResponding}
-                  className="p-1 hover:bg-neutral-400 dark:hover:bg-neutral-700 rounded-2xl duration-200"
-                >
-                  <MdOutlineKeyboardVoice className="text-xl text-neutral-800 dark:text-neutral-200" />
-                </button>
+              </div>
+              <div className="welcome-text w-fit h-fit text-center text-wrap text-xs sm:text-sm">
+                <ReactTyped
+                  typeSpeed={20}
+                  startDelay={120}
+                  strings={["I'm scienGPT, lets start the conversation"]}
+                  showCursor={false}
+                />
               </div>
             </div>
-            <button
-              disabled={isResponding}
-              type="submit"
-              className="bg-green-700 hover:bg-green-800 duration-200 p-2 rounded-2xl w-fit h-fit"
+          )}
+          {chatHistory?.map((chat, index) => (
+            <div
+              key={index}
+              className="chat-box-set w-full h-fit flex flex-col gap-1"
             >
-              <FiSend className="text-base text-neutral-200" />
-            </button>
-          </form>
+              {chat.role === "user" ? (
+                <UserQuery query={chat.message} />
+              ) : (
+                <BotResponse response={chat.message} />
+              )}
+            </div>
+          ))}
         </div>
+        {!isResponseBlocked && (
+          <div className="input-box absolute bottom-0 w-full h-[3.3rem] p-2 flex items-center justify-center">
+            <form
+              onSubmit={handleUserQuery}
+              className="input-box flex flex-row items-center w-full h-full rounded-xl gap-1 focus:outline-1  duration-300"
+            >
+              <div className="group w-full flex">
+                <div
+                  className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400 group-focus-within:border-opacity-60 transition duration-200"
+                  style={{
+                    transitionProperty: "border-color",
+                  }}
+                >
+                  <input
+                    required
+                    autoComplete="off"
+                    ref={inputRef}
+                    name="query"
+                    type="text"
+                    minLength={2}
+                    value={userQuery}
+                    disabled={isResponding}
+                    onChange={(e) => setUserQuery(e.target.value)}
+                    className={`w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-none dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm ${
+                      isResponding ? "cursor-not-allowed" : ""
+                    }`}
+                    placeholder="Type your message"
+                  />
+                  <button
+                    disabled={isResponding}
+                    className={`p-1 ${
+                      isResponding
+                        ? "cursor-not-allowed"
+                        : "hover:bg-neutral-400 dark:hover:bg-neutral-700 "
+                    } rounded-2xl duration-200`}
+                  >
+                    <MdOutlineKeyboardVoice className="text-xl text-neutral-800 dark:text-neutral-200" />
+                  </button>
+                </div>
+              </div>
+              <button
+                disabled={isResponding}
+                type="submit"
+                className={`${
+                  isResponding
+                    ? "bg-[#0057ff]"
+                    : "bg-green-700 hover:bg-green-800"
+                } p-2 duration-200 rounded-2xl w-fit h-fit`}
+              >
+                {isResponding ? (
+                  <GPTResponseLoader color="pink" width={15} height={15} />
+                ) : (
+                  <FiSend className="text-base text-neutral-200" />
+                )}
+              </button>
+            </form>
+          </div>
+        )}
       </motion.div>
     </section>
   );
 }
 
-function UserQuery(): JSX.Element {
+function UserQuery({ query }: { query: string }): JSX.Element {
   return (
-    <div className="user-query w-full h-fit flex flex-row gap-3">
-      <div className="query-box w-fit h-fit bg-gradient-to-br from-pink-800 to-pink-900 rounded-lg p-3">
-        <p className="text-white">Hi</p>
+    <div className="user-query w-full h-fit flex justify-end">
+      <div className="message-container w-fit h-fit max-w-[200px] flex flex-row-reverse  items-start gap-1">
+        <p className="w-fit h-fit text-xs sm:text-sm px-2 py-1 rounded-md  bg-transparent bg-gradient-to-br from-[#3f5870] to-[#783b38] text-white">
+          {query}
+        </p>
       </div>
     </div>
   );
 }
 
-function BotResponse(): JSX.Element {
+function BotResponse({ response }: { response: string }): JSX.Element {
+  // Parse the response (Markdown to HTML)
+  const parsedResponse = md.render(response);
+
   return (
-    <div className="bot-response w-full h-fit flex flex-row justify-end gap-3">
-      <div className="response-box w-fit h-fit bg-gradient-to-br from-pink-800 to-pink-900 rounded-lg p-3">
-        <p className="text-white">Hello, I am scienGPT. How can I help you?</p>
+    <div className="ai-response w-fit h-fit flex flex-row  items-start gap-1">
+      <div className="image w-[27px] h-[27px]">
+        <Image
+          src={logoImg}
+          alt="logo"
+          width={27}
+          height={27}
+          className="rounded-full border"
+        />
       </div>
+      <p className="w-fit h-fit text-xs sm:text-sm px-3 py-2 bg-transparent bg-gradient-to-br from-[#3f5870] to-[#783b38] rounded-r-2xl rounded-bl-2xl rounded-tl-sm text-white text-wrap max-w-[220px]">
+        <ReactTyped
+          strings={[parsedResponse]}
+          startDelay={100}
+          typeSpeed={30}
+          showCursor={false}
+        />
+      </p>
     </div>
   );
 }
