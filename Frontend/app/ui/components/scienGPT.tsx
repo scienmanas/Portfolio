@@ -34,6 +34,7 @@ export function ScienGPT(): JSX.Element {
   const [chatHistory, setChatHistory] = useState<chatHostoryType[]>([]);
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
   const [isResponseBlocked, setIsResponseBlocked] = useState<boolean>(false);
+  const [screenSize, setScreenSize] = useState<number>(0);
 
   // function to send message to GPT
   const handleUserQuery = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,7 +46,6 @@ export function ScienGPT(): JSX.Element {
     // Get the form data
     const formData = new FormData(e.currentTarget);
     const userQuery: string = formData.get("query") as string;
-    const userQueryFormatted: string = `Query from  user: ${userQuery}. If user gives explicit content or out of context query, then block the response or just return: blocked.`;
     setUserQuery("");
 
     // update chat history with user query
@@ -143,20 +143,31 @@ export function ScienGPT(): JSX.Element {
 
   // Focus on input field
   useEffect(() => {
-    if (isResponding && inputRef.current) {
+    if ((isResponding || isChatOpened) && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [isResponding]);
+  }, [isResponding, isChatOpened]);
+
+  // Change the screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit">
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
         disabled={isChatOpened}
-        className="opener-icons relative z-20 p-3 rounded-3xl bg-[#7726d9]"
+        className="opener-icons absolute bottom-0 right-0 z-20 p-3 bg-[#7726d9]"
         animate={{
           y: isChatOpened ? 20 : 0,
           opacity: isChatOpened ? 0 : 1,
+          borderRadius: "1.5rem",
         }}
         transition={{
           duration: 0.3,
@@ -174,11 +185,16 @@ export function ScienGPT(): JSX.Element {
           backdropFilter: "blur(5px)",
         }}
         animate={{
-          height: isChatOpened ? "25rem" : "0",
+          width: isChatOpened ? (screenSize >= 640 ? "24rem" : "20rem") : "0",
+          height: isChatOpened ? (screenSize >= 640 ? "27rem" : "23rem") : "0",
           y: isChatOpened ? -10 : 0,
           opacity: isChatOpened ? 1 : 0,
         }}
-        className="ai-chat-container sm:absolute absolute z-10 bottom-2 right-2 w-72 sm:w-96 sm:h-[25rem] h-[20rem] rounded-2xl shadow-lg flex flex-col justify-between overflow-x-hidden overflow-y-scroll"
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }}
+        className="ai-chat-container z-10 rounded-2xl shadow-lg flex flex-col justify-between overflow-hidden"
       >
         <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded font-mono">
           <div className="about-content-ai-bot">
@@ -189,7 +205,11 @@ export function ScienGPT(): JSX.Element {
           </div>
           <div className="close-and-reset flex flex-row gap-1 items-center">
             <button
-              className="p-2 bg-red-800 rounded-lg hover:bg-red-900 duration-200 border border-pink-800"
+              className={`p-2 bg-red-800 rounded-lg ${
+                chatHistory.length > 0
+                  ? "hover:bg-red-900"
+                  : "cursor-not-allowed opacity-45"
+              }  duration-200 border border-pink-800`}
               onClick={() => {
                 setChatHistory([]);
                 setIsResponseBlocked(false);
@@ -245,10 +265,10 @@ export function ScienGPT(): JSX.Element {
           ))}
         </div>
         {!isResponseBlocked && (
-          <div className="input-box absolute bottom-0 w-full h-[3.3rem] p-2 flex items-center justify-center">
+          <div className="input-box absolute bottom-0 w-full h-fit py-1 px-2 flex flex-col items-center justify-center">
             <form
               onSubmit={handleUserQuery}
-              className="input-box flex flex-row items-center w-full h-full rounded-xl gap-1 focus:outline-1  duration-300"
+              className="input-box flex flex-row items-center w-full h-[3.3rem] rounded-xl gap-1 focus:outline-1  duration-300"
             >
               <div className="group w-full flex">
                 <div
@@ -273,6 +293,7 @@ export function ScienGPT(): JSX.Element {
                     placeholder="Type your message"
                   />
                   <button
+                    type="button"
                     disabled={isResponding}
                     className={`p-1 ${
                       isResponding
@@ -300,6 +321,14 @@ export function ScienGPT(): JSX.Element {
                 )}
               </button>
             </form>
+            <div
+              style={{
+                fontSize: "0.6rem",
+              }}
+              className="disclaimer text-xs text-neutral-700 dark:text-neutral-400"
+            >
+              ⚙️ Fine-tuned Gemini | Info may be inaccurate ⚠️
+            </div>
           </div>
         )}
       </motion.div>

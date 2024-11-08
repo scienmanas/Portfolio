@@ -113,7 +113,7 @@ export function Contact(): JSX.Element {
       <canvas
         ref={confettiRef}
         id="confetti-canvas"
-        className="fixed -z-20 bottom-0 w-full h-full"
+        className="fixed -z-20 bottom-0 w-full h-96"
       ></canvas>
       <div className="wrapper w-full max-w-screen-xl h-fit items-start px-5 flex flex-col gap-6">
         <div className="heading-andd-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
