@@ -18,9 +18,9 @@ const md = new markdownit();
 const scienGPTUri =
   "https://kyczueqpgk.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
 
-interface chatHostoryType {
-  role: "user" | "gpt";
-  message: string;
+interface chatHistoryType {
+  role: "user" | "model";
+  parts: { text: string }[];
 }
 
 export function ScienGPT(): JSX.Element {
@@ -31,7 +31,7 @@ export function ScienGPT(): JSX.Element {
   // variable to save chat history
   const [userQuery, setUserQuery] = useState<string>("");
   const [isResponding, setIsResponding] = useState<boolean>(false);
-  const [chatHistory, setChatHistory] = useState<chatHostoryType[]>([]);
+  const [chatHistory, setChatHistory] = useState<chatHistoryType[]>([]);
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
   const [isResponseBlocked, setIsResponseBlocked] = useState<boolean>(false);
   const [screenSize, setScreenSize] = useState<number>(0);
@@ -53,7 +53,7 @@ export function ScienGPT(): JSX.Element {
       ...prevChats,
       {
         role: "user",
-        message: userQuery,
+        parts: [{ text: userQuery }],
       },
     ]);
 
@@ -65,6 +65,7 @@ export function ScienGPT(): JSX.Element {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          chatHistory: chatHistory,
           prompt: userQuery,
         }),
       });
@@ -80,16 +81,16 @@ export function ScienGPT(): JSX.Element {
           setChatHistory((prevChats) => [
             ...prevChats,
             {
-              role: "gpt",
-              message: "Sorry, I'm not able to respond at the moment",
+              role: "model",
+              parts: [{ text: "Sorry, I'm not able to respond at the moment" }],
             },
           ]);
         } else {
           setChatHistory((prevChats) => [
             ...prevChats,
             {
-              role: "gpt",
-              message: parsedBody.message,
+              role: "model",
+              parts: [{ text: parsedBody.message }],
             },
           ]);
         }
@@ -101,8 +102,8 @@ export function ScienGPT(): JSX.Element {
         setChatHistory((prevChats) => [
           ...prevChats,
           {
-            role: "gpt",
-            message: "Sorry, I'm not able to respond at the moment",
+            role: "model",
+            parts: [{ text: "Sorry, I'm not able to respond at the moment" }],
           },
         ]);
       }
@@ -113,8 +114,8 @@ export function ScienGPT(): JSX.Element {
       setChatHistory((prevChats) => [
         ...prevChats,
         {
-          role: "gpt",
-          message: "Sorry, I'm not able to respond at the moment",
+          role: "model",
+          parts: [{ text: "Sorry, I'm not able to respond at the moment" }],
         },
       ]);
     } finally {
@@ -257,9 +258,9 @@ export function ScienGPT(): JSX.Element {
               className="chat-box-set w-full h-fit flex flex-col gap-1"
             >
               {chat.role === "user" ? (
-                <UserQuery query={chat.message} />
+                <UserQuery query={chat.parts[0].text} />
               ) : (
-                <BotResponse response={chat.message} />
+                <BotResponse response={chat.parts[0].text} />
               )}
             </div>
           ))}
