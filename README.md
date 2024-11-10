@@ -126,7 +126,7 @@ Contributions are always welcome! Additionally you can contact me by my email: *
 
 ## 📷 Video
 
- To be added ...
+https://github.com/user-attachments/assets/14add2de-72c2-4c42-99ce-dd073918079e
 
 ## 🙌 Credits & Acknowledgements
 
