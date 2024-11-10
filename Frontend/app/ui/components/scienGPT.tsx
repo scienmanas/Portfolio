@@ -15,18 +15,30 @@ import logoImg from "@/public/assets/logo/logo.png";
 // Initialize markdown-it
 const md = new markdownit();
 
-const scienGPTUri =
-  "https://kyczueqpgk.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
+// Testing
+const scienGPTUri = "";
+
+// Production
+// const scienGPTUri =
+//   "https://kyczueqpgk.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
 
 interface chatHistoryType {
   role: "user" | "model";
   parts: { text: string }[];
 }
 
+// Declare a global interface to add the webkitSpeechRecognition property to the Window object
+declare global {
+  interface window {
+    webkitSpeechRecognition: any;
+  }
+}
+
 export function ScienGPT(): JSX.Element {
   // Refence variables
   const conversationAreaRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   // variable to save chat history
   const [userQuery, setUserQuery] = useState<string>("");
@@ -35,6 +47,31 @@ export function ScienGPT(): JSX.Element {
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
   const [isResponseBlocked, setIsResponseBlocked] = useState<boolean>(false);
   const [screenSize, setScreenSize] = useState<number>(0);
+  const [isSpeechRecognitionAvailable, setIsSpeechRecognitionAvailable] =
+    useState<boolean | null>(null);
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+
+  // Function to start recording
+  const startRecording = () => {
+    setIsRecording(true);
+
+    // Create a new SpeechRecognition instance and configure it
+    recognitionRef.current = new window.webkitSpeechRecognition();
+    recognitionRef.current.continuous = true;
+    recognitionRef.current.interimResults = true;
+
+    // let accumulatedTranscription = transcription;
+
+    recognitionRef.current.onresult = (event: any) => {
+      const { transcript } = event.results[event.results.length - 1][0];
+      // Log the recognition results and update the transcript state
+      console.log(event.results);
+      setUserQuery(transcript);
+    };
+
+    // Start the speech recognition
+    recognitionRef.current.start();
+  };
 
   // function to send message to GPT
   const handleUserQuery = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -70,9 +107,8 @@ export function ScienGPT(): JSX.Element {
         }),
       });
 
-      if (response.status === 200) {
-        const data = await response.json();
-
+      const data = await response.json();
+      if (response.status === 200 || data.statusCode === 200) {
         // now parse the body
         const parsedBody = JSON.parse(data.body);
         if (parsedBody.message === "blocked") {
@@ -159,16 +195,32 @@ export function ScienGPT(): JSX.Element {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Cleanup effect when the component unmounts
+  useEffect(() => {
+    typeof window.webkitSpeechRecognition !== "undefined"
+      ? setIsSpeechRecognitionAvailable(true)
+      : setIsSpeechRecognitionAvailable(false);
+
+    return () => {
+      // Stop the speech recognition if it's active
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
   return (
     <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit">
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
         disabled={isChatOpened}
         className="opener-icons absolute bottom-0 right-0 z-20 p-3 bg-[#7726d9]"
+        initial={{
+          borderRadius: "1.5rem",
+        }}
         animate={{
           y: isChatOpened ? 20 : 0,
           opacity: isChatOpened ? 0 : 1,
-          borderRadius: "1.5rem",
         }}
         transition={{
           duration: 0.3,
@@ -228,7 +280,7 @@ export function ScienGPT(): JSX.Element {
         </div>
         <div
           ref={conversationAreaRef}
-          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 pb-14 hide-scrollbar"
+          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 pb-20 hide-scrollbar"
         >
           {chatHistory.length === 0 && (
             <div
@@ -266,10 +318,10 @@ export function ScienGPT(): JSX.Element {
           ))}
         </div>
         {!isResponseBlocked && (
-          <div className="input-box absolute bottom-0 w-full h-fit py-1 px-2 flex flex-col items-center justify-center">
+          <div className="input-box absolute bottom-0 w-full h-fit pb-1 px-2 flex flex-col items-center justify-center backdrop-blur-sm gap-[2px]">
             <form
               onSubmit={handleUserQuery}
-              className="input-box flex flex-row items-center w-full h-[3.3rem] rounded-xl gap-1 focus:outline-1  duration-300"
+              className="input-box flex flex-row items-center w-full h-fit rounded-xl gap-1 focus:outline-1  duration-300"
             >
               <div className="group w-full flex">
                 <div
@@ -293,25 +345,56 @@ export function ScienGPT(): JSX.Element {
                     }`}
                     placeholder="Type your message"
                   />
-                  <button
-                    type="button"
-                    disabled={isResponding}
-                    className={`p-1 ${
-                      isResponding
-                        ? "cursor-not-allowed"
-                        : "hover:bg-neutral-400 dark:hover:bg-neutral-700 "
-                    } rounded-2xl duration-200`}
-                  >
-                    <MdOutlineKeyboardVoice className="text-xl text-neutral-800 dark:text-neutral-200" />
-                  </button>
+                  {isSpeechRecognitionAvailable && (
+                    <motion.button
+                      onClick={() => {
+                        if (!isRecording) {
+                          setIsRecording(true);
+                          startRecording();
+                        } else {
+                          setIsRecording(false);
+                          recognitionRef.current.stop();
+                        }
+                      }}
+                      type="button"
+                      disabled={isResponding}
+                      className={`speech-button group p-1 ${
+                        isResponding
+                          ? "cursor-not-allowed"
+                          : "hover:bg-red-700 dark:hover:bg-red-800 "
+                      } ${
+                        isRecording ? "bg-red-700 dark:bg-red-800" : ""
+                      } rounded-2xl duration-200`}
+                      animate={{
+                        scale: isRecording ? [1, 1.2, 1] : 1, // Scale up and down
+                        opacity: isRecording ? [1, 0.7, 1] : 1, // Fade in and out
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "loop", // Make it repeat infinitely
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <MdOutlineKeyboardVoice
+                        className={`text-xl ${
+                          isRecording
+                            ? "text-white dark:text-white"
+                            : "text-neutral-800 dark:text-neutral-200 hover:text-white dark:hover:text-white"
+                        }`}
+                      />
+                    </motion.button>
+                  )}
                 </div>
               </div>
               <button
-                disabled={isResponding}
+                disabled={isResponding || isRecording}
                 type="submit"
                 className={`${
-                  isResponding
-                    ? "bg-[#0057ff]"
+                  isResponding || isRecording
+                    ? isRecording
+                      ? "bg-green-700 cursor-not-allowed"
+                      : "bg-[#0057ff] cursor-not-allowed"
                     : "bg-green-700 hover:bg-green-800"
                 } p-2 duration-200 rounded-2xl w-fit h-fit`}
               >
