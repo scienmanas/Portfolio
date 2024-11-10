@@ -6,7 +6,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 // Get the tuned model & generation config 
 const model = genAI.getGenerativeModel({
-    model: "tunedModels/sciengpt-ui3orhh7v19d"
+    model: "tunedModels/sciengpt-sir8hq875798"
 });
 const generationConfig = {
     temperature: 1,
