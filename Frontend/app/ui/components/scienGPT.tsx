@@ -2,41 +2,97 @@
 
 import { motion } from "framer-motion";
 import { ReactTyped } from "react-typed";
-import { useState, useEffect } from "react";
-import { SubmissionLoader } from "@/app/ui/loaders";
+import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import markdownit from "markdown-it";
+import { GPTResponseLoader } from "@/app/ui/loaders";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FiSend } from "react-icons/fi";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import { MdOutlineResetTv } from "react-icons/md";
-import { RiChatSmileLine } from "react-icons/ri";
+import logoImg from "@/public/assets/logo/logo.png";
 
-const scienGPTUri =
-  "https://kyczueqpgk.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
+// Initialize markdown-it
+const md = new markdownit();
 
-interface chatHostoryType {
-  user: string;
-  gpt: string;
+// Testing
+const scienGPTUri = "https://cupm2jmod1.execute-api.us-east-1.amazonaws.com/Developement/scienGPT";
+
+// Production
+// const scienGPTUri =
+//   "https://kyczueqpgk.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
+
+interface chatHistoryType {
+  role: "user" | "model";
+  parts: { text: string }[];
+}
+
+// Declare a global interface to add the webkitSpeechRecognition property to the Window object
+declare global {
+  interface window {
+    webkitSpeechRecognition: any;
+  }
 }
 
 export function ScienGPT(): JSX.Element {
+  // Refence variables
+  const conversationAreaRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
+
   // variable to save chat history
   const [userQuery, setUserQuery] = useState<string>("");
   const [isResponding, setIsResponding] = useState<boolean>(false);
-  const [chatHistory, setChatHistory] = useState<chatHostoryType[] | null>(
-    null
-  );
+  const [chatHistory, setChatHistory] = useState<chatHistoryType[]>([]);
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
+  const [isResponseBlocked, setIsResponseBlocked] = useState<boolean>(false);
+  const [screenSize, setScreenSize] = useState<number>(0);
+  const [isSpeechRecognitionAvailable, setIsSpeechRecognitionAvailable] =
+    useState<boolean | null>(null);
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+
+  // Function to start recording
+  const startRecording = () => {
+    setIsRecording(true);
+
+    // Create a new SpeechRecognition instance and configure it
+    recognitionRef.current = new window.webkitSpeechRecognition();
+    recognitionRef.current.continuous = true;
+    recognitionRef.current.interimResults = true;
+
+    // let accumulatedTranscription = transcription;
+
+    recognitionRef.current.onresult = (event: any) => {
+      const { transcript } = event.results[event.results.length - 1][0];
+      // Log the recognition results and update the transcript state
+      console.log(event.results);
+      setUserQuery(transcript);
+    };
+
+    // Start the speech recognition
+    recognitionRef.current.start();
+  };
 
   // function to send message to GPT
   const handleUserQuery = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Fetching response from GPT");
-    console.log("User: Hi");
 
-    // Chhange the state to loading
+    // Change the state to loading
     setIsResponding(true);
 
-    const prompt = "Hi";
+    // Get the form data
+    const formData = new FormData(e.currentTarget);
+    const userQuery: string = formData.get("query") as string;
+    setUserQuery("");
+
+    // update chat history with user query
+    setChatHistory((prevChats) => [
+      ...prevChats,
+      {
+        role: "user",
+        parts: [{ text: userQuery }],
+      },
+    ]);
 
     // fetch the response from GPT
     try {
@@ -46,32 +102,122 @@ export function ScienGPT(): JSX.Element {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt: prompt,
+          chatHistory: chatHistory,
+          prompt: userQuery,
         }),
       });
 
-      if (response.status === 200) {
-        const data = await response.json();
-        console.log(data);
-        // Update the chat history
+      const data = await response.json();
+      if (response.status === 200 || data.statusCode === 200) {
+        // now parse the body
+        const parsedBody = JSON.parse(data.body);
+        if (parsedBody.message === "blocked") {
+          setIsResponseBlocked(true);
+          // Update chat history with error message
+          setChatHistory((prevChats) => [
+            ...prevChats,
+            {
+              role: "model",
+              parts: [{ text: "Sorry, I'm not able to respond at the moment" }],
+            },
+          ]);
+        } else {
+          setChatHistory((prevChats) => [
+            ...prevChats,
+            {
+              role: "model",
+              parts: [{ text: parsedBody.message }],
+            },
+          ]);
+        }
       } else {
         console.error("Failed to fetch response from GPT");
         // Update the chat history with error message, and warning the user for exiplicit content
+        setIsResponding(true);
+        // Update chat historu with error message
+        setChatHistory((prevChats) => [
+          ...prevChats,
+          {
+            role: "model",
+            parts: [{ text: "Sorry, I'm not able to respond at the moment" }],
+          },
+        ]);
       }
     } catch (error) {
       console.error(error);
+      setIsResponding(true);
       // Update chat historu with error message
+      setChatHistory((prevChats) => [
+        ...prevChats,
+        {
+          role: "model",
+          parts: [{ text: "Sorry, I'm not able to respond at the moment" }],
+        },
+      ]);
     } finally {
       setIsResponding(false);
     }
   };
 
+  // AutoScrolling
+  useEffect(() => {
+    const chatContainer = conversationAreaRef.current;
+    if (chatContainer) {
+      // set smooth scrolling
+      chatContainer.style.scrollBehavior = "smooth";
+      // Create a MutationObserver to detect changes in the chat container
+      const observer = new MutationObserver(() => {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      });
+
+      // Start observing the chat container for child list changes
+      observer.observe(chatContainer, { childList: true, subtree: true });
+
+      // Cleanup the observer on component unmount
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  // Focus on input field
+  useEffect(() => {
+    if ((isResponding || isChatOpened) && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isResponding, isChatOpened]);
+
+  // Change the screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Cleanup effect when the component unmounts
+  useEffect(() => {
+    typeof window.webkitSpeechRecognition !== "undefined"
+      ? setIsSpeechRecognitionAvailable(true)
+      : setIsSpeechRecognitionAvailable(false);
+
+    return () => {
+      // Stop the speech recognition if it's active
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, []);
+
   return (
-    <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit font-mono">
+    <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit">
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
         disabled={isChatOpened}
-        className="opener-icons relative z-20 p-3 rounded-3xl bg-[#7726d9]"
+        className="opener-icons absolute bottom-0 right-0 z-20 p-3 bg-[#7726d9]"
+        initial={{
+          borderRadius: "1.5rem",
+        }}
         animate={{
           y: isChatOpened ? 20 : 0,
           opacity: isChatOpened ? 0 : 1,
@@ -89,14 +235,21 @@ export function ScienGPT(): JSX.Element {
       <motion.div
         initial={{
           opacity: 0,
+          backdropFilter: "blur(5px)",
         }}
-        className="ai-chat-container absolute z-10 bottom-2 right-2 w-96 h-96 rounded-2xl shadow-lg flex flex-col justify-between overflow-hidden"
         animate={{
+          width: isChatOpened ? (screenSize >= 640 ? "24rem" : "20rem") : "0",
+          height: isChatOpened ? (screenSize >= 640 ? "27rem" : "23rem") : "0",
           y: isChatOpened ? -10 : 0,
           opacity: isChatOpened ? 1 : 0,
         }}
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }}
+        className="ai-chat-container z-10 rounded-2xl shadow-lg flex flex-col justify-between overflow-hidden"
       >
-        <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded">
+        <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded font-mono">
           <div className="about-content-ai-bot">
             <h1 className="font-bold text-white">scienGPT</h1>
             <p className="w-fit h-fit text-neutral-100 text-xs sm:text-sm">
@@ -105,8 +258,15 @@ export function ScienGPT(): JSX.Element {
           </div>
           <div className="close-and-reset flex flex-row gap-1 items-center">
             <button
-              className="p-2 bg-red-800 rounded-lg hover:bg-red-900 duration-200 border border-pink-800"
-              onClick={() => setChatHistory(null)}
+              className={`p-2 bg-red-800 rounded-lg ${
+                chatHistory.length > 0
+                  ? "hover:bg-red-900"
+                  : "cursor-not-allowed opacity-45"
+              }  duration-200 border border-pink-800`}
+              onClick={() => {
+                setChatHistory([]);
+                setIsResponseBlocked(false);
+              }}
             >
               <MdOutlineResetTv className="text-xl text-white" />
             </button>
@@ -118,60 +278,183 @@ export function ScienGPT(): JSX.Element {
             </button>
           </div>
         </div>
-        <div className="chats h-full backdrop-blur-sm "></div>
-        <div className="input-box absolute bottom-0 w-full h-[3.3rem] p-2 flex items-center justify-center">
-          <form
-            onSubmit={handleUserQuery}
-            className="input-box flex flex-row items-center w-full h-full rounded-xl gap-1 focus:outline-1  duration-300"
-          >
-            <div className="group w-full flex">
-              <div className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400 group-focus-within:border-opacity-60 transition-colors duration-300">
-                <input
-                  type="text"
-                  value={userQuery}
-                  disabled={isResponding}
-                  onChange={(e) => setUserQuery(e.target.value)}
-                  className="w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-none dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm"
-                  placeholder="Type your message"
+        <div
+          ref={conversationAreaRef}
+          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 pb-20 hide-scrollbar"
+        >
+          {chatHistory.length === 0 && (
+            <div
+              className="no-conversation-screen w-full h-full items-center justify-center p-4 flex flex-col gap-1
+            "
+            >
+              <div className="say-hi text-base sm:text-lg font-semibold w-fit h-fit text-center ">
+                <ReactTyped
+                  typeSpeed={20}
+                  startDelay={100}
+                  strings={["Say Hi 👋"]}
                 />
-                <button
-                  disabled={isResponding}
-                  className="p-1 hover:bg-neutral-400 dark:hover:bg-neutral-700 rounded-2xl duration-200"
-                >
-                  <MdOutlineKeyboardVoice className="text-xl text-neutral-800 dark:text-neutral-200" />
-                </button>
+              </div>
+              <div className="welcome-text w-fit h-fit text-center text-wrap text-xs sm:text-sm">
+                <ReactTyped
+                  typeSpeed={20}
+                  startDelay={120}
+                  strings={["I'm scienGPT, lets start the conversation"]}
+                  showCursor={false}
+                />
               </div>
             </div>
-            <button
-              disabled={isResponding}
-              type="submit"
-              className="bg-green-700 hover:bg-green-800 duration-200 p-2 rounded-2xl w-fit h-fit"
+          )}
+          {chatHistory?.map((chat, index) => (
+            <div
+              key={index}
+              className="chat-box-set w-full h-fit flex flex-col gap-1"
             >
-              <FiSend className="text-base text-neutral-200" />
-            </button>
-          </form>
+              {chat.role === "user" ? (
+                <UserQuery query={chat.parts[0].text} />
+              ) : (
+                <BotResponse response={chat.parts[0].text} />
+              )}
+            </div>
+          ))}
         </div>
+        {!isResponseBlocked && (
+          <div className="input-box absolute bottom-0 w-full h-fit pb-1 px-2 flex flex-col items-center justify-center backdrop-blur-sm gap-[2px]">
+            <form
+              onSubmit={handleUserQuery}
+              className="input-box flex flex-row items-center w-full h-fit rounded-xl gap-1 focus:outline-1  duration-300"
+            >
+              <div className="group w-full flex">
+                <div
+                  className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400 group-focus-within:border-opacity-60 transition duration-200"
+                  style={{
+                    transitionProperty: "border-color",
+                  }}
+                >
+                  <input
+                    required
+                    autoComplete="off"
+                    ref={inputRef}
+                    name="query"
+                    type="text"
+                    minLength={2}
+                    value={userQuery}
+                    disabled={isResponding}
+                    onChange={(e) => setUserQuery(e.target.value)}
+                    className={`w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-none dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm ${
+                      isResponding ? "cursor-not-allowed" : ""
+                    }`}
+                    placeholder="Type your message"
+                  />
+                  {isSpeechRecognitionAvailable && (
+                    <motion.button
+                      onClick={() => {
+                        if (!isRecording) {
+                          setIsRecording(true);
+                          startRecording();
+                        } else {
+                          setIsRecording(false);
+                          recognitionRef.current.stop();
+                        }
+                      }}
+                      type="button"
+                      disabled={isResponding}
+                      className={`speech-button group p-1 ${
+                        isResponding
+                          ? "cursor-not-allowed"
+                          : "hover:bg-red-700 dark:hover:bg-red-800 "
+                      } ${
+                        isRecording ? "bg-red-700 dark:bg-red-800" : ""
+                      } rounded-2xl duration-200`}
+                      animate={{
+                        scale: isRecording ? [1, 1.2, 1] : 1, // Scale up and down
+                        opacity: isRecording ? [1, 0.7, 1] : 1, // Fade in and out
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "loop", // Make it repeat infinitely
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <MdOutlineKeyboardVoice
+                        className={`text-xl ${
+                          isRecording
+                            ? "text-white dark:text-white"
+                            : "text-neutral-800 dark:text-neutral-200 hover:text-white dark:hover:text-white"
+                        }`}
+                      />
+                    </motion.button>
+                  )}
+                </div>
+              </div>
+              <button
+                disabled={isResponding || isRecording}
+                type="submit"
+                className={`${
+                  isResponding || isRecording
+                    ? isRecording
+                      ? "bg-green-700 cursor-not-allowed"
+                      : "bg-[#0057ff] cursor-not-allowed"
+                    : "bg-green-700 hover:bg-green-800"
+                } p-2 duration-200 rounded-2xl w-fit h-fit`}
+              >
+                {isResponding ? (
+                  <GPTResponseLoader color="pink" width={15} height={15} />
+                ) : (
+                  <FiSend className="text-base text-neutral-200" />
+                )}
+              </button>
+            </form>
+            <div
+              style={{
+                fontSize: "0.6rem",
+              }}
+              className="disclaimer text-xs text-neutral-700 dark:text-neutral-400"
+            >
+              ⚙️ Fine-tuned Gemini | Info may be inaccurate ⚠️
+            </div>
+          </div>
+        )}
       </motion.div>
     </section>
   );
 }
 
-function UserQuery(): JSX.Element {
+function UserQuery({ query }: { query: string }): JSX.Element {
   return (
-    <div className="user-query w-full h-fit flex flex-row gap-3">
-      <div className="query-box w-fit h-fit bg-gradient-to-br from-pink-800 to-pink-900 rounded-lg p-3">
-        <p className="text-white">Hi</p>
+    <div className="user-query w-full h-fit flex justify-end">
+      <div className="message-container w-fit h-fit max-w-[200px] flex flex-row-reverse  items-start gap-1">
+        <p className="w-fit h-fit text-xs sm:text-sm px-2 py-1 rounded-md  bg-transparent bg-gradient-to-br from-[#3f5870] to-[#783b38] text-white">
+          {query}
+        </p>
       </div>
     </div>
   );
 }
 
-function BotResponse(): JSX.Element {
+function BotResponse({ response }: { response: string }): JSX.Element {
+  // Parse the response (Markdown to HTML)
+  const parsedResponse = md.render(response);
+
   return (
-    <div className="bot-response w-full h-fit flex flex-row justify-end gap-3">
-      <div className="response-box w-fit h-fit bg-gradient-to-br from-pink-800 to-pink-900 rounded-lg p-3">
-        <p className="text-white">Hello, I am scienGPT. How can I help you?</p>
+    <div className="ai-response w-fit h-fit flex flex-row  items-start gap-1">
+      <div className="image w-[27px] h-[27px]">
+        <Image
+          src={logoImg}
+          alt="logo"
+          width={27}
+          height={27}
+          className="rounded-full border"
+        />
       </div>
+      <p className="w-fit h-fit text-xs sm:text-sm px-3 py-2 bg-transparent bg-gradient-to-br from-[#3f5870] to-[#783b38] rounded-r-2xl rounded-bl-2xl rounded-tl-sm text-white text-wrap max-w-[220px]">
+        <ReactTyped
+          strings={[parsedResponse]}
+          startDelay={100}
+          typeSpeed={30}
+          showCursor={false}
+        />
+      </p>
     </div>
   );
 }

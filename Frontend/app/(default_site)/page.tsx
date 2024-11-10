@@ -10,13 +10,15 @@ import { ScienGPT } from "@/app/ui/components/scienGPT";
 export default function Home() {
   return (
     <div className="home relative w-full h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden py-4">
-      <Hero />
-      <Skills />
-      <Projects />
-      <Flex />
-      <CommunityWork />
-      <MoreAboutMe />
-      <Contact />
+      <div className="home relative w-full h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden py-4">
+        <Hero />
+        <Skills />
+        <Projects />
+        <Flex />
+        <CommunityWork />
+        <MoreAboutMe />
+        <Contact />
+      </div>
       <ScienGPT />
     </div>
   );

@@ -1,40 +1,36 @@
 ---
-publishedDate: 2024-09-21T00:00:00Z
-title: A light.
-description: I wrote a poem for my crush (doesn't exits 😅). But I think you may like it. Who doesn't have a crush in his lifetime 🤨,
+publishedDate: 2024-11-08T00:00:00Z
+title: The Light
+description: Some emotions, some fantasy, some learning, some childishness. Read more to find out.
 tags:
   - poetry
-  - love
 #  All the comtents of the blog goes here.
 ---
-The Poem name is - **"Rose Blooming"**. I wrote this on 21st June, 2024, when I was doing my internship in **IISc Banglore** and the **CEA NITE** was on that day. **CEA NITE** is a cultural event of **Chemical Department** of IISc which happens every year during June month. As always I was not going to perform but my mentor insisted (iykuk 😅).
+Late in October, I took a small break from everything. In that period, I don't know what came in my mind I started watching "**Pokemon**" again. Ahh... many new seasons were out since I last watched. And yeahh...ahhh... the Kalos region (XYZ series) just amazing. There was a new girl character introduced named: **Serena**, amazing choice.
 
-So before I start the poem let me set the plot. There was a girl junior to me, when I was in 9th, she was in 8th. My first crush. I never talked to her, never had the courage to do so. But I always had a feeling for her. So this poem is dedicated to her.
+Peeps who have seen the Kalos series, know that there was an episode, where she lost her first stage performance, expressing herself to be strong, but later in morning she can be seen crying alone. And at the same day, she starts a new chapter with changing her look and style with a new haircut. Okay.. enough of drama.
 
-Here it goes -
+This poem somewhere revolves around her character and a new start.
 
 ```
-On one busy day in my regular schedule,
-I saw a rose blooming, radiant and gentle.
-In the midst of the rush, she was a spark so bright,
-I was lost in her beauty, she was a sight.
+She was not a perfect girl,
+Not a winner, nor a loser,
+Neither strong nor weak,
+Yet she held something unique.
 
-The world looked a little different today,
-Beacuse my eyes went to a different world, I must say.
-At the same she passed besides me,
-Making my heart skip a beat,
+A fighter and a challenger,
+A friend, a motivator,
+A well of deep emotions,
+And yes, a true light's creator.
 
-Her presence changed the essence of environment perceived to me,
-Making me stand there like a new born petal on the stem,
-In the crowd she seemed like a distinguished bright star,
-Radiant and steady, shinning like a guiding pole star.
+Like a Daruma doll she’d rise,
+Embracing new challenges, new beginnings,
+Open to change, ready to move forward,
+She is light—a pure, unyielding light.
 
-Everytime when I saw her, I felt ligher, like a feather,
-Felt like I was recarnated to a new world, a new weather.
-The busy day now seems to have a magic glaze,
-All becuase of the rose, and her gentle stare. [go slow here]
 ```
 
-I know this poems feels kinda incomplete 😅 but this was my first poem. Hope you like it.
+
+If you like it, do share the review with me, just [email me](mailto:iamscientistmanas@gmail.com) .
 
 Cheers🥂 - [**_Manas_**](https://www.github.com/scienmanas) 😊

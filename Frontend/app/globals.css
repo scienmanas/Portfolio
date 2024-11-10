@@ -85,3 +85,7 @@
   border-radius: 0.5rem;
   animation: scaleAndRound 2s ease-in-out infinite;
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -19,11 +19,16 @@ const generationConfig = {
 
 export const handler = async (event) => {
     // Destructure
-    const { prompt } = event;
+    const { chatHistory, prompt } = event;
 
     try {
         // Generate response
-        const response = await model.generateContent(prompt, generationConfig);
+        const chatSession = model.startChat({
+            generationConfig,
+            history: chatHistory
+        })
+
+        const response = await chatSession.sendMessage(prompt);
         const result = response.response.text();
 
         // Return the reponse
