@@ -16,7 +16,7 @@ import logoImg from "@/public/assets/logo/logo.png";
 const md = new markdownit();
 
 // Testing
-const scienGPTUri = "https://cupm2jmod1.execute-api.us-east-1.amazonaws.com/Developement/scienGPT";
+const scienGPTUri = "https://cupm2jmod1.execute-api.us-east-1.amazonaws.com/Production/scienGPT";
 
 // Production
 // const scienGPTUri =
