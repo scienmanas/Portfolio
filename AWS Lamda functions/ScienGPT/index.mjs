@@ -28,7 +28,6 @@ export const handler = async (event) => {
             history: chatHistory
         })
 
-
         const response = await chatSession.sendMessage(prompt);
         const result = response.response.text();
 
