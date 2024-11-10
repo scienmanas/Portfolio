@@ -39,12 +39,14 @@ export function Navbar(): JSX.Element {
       setWebsiteTheme(theme);
       document.body.style.overflowY = "auto";
     }
-  }, [theme, mounted]);
+  }, [theme, setTheme, mounted]);
 
   return (
     <Fragment>
       <WebsiteLoader mounted={mounted} />
-      <nav className={`relative w-full h-fit flex items-center justify-center z-50`}>
+      <nav
+        className={`relative w-full h-fit flex items-center justify-center z-50`}
+      >
         <div className="wrapper w-full max-w-screen-xl flex flex-row flex-wrap items-center justify-around sm:justify-between px-6 pt-8 gap-2">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
