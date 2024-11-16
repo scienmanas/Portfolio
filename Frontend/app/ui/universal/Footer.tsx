@@ -7,6 +7,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io5";
 import { SiFarcaster } from "react-icons/si";
+import { FaCodepen } from "react-icons/fa6";
 import { IconType } from "react-icons";
 
 interface socialLinksType {
@@ -25,16 +26,22 @@ export function Footer(): JSX.Element {
       clasName: "dark:text-neutral-300 text-neutral-800 ",
     },
     {
-      name: "linkedin",
-      icon: FaLinkedin,
-      link: "https://www.linkedin.com/in/scienmanas",
-      clasName: "dark:text-blue-400 text-blue-600",
-    },
-    {
       name: "twitter",
       icon: FaXTwitter,
       link: "https://x.com/scienmanas",
       clasName: "dark:text-neutral-300 text-neutral-800",
+    },
+    {
+      name: "codepen",
+      icon: FaCodepen,
+      link: "https://codepen.io/scienmanas",
+      clasName: "dark:text-neutral-300 text-neutral-800",
+    },
+    {
+      name: "linkedin",
+      icon: FaLinkedin,
+      link: "https://www.linkedin.com/in/scienmanas",
+      clasName: "dark:text-blue-400 text-blue-600",
     },
     {
       name: "youtube",

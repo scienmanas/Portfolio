@@ -259,7 +259,7 @@ export function ScienGPT(): JSX.Element {
           opacity: isChatOpened ? 0 : 1,
         }}
         transition={{
-          duration: 0.3,
+          duration: 0.6,
           ease: "easeInOut",
         }}
         whileHover={{
@@ -274,13 +274,14 @@ export function ScienGPT(): JSX.Element {
           backdropFilter: "blur(5px)",
         }}
         animate={{
-          width: isChatOpened ? (screenSize >= 640 ? "24rem" : "20rem") : "0",
+          width: screenSize >= 640 ? "24rem" : "20rem",
           height: isChatOpened ? (screenSize >= 640 ? "27rem" : "23rem") : "0",
           y: isChatOpened ? -10 : 0,
           opacity: isChatOpened ? 1 : 0,
         }}
         transition={{
-          duration: 0.3,
+          delay: 0.1,
+          duration: 0.4,
           ease: "easeInOut",
         }}
         className="ai-chat-container z-10 rounded-2xl shadow-lg flex flex-col justify-between overflow-hidden"

@@ -40,11 +40,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cursorSvg = `data:image/svg+xml,${encodeURIComponent(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-      <circle cx="20" cy="20" r="16" fill="none" stroke="#00ffff" stroke-width="2"/>
-    </svg>
-  `)}`;
+  // const cursorSvg = `data:image/svg+xml,${encodeURIComponent(`
+  //   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  //     <circle cx="20" cy="20" r="16" fill="none" stroke="#00ffff" stroke-width="2"/>
+  //   </svg>
+  // `)}`;
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -58,9 +58,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light">
           <CursorLight />
           <div
-            style={{
-              cursor: `url(${cursorSvg}) 12 12, auto`,
-            }}
+            // style={{
+            //   cursor: `url(${cursorSvg}) 12 12, auto`,
+            // }}
             className="wrapper flex w-full h-fit relative overflow-hidden"
           >
             <div className="gradient-blurred absolute w-full h-dvh -z-10 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-45% opacity-30 blur-md"></div>
@@ -71,7 +71,7 @@ export default function RootLayout({
               <section className="w-full h-full page-contents relative z-20">
                 {children}
               </section>
-              <section className="footer w-full h-fit flex items-center justify-center z-10">
+              <section className="footer w-full h-fit flex items-center justify-center z-20">
                 <Footer />
               </section>
             </div>

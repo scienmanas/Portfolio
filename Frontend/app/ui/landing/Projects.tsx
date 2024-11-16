@@ -248,7 +248,7 @@ function ProjectCard({
         ease: "easeIn",
       }}
       viewport={{ once: true }}
-      className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden"
+      className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden shadow-2xl dark:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.1)]"
     >
       <div className="relative image-box w-full h-fit">
         <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
@@ -298,7 +298,7 @@ function ProjectCard({
         <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
           {techStack.map((tech, index) => (
             <div
-              className="tech px-2 py-1 rounded-lg  dark:bg-slate-800 bg-slate-700 text-[0.6rem] sm:text-xs dark:text-yellow-300 text-yellow-300"
+              className="tech px-2 py-1 rounded-lg  dark:bg-slate-800 bg-slate-700 text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
               key={index}
             >
               {tech.toLocaleLowerCase()}

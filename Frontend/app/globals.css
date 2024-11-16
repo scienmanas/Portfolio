@@ -2,13 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
-
 
 .markdown p {
   margin-top: 16px;
@@ -46,14 +44,13 @@
   filter: blur(35px);
 }
 
-
 @keyframes rotate {
   0% {
     transform: rotate(0deg) scale(1);
   }
 
   50% {
-    transform: rotate(180deg) scale(0.70);
+    transform: rotate(180deg) scale(0.7);
   }
 
   100% {
@@ -71,7 +68,6 @@
     border-radius: 30%;
   }
 }
-
 
 .boxes-wrapper {
   display: grid;
