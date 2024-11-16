@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 // Projects image import
 import mybuddyImg from "@/public/assets/projects/my-buddy.png";
-import portfolioImg from '@/public/assets/projects/portfolio.png'
+import portfolioImg from "@/public/assets/projects/portfolio.png";
 import certimailerImg from "@/public/assets/projects/certimailer.png";
 import landifyImg from "@/public/assets/projects/landify.png";
 import infopulseImg from "@/public/assets/projects/infopulse.png";
@@ -52,16 +52,12 @@ export function Projects(): JSX.Element {
     },
     {
       name: "Portfolio",
-      description: "An terminal themed portfolio webisted build using framer, Next JS and lambda function ",
+      description:
+        "An terminal themed portfolio webisted build using framer, Next JS and lambda function along with custom trained Geni-AI model for chatbot.",
       image: portfolioImg,
-      techStack: [
-        "Next Js",
-        "Framer-motion",
-        "lambda",
-        "Typescript"
-      ],
+      techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
       github: "https://github.com/scienmanas/Portfolio",
-      deployedLink: "https://scienmanas.xyz"
+      deployedLink: "https://scienmanas.xyz",
     },
     {
       name: "CertiMailer",
@@ -252,16 +248,25 @@ function ProjectCard({
         ease: "easeIn",
       }}
       viewport={{ once: true }}
-      className="project-card  max-w-[340px] h-fit rounded-md flex flex-col"
+      className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden"
     >
       <div className="relative image-box w-full h-fit">
-        <div className="image group w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
+        <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
+          {/* Blurred image as a placeholder */}
           <Image
             src={image}
             alt={`${name}-img`}
             width={340}
             height={270}
-            className="flex object-cover w-full h-[270px] group-hover:scale-105 rounded-t-md duration-300 pointer-events-none"
+            className="absolute object-cover rounded-t-md blur-md scale-110"
+          />
+          {/* Do not strect image */}
+          <Image
+            src={image}
+            alt={`${name}-img`}
+            width={340}
+            height={270}
+            className="relative w-fit h-fit group-hover:scale-105 rounded-t-md duration-300 pointer-events-none z-10"
           />
         </div>
       </div>
@@ -293,7 +298,7 @@ function ProjectCard({
         <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
           {techStack.map((tech, index) => (
             <div
-              className="tech px-2 py-1 rounded-sm border-dotted border-[0.5px] border-pink-500 dark:border-pink-200 text-[0.6rem] sm:text-xs dark:text-yellow-300 text-yellow-800"
+              className="tech px-2 py-1 rounded-lg  dark:bg-slate-800 bg-slate-700 text-[0.6rem] sm:text-xs dark:text-yellow-300 text-yellow-300"
               key={index}
             >
               {tech.toLocaleLowerCase()}

@@ -36,6 +36,7 @@ export function ScienGPT(): JSX.Element {
   const conversationAreaRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<any>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
 
   // variable to save chat history
   const [userQuery, setUserQuery] = useState<string>("");
@@ -48,8 +49,29 @@ export function ScienGPT(): JSX.Element {
     useState<boolean | null>(null);
   const [isRecording, setIsRecording] = useState<boolean>(false);
 
+  // Function to request permission
+  const requestMicrophonePermissionAndTriggerRecording = async () => {
+    try {
+      if (!mediaStreamRef.current) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+        mediaStreamRef.current = stream;
+      }
+
+      if (mediaStreamRef.current) {
+        startStreaming();
+        setIsRecording(true);
+      }
+    } catch (error) {
+      console.error("Microphone access was denied:", error);
+      // Stop speech recognition
+      stopStreaming();
+    }
+  };
+
   // Function to start recording
-  const startRecording = () => {
+  const startStreaming = () => {
     setIsRecording(true);
 
     // Create a new SpeechRecognition instance and configure it
@@ -156,6 +178,25 @@ export function ScienGPT(): JSX.Element {
     }
   };
 
+  // Function to stop recording
+  const stopStreaming = () => {
+    // Stop speech recognition
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      recognitionRef.current = null;
+    }
+
+    // Stop all tracks in the media stream
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach((track) => {
+        track.stop();
+      });
+      mediaStreamRef.current = null;
+    }
+
+    setIsRecording(false);
+  };
+
   // AutoScrolling
   useEffect(() => {
     const chatContainer = conversationAreaRef.current;
@@ -199,10 +240,8 @@ export function ScienGPT(): JSX.Element {
       : setIsSpeechRecognitionAvailable(false);
 
     return () => {
-      // Stop the speech recognition if it's active
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
+      // Stop the speech recognition & streaming
+      stopStreaming();
     };
   }, []);
 
@@ -255,8 +294,9 @@ export function ScienGPT(): JSX.Element {
           </div>
           <div className="close-and-reset flex flex-row gap-1 items-center">
             <button
+              disabled={chatHistory.length === 0 || isResponding}
               className={`p-2 bg-red-800 rounded-lg ${
-                chatHistory.length > 0
+                chatHistory.length > 0 && !isResponding
                   ? "hover:bg-red-900"
                   : "cursor-not-allowed opacity-45"
               }  duration-200 border border-pink-800`}
@@ -344,41 +384,45 @@ export function ScienGPT(): JSX.Element {
                   />
                   {isSpeechRecognitionAvailable && (
                     <motion.button
-                      onClick={() => {
+                      onClick={async () => {
                         if (!isRecording) {
-                          setIsRecording(true);
-                          startRecording();
+                          requestMicrophonePermissionAndTriggerRecording();
                         } else {
-                          setIsRecording(false);
-                          recognitionRef.current.stop();
+                          stopStreaming();
                         }
                       }}
                       type="button"
                       disabled={isResponding}
-                      className={`speech-button group p-1 ${
-                        isResponding
-                          ? "cursor-not-allowed"
-                          : "hover:bg-red-700 dark:hover:bg-red-800 "
-                      } ${
-                        isRecording ? "bg-red-700 dark:bg-red-800" : ""
-                      } rounded-2xl duration-200`}
+                      className={`speech-button w-fit h-fit
+                        ${isResponding ? "cursor-not-allowed" : ""}
+                        `}
                       animate={{
                         scale: isRecording ? [1, 1.2, 1] : 1, // Scale up and down
                         opacity: isRecording ? [1, 0.7, 1] : 1, // Fade in and out
                       }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        repeatType: "loop", // Make it repeat infinitely
-                        ease: "easeInOut",
-                      }}
+                      transition={
+                        isRecording
+                          ? {
+                              duration: 1.5,
+                              repeat: Infinity,
+                              repeatType: "loop", // Make it repeat infinitely
+                              ease: "easeInOut",
+                            }
+                          : {}
+                      }
                     >
                       <MdOutlineKeyboardVoice
-                        className={`text-xl ${
+                        className={`text-2xl p-[2px] 
+                        ${
+                          isResponding
+                            ? "pointer-events-none"
+                            : "hover:bg-red-700 dark:hover:bg-red-800 "
+                        } ${
                           isRecording
-                            ? "text-white dark:text-white"
+                            ? "bg-red-700 dark:bg-red-800 text-white dark:text-white"
                             : "text-neutral-800 dark:text-neutral-200 hover:text-white dark:hover:text-white"
-                        }`}
+                        } rounded-2xl duration-200
+                        `}
                       />
                     </motion.button>
                   )}
@@ -388,12 +432,12 @@ export function ScienGPT(): JSX.Element {
                 disabled={isResponding || isRecording}
                 type="submit"
                 className={`${
-                  isResponding || isRecording
-                    ? isRecording
-                      ? "bg-green-700 cursor-not-allowed"
-                      : "bg-[#0057ff] cursor-not-allowed"
+                  isResponding
+                    ? "bg-[#0057ff] cursor-not-allowed"
                     : "bg-green-700 hover:bg-green-800"
-                } p-2 duration-200 rounded-2xl w-fit h-fit`}
+                }
+                ${isRecording ? "cursor-not-allowed" : ""}
+                p-2 duration-200 rounded-2xl w-fit h-fit`}
               >
                 {isResponding ? (
                   <GPTResponseLoader color="pink" width={15} height={15} />
