@@ -286,7 +286,7 @@ function ProjectCard({
             y: xPercent <= 50 ? -degreeY : degreeY,
           });
         }}
-        onMouseOut={(e) => {
+        onMouseOut={() => {
           setRotated(null);
         }}
         className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden shadow-2xl dark:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.1)]"
