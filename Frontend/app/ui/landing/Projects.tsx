@@ -4,6 +4,7 @@ import { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 
 // Projects image import
 import mybuddyImg from "@/public/assets/projects/my-buddy.png";
@@ -232,6 +233,9 @@ function ProjectCard({
   github,
   deployedLink,
 }: projectDataType): JSX.Element {
+  const [rotated, setRotated] = useState<null | { x: number; y: number }>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
   return (
     <motion.div
       initial={{
@@ -248,62 +252,100 @@ function ProjectCard({
         ease: "easeIn",
       }}
       viewport={{ once: true }}
-      className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden shadow-2xl dark:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.1)]"
+      className="project-card-container w-fit h-fit"
+      style={{
+        perspective: "1000px",
+      }}
     >
-      <div className="relative image-box w-full h-fit">
-        <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
-          {/* Blurred image as a placeholder */}
-          <Image
-            src={image}
-            alt={`${name}-img`}
-            width={340}
-            height={270}
-            className="absolute object-cover rounded-t-md blur-md scale-110"
-          />
-          {/* Do not strect image */}
-          <Image
-            src={image}
-            alt={`${name}-img`}
-            width={340}
-            height={270}
-            className="relative w-fit h-fit group-hover:scale-105 rounded-t-md duration-300 pointer-events-none z-10"
-          />
+      <div
+        ref={cardRef}
+        style={{
+          transform: rotated
+            ? `rotateX(${rotated.x}deg) rotateY(${rotated.y}deg)`
+            : "rotateX(0deg) rotateY(0deg)",
+          transition: "transform 0.3s ease-in-out",
+        }}
+        onMouseMove={(e) => {
+          // Get the card element dimentions
+          const cardDimensions = cardRef.current?.getBoundingClientRect();
+
+          // Get the mouse position
+          const x = e.clientX - (cardDimensions?.left as number);
+          const y = e.clientY - (cardDimensions?.top as number);
+
+          // Convert to percentage
+          const xPercent = (x / (cardDimensions?.width as number)) * 100;
+          const yPercent = (y / (cardDimensions?.height as number)) * 100;
+
+          // Convert to degreea
+          const degreeX = 20 * (Math.abs(xPercent - 50) / 50);
+          const degreeY = 20 * (Math.abs(yPercent - 50) / 50);
+
+          setRotated({
+            x: yPercent <= 50 ? degreeX : -degreeX,
+            y: xPercent <= 50 ? -degreeY : degreeY,
+          });
+        }}
+        onMouseOut={(e) => {
+          setRotated(null);
+        }}
+        className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden shadow-2xl dark:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.1)]"
+      >
+        <div className="relative image-box w-full h-fit">
+          <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
+            {/* Blurred image as a placeholder */}
+            <Image
+              src={image}
+              alt={`${name}-img`}
+              width={340}
+              height={270}
+              className="absolute object-cover rounded-t-md blur-md scale-110"
+            />
+            {/* Do not strect image */}
+            <Image
+              src={image}
+              alt={`${name}-img`}
+              width={340}
+              height={270}
+              className="relative w-fit h-fit rounded-t-md pointer-events-none z-10 group-hover:scale-105 duration-300"
+            />
+          </div>
         </div>
-      </div>
-      <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#46344e] bg-white items-start gap-4">
-        <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
-          <div className="name-links w-full h-fit flex flex-row items-center justify-between">
-            <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900">
-              {name}
-            </div>
-            <div className="links w-fit h-fit flex flex-row gap-2 items-center">
-              <Link href={github} className="w-fit h-fit">
-                <FiGithub className="dark:text-white text-neutral-900 text-base sm:text-lg" />
-              </Link>
-              {deployedLink && (
-                <Link href={deployedLink as string} className="w-fit h-fit">
-                  <LuExternalLink className="dark:text-white text-neutral-900 text-base sm:text-lg" />
+        <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#46344e] bg-white items-start gap-4">
+          <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
+            <div className="name-links w-full h-fit flex flex-row items-center justify-between">
+              <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900">
+                {name}
+              </div>
+              <div className="links w-fit h-fit flex flex-row gap-2 items-center">
+                <Link href={github} className="w-fit h-fit">
+                  <FiGithub className="dark:text-white text-neutral-900 text-base sm:text-lg" />
                 </Link>
-              )}
+                {deployedLink && (
+                  <Link href={deployedLink as string} className="w-fit h-fit">
+                    <LuExternalLink className="dark:text-white text-neutral-900 text-base sm:text-lg" />
+                  </Link>
+                )}
+              </div>
+            </div>
+            <div className="description w-fit h-fit text-xs sm:text-sm text-neutral-800 dark:text-neutral-200">
+              {description.split(/\s+/).filter((element) => {
+                return element.length !== 0;
+              }).length > 15
+                ? description.slice(0, 110) + "..."
+                : description}
             </div>
           </div>
-          <div className="description w-fit h-fit text-xs sm:text-sm text-neutral-800 dark:text-neutral-200">
-            {description.split(/\s+/).filter((element) => {
-              return element.length !== 0;
-            }).length > 15
-              ? description.slice(0, 110) + "..."
-              : description}
+          <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
+            {techStack.map((tech, index) => (
+              <div
+                className="tech px-2 py-1 rounded-lg  dark:bg-slate-800 bg-slate-700 text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
+                key={index}
+              >
+                {tech.toLocaleLowerCase()}
+              </div>
+            ))}
           </div>
-        </div>
-        <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
-          {techStack.map((tech, index) => (
-            <div
-              className="tech px-2 py-1 rounded-lg  dark:bg-slate-800 bg-slate-700 text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
-              key={index}
-            >
-              {tech.toLocaleLowerCase()}
-            </div>
-          ))}
         </div>
       </div>
     </motion.div>
