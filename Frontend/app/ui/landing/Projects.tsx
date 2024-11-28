@@ -16,6 +16,7 @@ import valentinerImg from "@/public/assets/projects/valentiner.png";
 import hackbellsbotImg from "@/public/assets/projects/hackbells-bot.png";
 import stickersmashImg from "@/public/assets/projects/sticker-smash.png";
 import microsoftlandingpageImg from "@/public/assets/projects/microsoft-landing-page.png";
+import maafkaroImg from "@/public/assets/projects/maaf-karo.png";
 import { FiGithub } from "react-icons/fi";
 import { LuExternalLink } from "react-icons/lu";
 
@@ -54,7 +55,7 @@ export function Projects(): JSX.Element {
     {
       name: "Portfolio",
       description:
-        "An terminal themed portfolio webisted build using framer, Next JS and lambda function along with custom trained Geni-AI model for chatbot.",
+        "A terminal themed portfolio webisted build using framer, Next JS and lambda function along with custom trained Geni-AI model for chatbot.",
       image: portfolioImg,
       techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
       github: "https://github.com/scienmanas/Portfolio",
@@ -84,6 +85,15 @@ export function Projects(): JSX.Element {
       techStack: ["TypeScript", "Next Js", "Blog Engine", "Mongo DB"],
       github: "https://github.com/scienmanas/Landify",
       deployedLink: "https://landify-sepia.vercel.app/",
+    },
+    {
+      name: "Maaf Karo",
+      description:
+        "An AI powered web-app enabling you to compare yourself with some of the legends on the earth",
+      image: maafkaroImg,
+      techStack: ["Next Js", "gen-ai", "aws-lambda", "TypeScript"],
+      github: "https://github.com/scienmanas/Maaf-Karo",
+      deployedLink: "https://maaf-karo.vercel.app/",
     },
     {
       name: "InfoPulse",
@@ -126,8 +136,8 @@ export function Projects(): JSX.Element {
         "A landing page clone made for practice purposes, complete clone of Microsoft's website at that time stamp",
       image: microsoftlandingpageImg,
       techStack: ["HTML", "Tailwind CSS"],
-      github: "https://github.com/scienmanas/StickerSmash",
-      deployedLink: "https://sticker-smash-one.vercel.app/",
+      github: "https://github.com/scienmanas/Microsoft-Landing-Page-Clone",
+      deployedLink: "https://microsoft-landing-page-clone-gamma.vercel.app/",
     },
   ];
 
