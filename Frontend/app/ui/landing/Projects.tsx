@@ -4,7 +4,7 @@ import { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 // Projects image import
 import mybuddyImg from "@/public/assets/projects/my-buddy.png";
@@ -243,7 +243,6 @@ function ProjectCard({
   github,
   deployedLink,
 }: projectDataType): JSX.Element {
-  const [rotated, setRotated] = useState<null | { x: number; y: number }>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -270,10 +269,7 @@ function ProjectCard({
       <div
         ref={cardRef}
         style={{
-          transform: rotated
-            ? `rotateX(${rotated.x}deg) rotateY(${rotated.y}deg)`
-            : "rotateX(0deg) rotateY(0deg)",
-          transition: "transform 0.3s ease-in-out",
+          perspective: "300px",
         }}
         onMouseMove={(e) => {
           // Get the card element dimentions
@@ -291,35 +287,46 @@ function ProjectCard({
           const degreeX = 20 * (Math.abs(xPercent - 50) / 50);
           const degreeY = 20 * (Math.abs(yPercent - 50) / 50);
 
-          setRotated({
-            x: yPercent <= 50 ? degreeX : -degreeX,
-            y: xPercent <= 50 ? -degreeY : degreeY,
-          });
+          if (cardRef.current) {
+            cardRef.current.style.transform = `${
+              xPercent <= 50
+                ? `rotateY(${degreeX}deg)`
+                : `rotateY(${-degreeX}deg)`
+            } ${
+              yPercent <= 50
+                ? `rotateX(${-degreeY}deg)`
+                : `rotateX(${degreeY}deg)`
+            } `;
+          }
         }}
         onMouseOut={() => {
-          setRotated(null);
+          if (cardRef.current) {
+            cardRef.current.style.transform = "rotateY(0deg) rotateX(0deg)";
+          }
         }}
-        className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden shadow-2xl dark:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.1)]"
+        className="project-card  max-w-[340px] h-fit rounded-xl flex flex-col overflow-hidden shadow-2xl dark:shadow-[0_35px_60px_-15px_rgba(255,255,255,0.1)] duration-700"
       >
         <div className="relative image-box w-full h-fit">
-          <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
-            {/* Blurred image as a placeholder */}
-            <Image
-              src={image}
-              alt={`${name}-img`}
-              width={340}
-              height={270}
-              className="absolute object-cover rounded-t-md blur-md scale-110"
-            />
-            {/* Do not strect image */}
-            <Image
-              src={image}
-              alt={`${name}-img`}
-              width={340}
-              height={270}
-              className="relative w-fit h-fit rounded-t-md pointer-events-none z-10 group-hover:scale-105 duration-300"
-            />
-          </div>
+          <Link className="w-full h-fit" href={github}>
+            <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
+              {/* Blurred image as a placeholder */}
+              <Image
+                src={image}
+                alt={`${name}-img`}
+                width={340}
+                height={270}
+                className="absolute object-cover rounded-t-md blur-md scale-110"
+              />
+              {/* Do not strect image */}
+              <Image
+                src={image}
+                alt={`${name}-img`}
+                width={340}
+                height={270}
+                className="relative w-fit h-fit rounded-t-md pointer-events-none z-10 group-hover:scale-105 duration-500"
+              />
+            </div>
+          </Link>
         </div>
         <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#46344e] bg-white items-start gap-4">
           <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">

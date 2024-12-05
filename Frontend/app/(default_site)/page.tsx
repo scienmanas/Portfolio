@@ -6,6 +6,7 @@ import { CommunityWork } from "@/app/ui/landing/CommunityWork";
 import { MoreAboutMe } from "@/app/ui/landing/MoreAboutMe";
 import { Contact } from "@/app/ui/landing/Contact";
 import { ScienGPT } from "@/app/ui/components/scienGPT";
+// import { GithubMap } from "@/app/ui/components/github-map";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <CommunityWork />
         <MoreAboutMe />
         <Contact />
+        {/* <GithubMap /> */}
       </div>
       <ScienGPT />
     </div>
