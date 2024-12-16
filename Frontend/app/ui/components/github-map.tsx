@@ -48,6 +48,8 @@ export function GithubMap(): JSX.Element {
           totalcontributions: parsedData.totalContributions,
           maxContribution: parsedData.maxContribution,
         });
+        // Make the component visible
+        setIsFetchSuccessful(true);
       } else if (data.statusCode !== 200 || response.status !== 200) {
         setIsFetchSuccessful(false);
       }
@@ -83,9 +85,7 @@ export function GithubMap(): JSX.Element {
   return (
     <section
       className={`github-map w-full h-fit flex items-center justify-center font-mono ${
-        isFetchSuccessful === false || isFetchSuccessful === null
-          ? "hidden"
-          : ""
+        isFetchSuccessful === true ? "visible" : "hidden"
       }`}
     >
       <div className="wrapper w-full max-w-screen-xl h-fit flex items-start justify-start px-5 flex-col gap-6">
