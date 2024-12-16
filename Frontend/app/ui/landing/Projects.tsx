@@ -316,6 +316,7 @@ function ProjectCard({
                 width={340}
                 height={270}
                 className="absolute object-cover rounded-t-md blur-md scale-110"
+                style={{ width: "auto", height: "auto" }}
               />
               {/* Do not strect image */}
               <Image
@@ -323,7 +324,8 @@ function ProjectCard({
                 alt={`${name}-img`}
                 width={340}
                 height={270}
-                className="relative w-fit h-fit rounded-t-md pointer-events-none z-10 group-hover:scale-105 duration-500"
+                className="relative rounded-t-md pointer-events-none z-10 group-hover:scale-105 duration-500"
+                style={{ width: "auto", height: "auto" }}
               />
             </div>
           </Link>
