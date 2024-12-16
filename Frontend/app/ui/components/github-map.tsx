@@ -83,7 +83,9 @@ export function GithubMap(): JSX.Element {
   return (
     <section
       className={`github-map w-full h-fit flex items-center justify-center font-mono ${
-        isFetchSuccessful === false ? "hidden" : ""
+        isFetchSuccessful === false || isFetchSuccessful === null
+          ? "hidden"
+          : ""
       }`}
     >
       <div className="wrapper w-full max-w-screen-xl h-fit flex items-start justify-start px-5 flex-col gap-6">
