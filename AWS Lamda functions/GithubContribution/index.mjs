@@ -4,6 +4,14 @@ export const handler = async (event) => {
   const { userName } = event;
   const authToken = process.env.GITHUB_ACCESS_TOKEN
 
+  // Dismiss request is incorrect userName
+  if (userName !== "scienmanas")
+    return {
+      statusCode: 401,
+      body: JSON.stringify({
+        message: "Unauthorized"
+      })
+    }
   // query
   const query = `
     query {

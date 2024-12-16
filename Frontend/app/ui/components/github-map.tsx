@@ -5,23 +5,20 @@ import CalendarHeatmap from "react-calendar-heatmap";
 import { useState, useLayoutEffect } from "react";
 
 const USER_NAME = "scienmanas";
-interface ContributionDay {
-  date: string;
-  contributionCount: number;
-}
-
-interface ContributionWeek {
-  contributionDays: ContributionDay[];
-}
+const API_URI =
+  "https://2zazwk200k.execute-api.us-east-1.amazonaws.com/Production/github-contribution";
 
 export function GithubMap(): JSX.Element {
+  const [isFetchSuccessful, setIsFetchSuccessful] = useState<boolean | null>(
+    null
+  );
   const [contributionData, setContributionData] = useState<{
-    contribution: { date: string; count: number }[];
-    totalcontribution: number;
+    contributions: { date: string; count: number }[];
+    totalcontributions: number;
     maxContribution: number;
   }>({
-    contribution: [],
-    totalcontribution: 0,
+    contributions: [],
+    totalcontributions: 0,
     maxContribution: 0,
   });
   const [contributionTimeBounds, setContributionTimeBounds] = useState<null | {
@@ -30,60 +27,36 @@ export function GithubMap(): JSX.Element {
   }>(null);
 
   const fetchGithubData = async () => {
-    // Query
-    const query = `
-        query {
-          user(login: "${USER_NAME}") {
-            contributionsCollection {
-              contributionCalendar {
-                totalContributions
-                weeks {
-                  contributionDays {
-                    contributionCount
-                    date
-                  }
-                }
-              }
-            }
-          }
-        }
-        `;
+    // Call the API
 
-    console.log(auth);
-    // Call the GitHub API
-    const response = await fetch("https://api.github.com/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `bearer ${auth}`,
-      },
-      body: JSON.stringify({ query }),
-    });
+    try {
+      const response = await fetch(API_URI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: USER_NAME,
+        }),
+      });
 
-    const data = await response.json();
-    const flatContributions =
-      data.data.user.contributionsCollection.contributionCalendar.weeks.flatMap(
-        (week: ContributionWeek) =>
-          week.contributionDays.map((day) => ({
-            date: day.date,
-            count: day.contributionCount,
-          }))
-      );
-
-    // Set the contribution data
-    setContributionData({
-      contribution: flatContributions,
-      totalcontribution:
-        data.data.user.contributionsCollection.contributionCalendar
-          .totalContributions,
-      maxContribution: Math.max(
-        ...flatContributions.map(
-          (day: { date: string; count: number }) => day.count
-        )
-      ),
-    });
+      const data = await response.json();
+      if (data.statusCode === 200) {
+        const parsedData = JSON.parse(data.body);
+        setContributionData({
+          contributions: parsedData.contributions,
+          totalcontributions: parsedData.totalContributions,
+          maxContribution: parsedData.maxContribution,
+        });
+      } else if (data.statusCode !== 200 || response.status !== 200) {
+        setIsFetchSuccessful(false);
+      }
+    } catch (error) {
+      setIsFetchSuccessful(false);
+    }
   };
 
+  // Paint DOM after the component is mounted
   useLayoutEffect(() => {
     const today = new Date();
     const startDate =
@@ -108,7 +81,11 @@ export function GithubMap(): JSX.Element {
   }, []);
 
   return (
-    <section className="github-map w-full h-fit flex items-center justify-center font-mono">
+    <section
+      className={`github-map w-full h-fit flex items-center justify-center font-mono ${
+        isFetchSuccessful === false ? "hidden" : ""
+      }`}
+    >
       <div className="wrapper w-full max-w-screen-xl h-fit flex items-start justify-start px-5 flex-col gap-6">
         <motion.div
           initial={{
@@ -155,7 +132,7 @@ export function GithubMap(): JSX.Element {
             <CalendarHeatmap
               startDate={contributionTimeBounds?.startDate}
               endDate={contributionTimeBounds?.endDate}
-              values={contributionData.contribution}
+              values={contributionData.contributions}
               classForValue={(value) => {
                 if (!value) {
                   return "color-empty";
@@ -185,7 +162,7 @@ export function GithubMap(): JSX.Element {
           >
             <span>Total Contribution: </span>
             <span className="font-semibold text-[#9d174d] underline">
-              {contributionData.totalcontribution}
+              {contributionData.totalcontributions}
             </span>
           </motion.div>
         </div>
