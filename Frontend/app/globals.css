@@ -59,6 +59,7 @@
 }
 
 @keyframes scaleAndRound {
+
   0%,
   100% {
     border-radius: 15%;
@@ -86,3 +87,80 @@
   display: none;
 }
 
+
+/* ------ Contribution map CSS ------ */
+
+.react-calendar-heatmap text {
+  font-size: 10px;
+  fill: #aaa;
+}
+
+.react-calendar-heatmap .react-calendar-heatmap-small-text {
+  font-size: 5px;
+}
+
+.react-calendar-heatmap rect:hover {
+  stroke: #555;
+  stroke-width: 1px;
+}
+
+/*
+ * Default color scale
+ */
+
+.react-calendar-heatmap .color-empty {
+  @apply fill-gray-200 dark:fill-gray-700;
+}
+
+.react-calendar-heatmap .color-filled {
+  @apply fill-rose-700 dark:fill-rose-500;
+}
+
+.react-calendar-heatmap .color-github-0 {
+  @apply fill-gray-300 dark:fill-gray-700;
+}
+
+
+.react-calendar-heatmap .color-github-1 {
+  @apply fill-[#bd5ddb] dark:fill-[#e9a9ff];
+}
+
+.react-calendar-heatmap .color-github-2 {
+  @apply fill-[#ad54c8] dark:fill-[#d798ec];
+}
+
+.react-calendar-heatmap .color-github-3 {
+  @apply fill-[#9d4bb6] dark:fill-[#c686da];
+}
+
+.react-calendar-heatmap .color-github-4 {
+  @apply fill-[#8d42a4] dark:fill-[#b475c7];
+}
+
+.react-calendar-heatmap .color-github-5 {
+  @apply fill-[#7d3991] dark:fill-[#a264b5];
+}
+
+.react-calendar-heatmap .color-github-6 {
+  @apply fill-[#6d2f7f] dark:fill-[#9153a3];
+}
+
+.react-calendar-heatmap .color-github-7 {
+  @apply fill-[#5e286d] dark:fill-[#823b8e];
+}
+
+.react-calendar-heatmap .color-github-8 {
+  @apply fill-[#4e205b] dark:fill-[#73407f];
+}
+
+.react-calendar-heatmap .color-github-9 {
+  @apply fill-[#3e1849] dark:fill-[#63326f];
+}
+
+.react-calendar-heatmap .color-github-10 {
+  @apply fill-[#3d1449] dark:fill-[#54305e];
+}
+
+
+
+/* ------ -------------------- ------ */

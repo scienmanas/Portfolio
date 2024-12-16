@@ -5,6 +5,7 @@ import { Footer } from "@/app/ui/universal/Footer";
 import { Navbar } from "@/app/ui/universal/Navbar";
 import { CursorLight } from "../ui/components/cursor-light";
 import metaDataImg from "@/public/assets/metadata/landing.png";
+import { ScienGPT } from "@/app/ui/components/scienGPT";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.DOMAIN as string),
@@ -53,7 +54,7 @@ export default function RootLayout({
           overflowX: "hidden",
           overflowY: "hidden",
         }}
-        className={`antialiase dark:bg-[#282c33] bg-[#eaeaea]`}
+        className={`antialiase dark:bg-[#282c33] bg-[#eaeaea] scroll-smooth`}
       >
         <ThemeProvider attribute="class" defaultTheme="light">
           <CursorLight />
@@ -71,8 +72,9 @@ export default function RootLayout({
               <section className="w-full h-full page-contents relative z-20">
                 {children}
               </section>
-              <section className="footer w-full h-fit flex items-center justify-center z-20">
+              <section className="footer-and-gpt w-full h-fit flex items-center justify-center z-20">
                 <Footer />
+                <ScienGPT />
               </section>
             </div>
           </div>
