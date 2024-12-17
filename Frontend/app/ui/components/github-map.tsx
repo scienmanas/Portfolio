@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import CalendarHeatmap from "react-calendar-heatmap";
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 
 const USER_NAME = "scienmanas";
 const API_URI =
@@ -59,7 +59,7 @@ export function GithubMap(): JSX.Element {
   };
 
   // Paint DOM after the component is mounted
-  useLayoutEffect(() => {
+  useEffect(() => {
     const today = new Date();
     const startDate =
       String(today.getFullYear() - 1) +
