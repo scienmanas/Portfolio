@@ -37,31 +37,6 @@ interface botProjectDataTypes {
 export function Projects(): JSX.Element {
   const projectData: projectDataType[] = [
     {
-      name: "My Buddy",
-      description:
-        "An AI-powered web app using Gemini LLM for personalized, empathetic conversations with customizable personas, offering emotional support through tailored prompt engineering.",
-      image: mybuddyImg,
-      techStack: [
-        "React Js",
-        " Javascript",
-        "Express",
-        "Mongo DB",
-        "Gen-AI",
-        "google-apis",
-      ],
-      github: "https://github.com/scienmanas/My-Buddy",
-      deployedLink: "https://my-buddy-ten.vercel.app/",
-    },
-    {
-      name: "Portfolio",
-      description:
-        "A terminal themed portfolio webisted build using framer, Next JS and lambda function along with custom trained Geni-AI model for chatbot.",
-      image: portfolioImg,
-      techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
-      github: "https://github.com/scienmanas/Portfolio",
-      deployedLink: "https://scienmanas.xyz",
-    },
-    {
       name: "CertiMailer",
       description:
         "A platform for automated certificate generation and distribution, featuring a Python script for developers and a web app with admin panels, verification, and scalability for organizations.",
@@ -76,6 +51,31 @@ export function Projects(): JSX.Element {
       ],
       github: "https://github.com/scienmanas/CertiMailer",
       deployedLink: "https://certimailer.xyz/",
+    },
+    {
+      name: "Portfolio",
+      description:
+        "A terminal themed portfolio webisted build using framer, Next JS and lambda function along with custom trained Geni-AI model for chatbot.",
+      image: portfolioImg,
+      techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
+      github: "https://github.com/scienmanas/Portfolio",
+      deployedLink: "https://scienmanas.xyz",
+    },
+    {
+      name: "My Buddy",
+      description:
+        "An AI-powered web app using Gemini LLM for personalized, empathetic conversations with customizable personas, offering emotional support through tailored prompt engineering.",
+      image: mybuddyImg,
+      techStack: [
+        "React Js",
+        " Javascript",
+        "Express",
+        "Mongo DB",
+        "Gen-AI",
+        "google-apis",
+      ],
+      github: "https://github.com/scienmanas/My-Buddy",
+      deployedLink: "https://my-buddy-ten.vercel.app/",
     },
     {
       name: "Landify",
