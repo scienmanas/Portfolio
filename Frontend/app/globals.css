@@ -7,6 +7,73 @@
     text-wrap: balance;
   }
 }
+/* ------ Markdown ------  */
+
+.markdown {
+  /* General text styling */
+  @apply text-gray-700 dark:text-gray-300;
+  word-wrap: break-word; /* For older browser support */
+  overflow-wrap: anywhere; /* Allows breaking anywhere in the word */
+}
+
+.markdown table {
+  @apply w-full border-collapse overflow-x-auto;
+  border: 1px solid #ddd; /* For table border */
+}
+
+.markdown th,
+.markdown td {
+  @apply px-4 py-2 border text-left text-sm;
+  border-color: rgba(229, 231, 235, 1); /* Light gray border */
+}
+
+.markdown th {
+  @apply bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300;
+  font-weight: bold;
+}
+
+.markdown tr:nth-child(even) {
+  @apply bg-gray-50 dark:bg-gray-800; /* Zebra striping */
+}
+
+.markdown h1 {
+  @apply text-3xl font-bold text-gray-900 dark:text-white;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.markdown h2 {
+  @apply text-2xl font-semibold text-gray-800 dark:text-gray-200;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.markdown h3 {
+  @apply text-xl font-semibold text-gray-700 dark:text-gray-300;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.markdown ul {
+  @apply list-disc pl-5 mt-4;
+}
+
+.markdown ol {
+  @apply list-decimal pl-5 mt-4; /* Ensures numbered lists are styled */
+}
+
+.markdown li {
+  @apply mb-2;
+}
+.markdown b,
+.markdown strong {
+  @apply font-bold text-gray-900 dark:text-white; /* Ensures bold text displays correctly */
+}
+
+.markdown b,
+.markdown strong {
+  @apply font-bold text-gray-900 dark:text-white; /* Ensures bold text displays correctly */
+}
 
 .markdown p {
   margin-top: 16px;
@@ -29,7 +96,9 @@
   @apply underline dark:decoration-yellow-500 decoration-yellow-500 text-blue-800 dark:text-cyan-500;
 }
 
-/* styles.css */
+/* ------ ------ ------ ------ ------  */
+
+/* ------ Cursor Light ------ */
 .cursor-light {
   position: absolute;
   width: 150px;
@@ -44,6 +113,9 @@
   filter: blur(35px);
 }
 
+/* ------ ------ ------ ------ ------  */
+
+/* ------  Loader ------  */
 @keyframes rotate {
   0% {
     transform: rotate(0deg) scale(1);
@@ -59,7 +131,6 @@
 }
 
 @keyframes scaleAndRound {
-
   0%,
   100% {
     border-radius: 15%;
@@ -83,10 +154,11 @@
   animation: scaleAndRound 2s ease-in-out infinite;
 }
 
+/* ------ ------ ------ ------ ------  */
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
 
 /* ------ Contribution map CSS ------ */
 
@@ -119,7 +191,6 @@
 .react-calendar-heatmap .color-github-0 {
   @apply fill-gray-300 dark:fill-gray-700;
 }
-
 
 .react-calendar-heatmap .color-github-1 {
   @apply fill-[#bd5ddb] dark:fill-[#e9a9ff];
@@ -160,7 +231,5 @@
 .react-calendar-heatmap .color-github-10 {
   @apply fill-[#3d1449] dark:fill-[#54305e];
 }
-
-
 
 /* ------ -------------------- ------ */

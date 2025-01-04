@@ -13,10 +13,11 @@
 
 This project requirement .env configuration in `Frontend` folder to handle the dynamicity of the metadata generated when deployed everytime. The `.env` file should be created in the `Frontend` folder with the following variables:
 
-| Varibale      | Description                                         |
-| :------------ | :-------------------------------------------------- |
-| `DOMAIN`    | Domain name of the website (https://scienmanas.xyz) |
-| `SITE_NAME` | Name of the site (Here I kept it- Manas)            |
+| Varibale         | Description                                         |
+| :--------------- | :-------------------------------------------------- |
+| `DOMAIN`         | Domain name of the website (https://scienmanas.xyz) |
+| `SITE_NAME`      | Name of the site (Here I kept it- Manas)            |
+| `G_ANALYTICS_ID` | Google Analytics ID for tracking user activity      |
 
 ## Few Notes
 
@@ -59,9 +60,9 @@ Additionally to make these API works, we need to `environment` variables for bot
 .
 ├── AWS Lambda Function
 │   │── ScienGPT
-│   │   └── Files for aws lambda function 
+│   │   └── Files for aws lambda function
 │   └── Emailer
-│     	└── Files for aws lambda function 
+│     	└── Files for aws lambda function
 ├── Frontend
 │   │── app
 │   │   ├── (default_site)
@@ -130,7 +131,7 @@ https://github.com/user-attachments/assets/14add2de-72c2-4c42-99ce-dd073918079e
 
 ## 🙌 Credits & Acknowledgements
 
-- The website is inspired by the portfolio of **[Nikhil Raj](https://github.com/nikhil25803)**  & **[Smile Gupta](https://github.com/smilegupta)**. There are some changes made to the original design. You can access their original portfolio from at [Nikhil Raj](https://nikhilraj.live/) & [Smile Gupta](https://smilegupta.github.io/portfolio-smilegupta/).
+- The website is inspired by the portfolio of **[Nikhil Raj](https://github.com/nikhil25803)** & **[Smile Gupta](https://github.com/smilegupta)**. There are some changes made to the original design. You can access their original portfolio from at [Nikhil Raj](https://nikhilraj.live/) & [Smile Gupta](https://smilegupta.github.io/portfolio-smilegupta/).
 
 ## 🔒 License
 

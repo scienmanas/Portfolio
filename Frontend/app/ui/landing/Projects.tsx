@@ -330,7 +330,7 @@ function ProjectCard({
             </div>
           </Link>
         </div>
-        <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#46344e] bg-white items-start gap-4">
+        <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#543e5e] bg-white items-start gap-4">
           <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
             <div className="name-links w-full h-fit flex flex-row items-center justify-between">
               <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900">
@@ -358,7 +358,7 @@ function ProjectCard({
           <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
             {techStack.map((tech, index) => (
               <div
-                className="tech px-2 py-1 rounded-lg  dark:bg-slate-800 bg-slate-700 text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
+                className="tech px-2 py-1 rounded-lg  dark:bg-neutral-800 bg-neutral-800 text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
                 key={index}
               >
                 {tech.toLocaleLowerCase()}
