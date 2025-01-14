@@ -7,6 +7,32 @@
     text-wrap: balance;
   }
 }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-color:  #25272b;
+  clip-path: circle(0% at top right);
+  transition: clip-path 0.4s ease-in-out;
+  pointer-events: none;
+  z-index: -50;
+}
+
+
+/* When dark mode is enabled, expand the circle */
+.dark body::before {
+  clip-path: circle(150% at top right);
+}
+
+/* Your existing body styles */
+body {
+  transition: background-color 0.4s ease-in-out;
+}
+
+
+
+
 /* ------ Markdown ------  */
 
 .markdown {

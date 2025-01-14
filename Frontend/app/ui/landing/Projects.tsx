@@ -19,6 +19,7 @@ import microsoftlandingpageImg from "@/public/assets/projects/microsoft-landing-
 import maafkaroImg from "@/public/assets/projects/maaf-karo.png";
 import { FiGithub } from "react-icons/fi";
 import { LuExternalLink } from "react-icons/lu";
+import { firaSansFont } from "@/app/lib/fonts";
 
 interface projectDataType {
   name: string;
@@ -261,7 +262,7 @@ function ProjectCard({
         ease: "easeIn",
       }}
       viewport={{ once: true }}
-      className="project-card-container w-fit h-fit"
+      className={`project-card-container w-fit h-fit ${firaSansFont.className}`}
       style={{
         perspective: "1000px",
       }}
@@ -333,7 +334,7 @@ function ProjectCard({
         <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#543e5e] bg-white items-start gap-4">
           <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
             <div className="name-links w-full h-fit flex flex-row items-center justify-between">
-              <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900">
+              <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900 relative after:absolute after:-bottom-[2px] after:left-0 after:h-[2px] after:w-full after:bg-cyan-500 dark:after:bg-cyan-400">
                 {name}
               </div>
               <div className="links w-fit h-fit flex flex-row gap-2 items-center">
