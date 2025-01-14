@@ -19,7 +19,6 @@ import microsoftlandingpageImg from "@/public/assets/projects/microsoft-landing-
 import maafkaroImg from "@/public/assets/projects/maaf-karo.png";
 import { FiGithub } from "react-icons/fi";
 import { LuExternalLink } from "react-icons/lu";
-import { firaSansFont } from "@/app/lib/fonts";
 
 interface projectDataType {
   name: string;
@@ -262,7 +261,7 @@ function ProjectCard({
         ease: "easeIn",
       }}
       viewport={{ once: true }}
-      className={`project-card-container w-fit h-fit ${firaSansFont.className}`}
+      className={`project-card-container w-fit h-fit`}
       style={{
         perspective: "1000px",
       }}
