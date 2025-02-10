@@ -17,6 +17,7 @@ import gitSvg from "@/public/assets/svg/git.svg";
 import dockerSvg from "@/public/assets/svg/docker.svg";
 import gcpSvg from "@/public/assets/svg/google-cloud.svg";
 import awslambdaSvg from "@/public/assets/svg/awslambda.svg";
+import { SiPrisma } from "react-icons/si";
 import { IconType } from "react-icons";
 import Image from "next/image";
 
@@ -54,6 +55,7 @@ export function Skills(): JSX.Element {
       category: "Backend & Database",
       skills: [
         { name: "Node.js", icon: FaNode },
+        { name: "Prisma", icon: SiPrisma },
         { name: "MongoDB", icon: mongodbSvg },
         { name: "Express.js", icon: SiExpress },
         { name: "SQL", icon: sqlSvg },

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 
 // Projects image import
+import myPookieImg from "@/public/assets/projects/my-pookie.png";
 import mybuddyImg from "@/public/assets/projects/my-buddy.png";
 import portfolioImg from "@/public/assets/projects/portfolio.png";
 import certimailerImg from "@/public/assets/projects/certimailer.png";
@@ -60,6 +61,15 @@ export function Projects(): JSX.Element {
       techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
       github: "https://github.com/scienmanas/Portfolio",
       deployedLink: "https://scienmanas.xyz",
+    },
+    {
+      name: "My Pookie",
+      description:
+        "A no-code Valentiner/Birthday/Anniversary wisher customizable according to the user.",
+      image: myPookieImg,
+      techStack: ["Next Js", "Prisma", "OAuth", "Typescript", "Framer Motion"],
+      github: "https://github.com/scienmanas.My-Pookie",
+      deployedLink: "https://mypookie.xyz",
     },
     {
       name: "My Buddy",
