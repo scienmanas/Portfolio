@@ -5,18 +5,18 @@ description: Learn how to implement Google oAuth in any web application raw with
 tags:
   - oAuth
   - tech
-#  All the comtents of the blog goes here.
+#  All the contents of the blog go here.
 ---
 
-Hi, I am Manas and in this blog, I will be tell you how to implement Google oAuth in any web application raw without using any library.
+Hi, I am Manas and in this blog, I will tell you how to implement Google oAuth in any web application raw without using any library.
 
-Follow the steps fiven below additionally you can watch the video for better understanding.
+Follow the steps given below, additionally, you can watch the video for better understanding.
 
 ## Understanding oAuth
 
-1. oAuth is an open standard for access delegation, commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords. This mechanism is used by companies such as Google, Facebook, Microsoft, and Twitter to permit the users to share information about their accounts with third party applications or websites.
+1. oAuth is an open standard for access delegation, commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them their passwords.
 
-2. Below diagram shows the flow of oAuth.
+2. The below diagram shows the flow of oAuth.
 
 <div style="text-align: center;">
   <img 
@@ -26,7 +26,7 @@ Follow the steps fiven below additionally you can watch the video for better und
   />
 </div>
 
-Now, u need to understand the flow of oAuth.
+Now, you need to understand the flow of oAuth.
 1. The user clicks on the login button.
 2. The user is redirected to the oAuth provider's login page.
 3. The user logs in and gives permission to the application.
@@ -37,18 +37,16 @@ Now, u need to understand the flow of oAuth.
 
 ## Steps to implement Google oAuth
 
-First thing need to be done in google cloud console.
+First thing needs to be done in Google Cloud Console.
 
 1. Go to [Google Developer Console](https://console.developers.google.com/).
 2. Create a new project.
 3. Go to the project and enable the Google oAuth API.
 4. Create a new oAuth client ID.
-5. Configure Consent Screen
+5. Configure Consent Screen.
 6. Add authorized JavaScript origins.
 7. Add the redirect URI.
 8. Copy the client ID and client secret.
-
-
 
 ### Now, let's move to the code.
 
@@ -56,16 +54,16 @@ First thing need to be done in google cloud console.
 2. Client secret is private, so we can't store it in the frontend. We will store it in the backend, and the redirect URI will be the backend endpoint.
 3. Create a button in the frontend to login with Google.
 4. On click of the button, open a new window with the Google oAuth URL.
-6. By redirect URI, Google will redirect to the backend endpoint with the code.
-7. In the backend, exchange the code with the access token and refresh token.
-8. Use the access token to get the user's information.
+5. By redirect URI, Google will redirect to the backend endpoint with the code.
+6. In the backend, exchange the code with the access token and refresh token.
+7. Use the access token to get the user's information.
 
 That's it. You have successfully implemented Google oAuth in your web application. Now to make your application more secure, you can encrypt the access token and decrypt it in the backend.
 
 All the codes:
 - Frontend: [GitHub](https://github.com/scienmanas/My-Pookie/blob/main/app/auth/page.tsx)
 - Backend Endpoint: [GitHub](https://github.com/scienmanas/My-Pookie/blob/main/app/api/auth/callback/route.ts)
-- Dashboard  enpoint (verification): [GitHub](https://github.com/scienmanas/My-Pookie/blob/main/app/api/auth/user/route.ts)
+- Dashboard endpoint (verification): [GitHub](https://github.com/scienmanas/My-Pookie/blob/main/app/api/auth/user/route.ts)
 
 
 ## Demo
@@ -86,8 +84,7 @@ All the codes:
 
 ## Message
 
-I debugged many different errors, so if use face any issue, most prooably I may have already debugged it. So feel free to reach out to me. 
-
+I debugged many different errors, so if you face any issue, most probably I may have already debugged it. So feel free to reach out to me. 
 
 Cheers 🥂,  
 **Manas**  
