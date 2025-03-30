@@ -34,11 +34,11 @@ export async function generateMetadata({
   const blogData = getBlogPostData("blogs", params.slug); // Fetch blog data based on slug
 
   // Construct a dynamic OpenGraph image URL based on environment variables
-  const ogImageURL = `${process.env.DOMAIN}` + blogData.image;
+  const ogImageURL = `${process.env.SITE_URL}` + blogData.image;
 
   // Return the metadata object, including OpenGraph and Twitter details
   return {
-    metadataBase: new URL(process.env.DOMAIN as string), // Base URL for metadata
+    metadataBase: new URL(process.env.SITE_URL as string), // Base URL for metadata
     title: `${blogData.title} - Blogs`, // Dynamic title for SEO
     description: blogData.description, // Blog description for SEO
     keywords: blogData.tags, // Relevant keywords
@@ -46,7 +46,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${blogData.title} - Blogs`, // OpenGraph title
       description: blogData.description, // OpenGraph description
-      url: `${process.env.DOMAIN}/blog/${params.slug}`, // Dynamic URL for the blog post
+      url: `${process.env.SITE_URL}/blog/${params.slug}`, // Dynamic URL for the blog post
       images: [ogImageURL], // Dynamic image for OpenGraph
       type: "article", // OpenGraph type
       siteName: `Manas Blogs`, // Site name for OpenGraph
@@ -58,14 +58,14 @@ export async function generateMetadata({
       description: blogData.description, // Twitter description
       images: [ogImageURL], // Dynamic image for Twitter
       creator: "@scienmanas", // Twitter handle of the creator
-      site: `${process.env.DOMAIN}/blog/${params.slug}`,
+      site: `${process.env.SITE_URL}/blog/${params.slug}`,
     },
   };
 }
 
 // Blog page component that renders the blog post content and sharing links
 export default function BlogsPage({ params }: BlogPageProps): JSX.Element {
-  const pageURL = process.env.DOMAIN + `/blog/${params.slug}`; // Construct page URL for sharing
+  const pageURL = process.env.SITE_URL + `/blog/${params.slug}`; // Construct page URL for sharing
   const blogData = getBlogPostData("blogs", params.slug); // Fetch blog post data
 
   // Calculate the total number of words and reading time

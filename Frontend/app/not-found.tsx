@@ -1,6 +1,7 @@
-// Import necessary modules from Next.js
+import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
+import Gif404 from "@/public/assets/animations/404.gif";
 
 // Generate metadata for the 404 error page
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,6 +27,15 @@ export default function NotFound(): JSX.Element {
   return (
     <div className="w-dvw h-dvh flex items-center justify-center">
       <div className="content-wrapper w-fit h-fit flex flex-col items-center max-w-[448px] text-wrap gap-4 p-4">
+        <div className="error-gif w-fit h-fit p-4">
+          <Image
+            src={Gif404}
+            alt="404"
+            unoptimized
+            priority
+            style={{ objectFit: "contain" }}
+          />
+        </div>
         {/* Display the 404 error code */}
         <div className="error-code w-fit h-fit text-center text-wrap font-extrabold text-6xl sm:text-8xl dark:text-purple-500 text-purple-700 animate-pulse">
           404

@@ -8,7 +8,7 @@ import metaDataImg from "@/public/assets/metadata/landing.png";
 import { ScienGPT } from "@/app/ui/components/scienGPT";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.DOMAIN as string),
+  metadataBase: new URL(process.env.SITE_URL as string),
   title: "Manas | Portfolio",
   description:
     "Portfolio website of me (Manas), showcasing my all projects, skills and work",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "Manas | Portfolio",
     description:
       "Portfolio website of me (Manas), showcasing my all projects, skills and work",
-    url: process.env.DOMAIN,
+    url: process.env.SITE_URL,
     type: "profile",
     locale: "en_US",
     siteName: process.env.SITE_NAME as string,
