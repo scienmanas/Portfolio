@@ -13,9 +13,9 @@
 
 This project requirement .env configuration in `Frontend` folder to handle the dynamicity of the metadata generated when deployed everytime. The `.env` file should be created in the `Frontend` folder with the following variables:
 
-| Varibale         | Description                                         |
-| :--------------- | :-------------------------------------------------- |
-| `DOMAIN`         | Domain name of the website (https://scienmanas.xyz) |
+| Varibale           | Description                                         |
+| :----------------- | :-------------------------------------------------- |
+| SITE_URL           | Domain name of the website (https://scienmanas.xyz) |
 | `SITE_NAME`      | Name of the site (Here I kept it- Manas)            |
 | `G_ANALYTICS_ID` | Google Analytics ID for tracking user activity      |
 

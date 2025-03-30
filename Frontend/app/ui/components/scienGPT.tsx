@@ -354,6 +354,22 @@ export function ScienGPT(): JSX.Element {
               )}
             </div>
           ))}
+          {isResponding && (
+            <div className="response-loader-placehilder-animation flex flex-row items-start w-fit h-fit">
+              <Image
+                src={logoImg}
+                alt="logo"
+                width={27}
+                height={27}
+                className="rounded-full border"
+              />
+              <div className="loading-animation flex flex-row items-end gap-1 h-6 ml-2">
+                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-sm animate-[bounce_1s_ease-in-out_0s_infinite]"></span>
+                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-sm animate-[bounce_1s_ease-in-out_0.2s_infinite]"></span>
+                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-sm animate-[bounce_1s_ease-in-out_0.4s_infinite]"></span>
+              </div>
+            </div>
+          )}
         </div>
         {!isResponseBlocked && (
           <div className="input-box absolute bottom-0 w-full h-fit pb-1 px-2 flex flex-col items-center justify-center backdrop-blur-sm gap-[2px]">
@@ -453,7 +469,7 @@ export function ScienGPT(): JSX.Element {
               }}
               className="disclaimer text-xs text-neutral-700 dark:text-neutral-400"
             >
-              ⚙️ Fine-tuned Gemini | Info may be inaccurate ⚠️
+              ⚙️ Fine-tuned AI | Info may be inaccurate ⚠️
             </div>
           </div>
         )}
@@ -493,7 +509,7 @@ function BotResponse({ response }: { response: string }): JSX.Element {
         <ReactTyped
           strings={[parsedResponse]}
           startDelay={100}
-          typeSpeed={30}
+          typeSpeed={15}
           showCursor={false}
         />
       </p>

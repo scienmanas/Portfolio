@@ -5,7 +5,7 @@ import metaDataImg from "@/public/assets/metadata/blog.png"; // Import image for
 export async function generateMetadata(): Promise<Metadata> {
   // Construct metadata object
   return {
-    metadataBase: new URL(process.env.DOMAIN as string), // Base URL for metadata
+    metadataBase: new URL(process.env.SITE_URL as string), // Base URL for metadata
     title: `Blogs - ${process.env.SITE_NAME}`, // Dynamic title for SEO
     description: "Read the blogs, discover phenomenal things happening around", // Description for SEO
     keywords: ["reading", "article", "tech", "knowledge", "poetry"], // Keywords for SEO
@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `Blogs - ${process.env.SITE_NAME}`, // OpenGraph title
       description:
         "Read my blogs, I write about tech, do some poetry, and makes memes.", // OpenGraph description
-      url: `${process.env.DOMAIN}/blog`, // URL for OpenGraph
+      url: `${process.env.SITE_URL}/blog`, // URL for OpenGraph
       images: [metaDataImg.src], // Image for OpenGraph
       type: "article", // OpenGraph type
       siteName: `${process.env.SITE_NAME}`, // Site name for OpenGraph
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
         "Read my blogs, I write about tech, do some poetry, and makes memes.", // Twitter description
       images: [metaDataImg.src], // Image for Twitter
       creator: "@scienmanas", // Twitter handle of the content creator
-      site: `${process.env.DOMAIN}/blog`,
+      site: `${process.env.SITE_URL}/blog`,
     },
   };
 }

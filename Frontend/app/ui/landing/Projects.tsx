@@ -4,7 +4,7 @@ import { StaticImageData } from "next/image";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 // Projects image import
 import myPookieImg from "@/public/assets/projects/my-pookie.png";
@@ -18,8 +18,11 @@ import hackbellsbotImg from "@/public/assets/projects/hackbells-bot.png";
 import stickersmashImg from "@/public/assets/projects/sticker-smash.png";
 import microsoftlandingpageImg from "@/public/assets/projects/microsoft-landing-page.png";
 import maafkaroImg from "@/public/assets/projects/maaf-karo.png";
+import sandyImg from "@/public/assets/projects/sandy.png";
+import summaraizeImg from "@/public/assets/projects/summaraize.png";
 import { FiGithub } from "react-icons/fi";
 import { LuExternalLink } from "react-icons/lu";
+import { FaSort } from "react-icons/fa";
 
 interface projectDataType {
   name: string;
@@ -28,6 +31,7 @@ interface projectDataType {
   techStack: string[];
   github: string;
   deployedLink?: string;
+  date?: Date;
 }
 
 interface botProjectDataTypes {
@@ -36,6 +40,8 @@ interface botProjectDataTypes {
 }
 
 export function Projects(): JSX.Element {
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
+
   const projectData: projectDataType[] = [
     {
       name: "CertiMailer",
@@ -52,6 +58,31 @@ export function Projects(): JSX.Element {
       ],
       github: "https://github.com/scienmanas/CertiMailer",
       deployedLink: "https://certimailer.xyz/",
+      date: new Date("2024-12-01"),
+    },
+    {
+      name: "Sandy AI",
+      description:
+        "Voice powered, Gen-AI based cyber security bot for systems. Converse it as you would with a human.",
+      image: sandyImg,
+      techStack: [
+        "python",
+        "Gen-AI",
+        "ps-utils",
+        "algorithms",
+        "third-party-apis",
+      ],
+      github: "https://github.com/scienmanas/Sandy",
+      date: new Date("2025-02-20"),
+    },
+    {
+      name: "SummarAIze",
+      description:
+        "Chrome & Firefox extension to summarize the entire webpage in points with options to choose from different LLMs",
+      image: summaraizeImg,
+      techStack: ["typescript", "webpack", "gen-ai", "javascript", "extension"],
+      github: "https://github.com/scienmanas/SummarAIze",
+      date: new Date("2025-04-01"),
     },
     {
       name: "Portfolio",
@@ -61,6 +92,7 @@ export function Projects(): JSX.Element {
       techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
       github: "https://github.com/scienmanas/Portfolio",
       deployedLink: "https://scienmanas.xyz",
+      date: new Date("2024-09-10"),
     },
     {
       name: "My Pookie",
@@ -70,6 +102,7 @@ export function Projects(): JSX.Element {
       techStack: ["Next Js", "Prisma", "OAuth", "Typescript", "Framer Motion"],
       github: "https://github.com/scienmanas.My-Pookie",
       deployedLink: "https://mypookie.xyz",
+      date: new Date("2025-02-01"),
     },
     {
       name: "My Buddy",
@@ -86,6 +119,7 @@ export function Projects(): JSX.Element {
       ],
       github: "https://github.com/scienmanas/My-Buddy",
       deployedLink: "https://my-buddy-ten.vercel.app/",
+      date: new Date("2024-04-05"),
     },
     {
       name: "Landify",
@@ -95,6 +129,7 @@ export function Projects(): JSX.Element {
       techStack: ["TypeScript", "Next Js", "Blog Engine", "Mongo DB"],
       github: "https://github.com/scienmanas/Landify",
       deployedLink: "https://landify-sepia.vercel.app/",
+      date: new Date("2024-08-15"),
     },
     {
       name: "Maaf Karo",
@@ -104,6 +139,7 @@ export function Projects(): JSX.Element {
       techStack: ["Next Js", "gen-ai", "aws-lambda", "TypeScript"],
       github: "https://github.com/scienmanas/Maaf-Karo",
       deployedLink: "https://maaf-karo.vercel.app/",
+      date: new Date("2024-11-20"),
     },
     {
       name: "InfoPulse",
@@ -113,6 +149,7 @@ export function Projects(): JSX.Element {
       techStack: ["TypeScript", "Next Js", "Express", "Mongo DB", "Cron-job"],
       github: "https://github.com/scienmanas/InfoPulse",
       deployedLink: "https://info-pulse-six.vercel.app/",
+      date: new Date("2024-08-10"),
     },
     {
       name: "Valentiner",
@@ -122,6 +159,7 @@ export function Projects(): JSX.Element {
       techStack: ["React Js", "crazy"],
       github: "https://github.com/scienmanas/ValenTiner",
       deployedLink: "https://valen-tiner.vercel.app/",
+      date: new Date("2024-02-01"),
     },
     {
       name: "HackBells Bot",
@@ -130,6 +168,7 @@ export function Projects(): JSX.Element {
       image: hackbellsbotImg,
       techStack: ["Python", "Scrapy", "shell", "rapid-apis"],
       github: "https://github.com/scienmanas/HackBells-Bot",
+      date: new Date("2024-03-20"),
     },
     {
       name: "Sticker Smash",
@@ -139,6 +178,7 @@ export function Projects(): JSX.Element {
       techStack: ["javascript", "react-native"],
       github: "https://github.com/scienmanas/StickerSmash",
       deployedLink: "https://sticker-smash-one.vercel.app/",
+      date: new Date("2024-09-20"),
     },
     {
       name: "Microsoft Landing Page",
@@ -148,6 +188,7 @@ export function Projects(): JSX.Element {
       techStack: ["HTML", "Tailwind CSS"],
       github: "https://github.com/scienmanas/Microsoft-Landing-Page-Clone",
       deployedLink: "https://microsoft-landing-page-clone-gamma.vercel.app/",
+      date: new Date("2023-10-10"),
     },
   ];
 
@@ -165,6 +206,23 @@ export function Projects(): JSX.Element {
       link: "https://github.com/scienmanas/CelestialAlert",
     },
   ];
+
+  // Sort projects based on date
+  const sortedProjects = [...projectData].sort((a, b) => {
+    if (sortOrder === "none") return 0;
+    if (!a.date || !b.date) return 0;
+
+    return sortOrder === "asc"
+      ? a.date.getTime() - b.date.getTime()
+      : b.date.getTime() - a.date.getTime();
+  });
+
+  // Toggle sort order
+  const toggleSortOrder = () => {
+    if (sortOrder === "none") setSortOrder("desc");
+    else if (sortOrder === "desc") setSortOrder("asc");
+    else setSortOrder("none");
+  };
 
   return (
     <section className="projects w-full h-fit flex items-center justify-center">
@@ -184,16 +242,39 @@ export function Projects(): JSX.Element {
             ease: "easeIn",
           }}
           viewport={{ once: true }}
-          className="head w-full h-fit flex items-start"
+          className="head w-full h-fit flex flex-wrap gap-4 items-start justify-between"
         >
           <h1 className="heading w-fit h-fit text-xl sm:text-2xl dark:text-white text-neutral-900 flex items-end gap-1">
             <span className="dark:text-[#c778dd] text-[#6d2f7f]">$</span>
             <span className="font-mono">projects</span>
           </h1>
+
+          <button
+            onClick={toggleSortOrder}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm border dark:border-[#47494e] hover:border-[#ab54c4] dark:hover:border-[#6d2f7f] duration-300 ${
+              sortOrder !== "none"
+                ? "dark:bg-[#543e5e] bg-[#6d2f7f] text-white"
+                : "dark:bg-[#2d2d2d] bg-gray-100 dark:text-white text-neutral-900"
+            }`}
+          >
+            <FaSort
+              className={
+                sortOrder !== "none"
+                  ? "text-white"
+                  : "dark:text-gray-400 text-gray-500"
+              }
+            />
+            <span>
+              {sortOrder === "none" && "Sort by date"}
+              {sortOrder === "desc" && "Newest first"}
+              {sortOrder === "asc" && "Oldest first"}
+            </span>
+          </button>
         </motion.div>
+
         <div className="content w-full h-fit flex flex-col gap-10">
           <div className="projects w-fit h-fit flex flex-row flex-wrap gap-10 items-center justify-center font-mono">
-            {projectData.map((project, index) => (
+            {sortedProjects.map((project, index) => (
               <ProjectCard
                 key={index}
                 name={project.name}
@@ -202,6 +283,7 @@ export function Projects(): JSX.Element {
                 techStack={project.techStack}
                 github={project.github}
                 deployedLink={project.deployedLink}
+                date={project.date}
               />
             ))}
           </div>
@@ -252,8 +334,17 @@ function ProjectCard({
   techStack,
   github,
   deployedLink,
+  date,
 }: projectDataType): JSX.Element {
   const cardRef = useRef<HTMLDivElement>(null);
+
+  // Format date to display only month and year
+  const formattedDate = date
+    ? new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        year: "numeric",
+      }).format(date)
+    : null;
 
   return (
     <motion.div
@@ -318,15 +409,15 @@ function ProjectCard({
       >
         <div className="relative image-box w-full h-fit">
           <Link className="w-full h-fit" href={github}>
-            <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-md flex items-center justify-center">
+            <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-xl border-[#dbd5d5] dark:border-[#484a50] flex items-center justify-center border-2">
               {/* Blurred image as a placeholder */}
               <Image
                 src={image}
                 alt={`${name}-img`}
                 width={340}
                 height={270}
-                className="absolute object-cover rounded-t-md blur-md scale-110"
-                style={{ width: "auto", height: "auto" }}
+                className="absolute object-cover rounded-t-xl blur-sm scale-110"
+                style={{ width: "340px", height: "270px" }}
               />
               {/* Do not strect image */}
               <Image
@@ -334,13 +425,13 @@ function ProjectCard({
                 alt={`${name}-img`}
                 width={340}
                 height={270}
-                className="relative rounded-t-md pointer-events-none z-10 group-hover:scale-105 duration-500"
+                className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
                 style={{ width: "auto", height: "auto" }}
               />
             </div>
           </Link>
         </div>
-        <div className="all-contents flex flex-col w-full h-[220px] py-5 px-4 dark:bg-[#543e5e] bg-white items-start gap-4">
+        <div className="all-contents flex flex-col w-full h-[230px] py-5 px-4 dark:bg-[#543e5e] bg-white items-start gap-4">
           <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
             <div className="name-links w-full h-fit flex flex-row items-center justify-between">
               <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900 relative after:absolute after:-bottom-[2px] after:left-0 after:h-[2px] after:w-full after:bg-cyan-500 dark:after:bg-cyan-400">
@@ -361,11 +452,11 @@ function ProjectCard({
               {description.split(/\s+/).filter((element) => {
                 return element.length !== 0;
               }).length > 15
-                ? description.slice(0, 110) + "..."
+                ? description.slice(0, 80) + "..."
                 : description}
             </div>
           </div>
-          <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2 ">
+          <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2">
             {techStack.map((tech, index) => (
               <div
                 className="tech px-2 py-1 rounded-lg  dark:bg-neutral-800 bg-black text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
@@ -375,6 +466,11 @@ function ProjectCard({
               </div>
             ))}
           </div>
+          {formattedDate && (
+            <div className="date w-full h-fit text-xs sm:text-sm text-neutral-800 dark:text-neutral-200 italic -mt-1">
+              ({formattedDate})
+            </div>
+          )}
         </div>
       </div>
     </motion.div>

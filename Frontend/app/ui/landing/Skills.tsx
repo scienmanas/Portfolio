@@ -110,7 +110,7 @@ export function Skills(): JSX.Element {
             {skillsCategorised.map((skillData, index1) => (
               <div
                 key={index1}
-                className="skill flex flex-row items-center gap-2"
+                className="skill flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full h-fit justify-start"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -120,15 +120,15 @@ export function Skills(): JSX.Element {
                     duration: 0.2,
                   }}
                   viewport={{ once: true }}
-                  className="skill-category text-[#6d2f7f] dark:text-[#c891d7] font-semibold text-sm sm:text-base"
+                  className="skill-category text-[#6d2f7f] dark:text-[#c891d7] font-semibold text-sm sm:text-base w-fit h-fit"
                 >
                   {skillData.category}:
                 </motion.div>
-                <div className="all-skills flex flex-row gap-4">
+                <div className="all-skills flex flex-wrap gap-4 w-full">
                   {skillData.skills.map((skill, index2) => (
                     <motion.div
                       key={index2}
-                      className="skill relative flex items-center w-full h-fit justify-center group"
+                      className="skill relative flex items-center w-fit h-fit justify-center group mb-2"
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{
