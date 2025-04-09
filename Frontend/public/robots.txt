@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://scienmanas.xyz
+
+# Sitemaps
+Sitemap: https://scienmanas.xyz/sitemap.xml

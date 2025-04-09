@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import { ThemeProvider } from "next-themes";
 import { Footer } from "@/app/ui/universal/Footer";
 import { Navbar } from "@/app/ui/universal/Navbar";
 import { CursorLight } from "../ui/components/cursor-light";
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -56,29 +55,27 @@ export default function RootLayout({
         }}
         className={`antialiase dark:bg-[#282c33] bg-[#eaeaea] scroll-smooth`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <CursorLight />
-          <div
-            // style={{
-            //   cursor: `url(${cursorSvg}) 12 12, auto`,
-            // }}
-            className="wrapper flex w-full h-fit relative overflow-hidden"
-          >
-            <div className="gradient-blurred absolute w-full h-dvh -z-10 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-45% opacity-30 blur-md"></div>
-            <div className="contents-wrapper relative flex flex-col w-full h-fit gap-10 z-10">
-              <section className="navbar w-full h-fit relative z-30">
-                <Navbar />
-              </section>
-              <section className="w-full h-full page-contents relative z-20">
-                {children}
-              </section>
-              <section className="footer-and-gpt w-full h-fit flex items-center justify-center z-20">
-                <Footer />
-                <ScienGPT />
-              </section>
-            </div>
+        <CursorLight />
+        <div
+          // style={{
+          //   cursor: `url(${cursorSvg}) 12 12, auto`,
+          // }}
+          className="wrapper flex w-full h-fit relative overflow-hidden"
+        >
+          <div className="gradient-blurred absolute w-full h-dvh -z-10 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-45% opacity-30 blur-md"></div>
+          <div className="contents-wrapper relative flex flex-col w-full h-fit gap-10 z-10">
+            <section className="navbar w-full h-fit relative z-30">
+              <Navbar />
+            </section>
+            <section className="w-full h-full page-contents relative z-20">
+              {children}
+            </section>
+            <section className="footer-and-gpt w-full h-fit flex items-center justify-center z-20">
+              <Footer />
+              <ScienGPT />
+            </section>
           </div>
-        </ThemeProvider>
+        </div>
       </body>
     </html>
   );

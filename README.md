@@ -15,7 +15,7 @@ This project requirement .env configuration in `Frontend` folder to handle the d
 
 | Varibale           | Description                                         |
 | :----------------- | :-------------------------------------------------- |
-| SITE_URL           | Domain name of the website (https://scienmanas.xyz) |
+| `SITE_URL`       | Domain name of the website (https://scienmanas.xyz) |
 | `SITE_NAME`      | Name of the site (Here I kept it- Manas)            |
 | `G_ANALYTICS_ID` | Google Analytics ID for tracking user activity      |
 

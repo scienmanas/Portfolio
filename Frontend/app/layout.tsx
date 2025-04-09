@@ -1,7 +1,6 @@
 import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Viewport } from "next";
-import { Analytics } from "@vercel/analytics/react";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const viewport: Viewport = {
@@ -28,7 +27,6 @@ export default function RootLayout({
             gaId={process.env.G_ANALYTICS_ID as string}
             debugMode={false}
           />
-          <Analytics />
         </ThemeProvider>
       </body>
     </html>
