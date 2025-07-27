@@ -88,6 +88,7 @@ Additionally to make these API works, we need to `environment` variables for bot
 │   │   │   │    ├── Flex.tsx
 │   │   │   │    ├── CommunityWork.tsx
 │   │   │   │    ├── MoreAboutMe.tsx
+│   │   │   │    ├── UserInfo.tsx
 │   │   │   │    └── Contact.tsx
 │   │   │   ├── universal
 │   │   │   │    ├── Navbar.tsx
