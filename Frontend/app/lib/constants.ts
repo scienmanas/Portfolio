@@ -14,7 +14,7 @@ import reactSvg from "@/public/assets/svg/react-js.svg";
 import { SiNextdotjs } from "react-icons/si";
 import tailwindSvg from "@/public/assets/svg/tailwind-css.svg";
 import reactNativeSvg from "@/public/assets/svg/react-native.svg";
-import { FaNode, FaSortDown } from "react-icons/fa";
+import { FaNode } from "react-icons/fa";
 import { SiExpress } from "react-icons/si";
 import mongodbSvg from "@/public/assets/svg/mongodb.svg";
 import sqlSvg from "@/public/assets/svg/my-sql.svg";

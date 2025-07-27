@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FiGithub } from "react-icons/fi";
 import { LuExternalLink } from "react-icons/lu";
 import { FaSort } from "react-icons/fa";
