@@ -3,62 +3,12 @@
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-
-interface AchievementsDataType {
-  name: string;
-  description: string;
-  link?: string;
-  date?: string;
-}
+import { achievementsData } from "@/app/lib/constants";
 
 export function Flex(): JSX.Element {
   // Ref for achievements
   const achievementRef = useRef<HTMLDivElement>(null);
   const achievementRefIsInView = useInView(achievementRef, { once: true });
-
-  const achievementsData: AchievementsDataType[] = [
-    {
-      name: "Top Presentation",
-      description:
-        "I along with my amazing team was honoured among top presenters for our research work in Indo-Canadian Symposium",
-      link: "https://drive.google.com/file/d/1EBWiMrzn2yjQcBKZlYt_Kuxi03wlHgFD/view",
-      date: "Feb, 2024",
-    },
-    {
-      name: "1st Prize, Hackbells",
-      description:
-        "Me and my friend Arpit bagged the first prize in 24 hours hackathon, we worked on a completely different cyber security tool, giving us an edge over other participants.",
-      link: "https://devfolio.co/projects/hackbell-bot-c98d",
-      date: "Feb 2024",
-    },
-    {
-      name: "Finalist - EyeInvent",
-      description:
-        "Our team consisting of two doctors, went to finalist in Eye Invent. We developed and printed a CAD model automating the holding of 90 D lens.",
-      date: "Feb 2024",
-    },
-    {
-      name: "Top 10% AWS DeepRacer Student",
-      description:
-        "I was in Top 10% among all the students in India region in monthly AWS DeepRacer Student League in July 2023 race",
-      link: "https://drive.google.com/file/d/1jb0IKKwrmqoqxGdv32QFtLa9VUrQyKdx/view",
-      date: "July 2023",
-    },
-    {
-      name: "Bronze Medal - Inter IIT 11.0",
-      description:
-        "Me along with my amazing team worked on formulating and presenting a solution to a real-world problem which involved complex decision-making. Guess what, we were first in the last round among all other IITs.",
-      link: "https://drive.google.com/file/d/1wnYmdBfAT-la8h7sTzAsRd1MBIHtrpM4/view",
-      date: "Feb 2023",
-    },
-    {
-      name: "2nd Prize - Cosmic Innovation Challenge",
-      description:
-        "Again, me and my friend Arpit bagged the 2nd prize for our presentation of an innovative idea to deal with the problem of space debris which can be done using gecko technology, robotic arm, and by exploiting cosmic deposition charges.",
-      link: "https://drive.google.com/file/d/1ZMlah5ZQJtnLCwvLtuyvo99iAOcYJM7r/view",
-      date: "Jan 2023",
-    },
-  ];
 
   return (
     <section className="w-full h-fit flex items-center justify-center">

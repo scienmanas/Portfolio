@@ -1,76 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import cppSvg from "@/public/assets/svg/c++.svg";
-import pythonSvg from "@/public/assets/svg/python.svg";
-import jsSvg from "@/public/assets/svg/javascript.svg";
-import tsSvg from "@/public/assets/svg/typescript.svg";
-import reactSvg from "@/public/assets/svg/react-js.svg";
-import { SiNextdotjs } from "react-icons/si";
-import tailwindSvg from "@/public/assets/svg/tailwind-css.svg";
-import reactNativeSvg from "@/public/assets/svg/react-native.svg";
-import { FaNode, FaSortDown } from "react-icons/fa";
-import { SiExpress } from "react-icons/si";
-import mongodbSvg from "@/public/assets/svg/mongodb.svg";
-import sqlSvg from "@/public/assets/svg/my-sql.svg";
-import gitSvg from "@/public/assets/svg/git.svg";
-import dockerSvg from "@/public/assets/svg/docker.svg";
-import gcpSvg from "@/public/assets/svg/google-cloud.svg";
-import awslambdaSvg from "@/public/assets/svg/awslambda.svg";
-import { SiPrisma } from "react-icons/si";
-import { IconType } from "react-icons";
 import Image from "next/image";
+import { skills } from "@/app/lib/constants";
+import { FaSortDown } from "react-icons/fa";
 
-interface Skill {
-  name: string;
-  icon: IconType | React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-}
-
-interface SkillsCategorised {
-  category: string;
-  skills: Skill[];
-}
 
 export function Skills(): JSX.Element {
-  const skillsCategorised: SkillsCategorised[] = [
-    {
-      category: "Languages",
-      skills: [
-        { name: "C++", icon: cppSvg },
-        { name: "Python", icon: pythonSvg },
-        { name: "JavaScript", icon: jsSvg },
-        { name: "TypeScript", icon: tsSvg },
-      ],
-    },
-    {
-      category: "Frontend",
-      skills: [
-        { name: "Next.js", icon: SiNextdotjs },
-        { name: "React.js", icon: reactSvg },
-        { name: "Tailwind CSS", icon: tailwindSvg },
-        { name: "React Native", icon: reactNativeSvg },
-      ],
-    },
-    {
-      category: "Backend & Database",
-      skills: [
-        { name: "Node.js", icon: FaNode },
-        { name: "Prisma", icon: SiPrisma },
-        { name: "MongoDB", icon: mongodbSvg },
-        { name: "Express.js", icon: SiExpress },
-        { name: "SQL", icon: sqlSvg },
-      ],
-    },
-    {
-      category: "Cloud & DevOps",
-      skills: [
-        { name: "Git", icon: gitSvg },
-        { name: "Docker", icon: dockerSvg },
-        { name: "GCP", icon: gcpSvg },
-        { name: "AWS (Lambda Functions)", icon: awslambdaSvg },
-      ],
-    },
-  ];
+  
 
   return (
     <section className="skills w-full flex items-center justify-center h-fit">
@@ -107,7 +44,7 @@ export function Skills(): JSX.Element {
           </motion.div>
 
           <div className="skill-box w-full h-fit flex flex-col gap-2 items-start">
-            {skillsCategorised.map((skillData, index1) => (
+            {skills.map((skillData, index1) => (
               <div
                 key={index1}
                 className="skill flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full h-fit justify-start"

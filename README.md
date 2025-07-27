@@ -136,10 +136,3 @@ https://github.com/user-attachments/assets/14add2de-72c2-4c42-99ce-dd073918079e
 ## 🔒 License
 
 This repository is open source and under [MIT](https://choosealicense.com/licenses/mit/) License.
-
-<!-- GitAds-Verify: 9WZHEDIODPU5PT4CFON46QGHVSOKJRYI -->
-
-
-## GitAds Sponsored
-[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=scienmanas/portfolio@github)](https://gitads.dev/v1/ad-track?source=scienmanas/portfolio@github)
-
