@@ -92,15 +92,39 @@ export function GithubMap(): JSX.Element {
   } else
     return (
       <section
-        className={`github-map w-full h-fit flex items-center justify-center font-mono ${
+        className={`github-map w-full h-fit flex font-mono items-start justify-start flex-col gap-6 ${
           isFetchSuccessful === true ? "visible" : "hidden"
         }`}
       >
-        <div className="wrapper w-full max-w-screen-xl h-fit flex items-start justify-start px-5 flex-col gap-6">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -10,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            delay: 0.4,
+            duration: 0.6,
+            ease: "easeInOut",
+          }}
+          viewport={{ once: true }}
+          className="heading font-semibold text-xl sm:text-2xl flex flex-row items-center gap-1 w-fit"
+        >
+          <span className="w-fit h-fit dark:text-[#c778dd] text-[#6d2f7f]">
+            ${" "}
+          </span>
+          <span className="font-mono w-fit h-fit text-neutral-800 dark:text-neutral-200">
+            github map
+          </span>
+        </motion.div>
+        <div className="map-and-contributions w-full h-fit flex flex-col items-start gap-4">
           <motion.div
             initial={{
               opacity: 0,
-              x: -10,
+              x: 10,
             }}
             whileInView={{
               opacity: 1,
@@ -112,70 +136,44 @@ export function GithubMap(): JSX.Element {
               ease: "easeInOut",
             }}
             viewport={{ once: true }}
-            className="heading font-semibold text-xl sm:text-2xl flex flex-row items-center gap-1 w-fit"
+            className="github-map w-[98%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem]"
           >
-            <span className="w-fit h-fit dark:text-[#c778dd] text-[#6d2f7f]">
-              ${" "}
-            </span>
-            <span className="font-mono w-fit h-fit text-neutral-800 dark:text-neutral-200">
-              github map
+            <CalendarHeatmap
+              startDate={contributionTimeBounds?.startDate}
+              endDate={contributionTimeBounds?.endDate}
+              values={contributionData.contributions}
+              classForValue={(value) => {
+                if (!value) {
+                  return "color-empty";
+                }
+                return `color-github-${Math.ceil(
+                  (value.count / contributionData.maxContribution) * 10
+                )}`;
+              }}
+            />
+          </motion.div>
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 10,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              delay: 0.4,
+              duration: 0.6,
+              ease: "easeInOut",
+            }}
+            viewport={{ once: true }}
+            className="total-contributions w-fit h-fit text-wrap text-xs sm:text-sm"
+          >
+            <span>Total Contribution: </span>
+            <span className="font-semibold text-[#9d174d] underline">
+              {contributionData.totalcontributions}
             </span>
           </motion.div>
-          <div className="map-and-contributions w-full h-fit flex flex-col items-start gap-4">
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: 10,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                delay: 0.4,
-                duration: 0.6,
-                ease: "easeInOut",
-              }}
-              viewport={{ once: true }}
-              className="github-map w-[98%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem]"
-            >
-              <CalendarHeatmap
-                startDate={contributionTimeBounds?.startDate}
-                endDate={contributionTimeBounds?.endDate}
-                values={contributionData.contributions}
-                classForValue={(value) => {
-                  if (!value) {
-                    return "color-empty";
-                  }
-                  return `color-github-${Math.ceil(
-                    (value.count / contributionData.maxContribution) * 10
-                  )}`;
-                }}
-              />
-            </motion.div>
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: 10,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                delay: 0.4,
-                duration: 0.6,
-                ease: "easeInOut",
-              }}
-              viewport={{ once: true }}
-              className="total-contributions w-fit h-fit text-wrap text-xs sm:text-sm"
-            >
-              <span>Total Contribution: </span>
-              <span className="font-semibold text-[#9d174d] underline">
-                {contributionData.totalcontributions}
-              </span>
-            </motion.div>
-          </div>
         </div>
       </section>
     );

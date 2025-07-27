@@ -16,61 +16,58 @@ import { motion } from "framer-motion";
 
 export function Contact(): JSX.Element {
   return (
-    <section className="contact relative w-full h-fit flex items-center justify-center">
-      <div className="wrapper w-full max-w-screen-xl h-fit items-start px-5 flex flex-col gap-6">
-        <div className="heading-andd-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
-          <motion.div
-            initial={{
-              opacity: 0,
-              x: -10,
-            }}
-            whileInView={{
-              opacity: 1,
-              x: 0,
-            }}
-            viewport={{ once: true }}
-            transition={{
-              delay: 0.4,
-              duration: 0.6,
-            }}
-            className="head font-semibold"
-          >
-            <span className="w-fit h-fit dark:text-[#c778dd] text-[#6d2f7f]">
-              ${" "}
-            </span>
-            <span className="font-mono w-fit h-fit text-neutral-800 dark:text-neutral-200">
-              contact
-            </span>
-          </motion.div>
-          <motion.div
-            initial={{
-              y: 15,
-              opacity: 0,
-            }}
-            whileInView={{
-              y: 0,
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.4,
-              duration: 0.6,
-              ease: "easeInOut",
-            }}
-            viewport={{ once: true }}
-            className="description font-mono w-fit h-fit text-sm sm:text-base"
-          >
-            👋 Hola! I'm always{" "}
-            <span className="dark:text-[#c778dd] text-[#6d2f7f]">
-              reachable through email
-            </span>{" "}
-            📧 ✨. (iamscientistmanas@gmail.com)
-          </motion.div>
-        </div>
+    <section className="contact relative w-full h-fit justify-center items-start flex flex-col gap-6">
+      <div className="heading-andd-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: -10,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.4,
+            duration: 0.6,
+          }}
+          className="head font-semibold"
+        >
+          <span className="w-fit h-fit dark:text-[#c778dd] text-[#6d2f7f]">
+            ${" "}
+          </span>
+          <span className="font-mono w-fit h-fit text-neutral-800 dark:text-neutral-200">
+            contact
+          </span>
+        </motion.div>
+        <motion.div
+          initial={{
+            y: 15,
+            opacity: 0,
+          }}
+          whileInView={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            delay: 0.4,
+            duration: 0.6,
+            ease: "easeInOut",
+          }}
+          viewport={{ once: true }}
+          className="description font-mono w-fit h-fit text-sm sm:text-base"
+        >
+          👋 Hola! I'm always{" "}
+          <span className="dark:text-[#c778dd] text-[#6d2f7f]">
+            reachable through email
+          </span>{" "}
+          📧 ✨. (iamscientistmanas@gmail.com)
+        </motion.div>
       </div>
     </section>
   );
 }
-
 
 // To implement the form submission, you can use the following code snippet:
 // export function Contact(): JSX.Element {
@@ -337,4 +334,3 @@ export function Contact(): JSX.Element {
 //     </section>
 //   );
 // }
-

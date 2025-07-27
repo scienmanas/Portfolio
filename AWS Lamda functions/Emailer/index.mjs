@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 
+// Pls dont that this doesn't work anymore because of new zoho policies.
+
 // Both of this is from the email host service
 const EMAIL_HOST = "smtppro.zoho.in"
 const PORT = 465

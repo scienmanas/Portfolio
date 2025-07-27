@@ -34,16 +34,103 @@ export function Projects(): JSX.Element {
   };
 
   return (
-    <section className="projects w-full h-fit flex items-center justify-center">
-      <div className="wrapper w-full h-fit max-w-screen-xl flex items-start flex-col gap-10 px-5">
+    <section className="projects w-full h-fit flex items-start flex-col gap-10 justify-center">
+      <motion.div
+        initial={{
+          opacity: 0,
+          x: 10,
+        }}
+        whileInView={{
+          opacity: 1,
+          x: 0,
+        }}
+        transition={{
+          delay: 0.4,
+          duration: 0.6,
+          ease: "easeIn",
+        }}
+        viewport={{ once: true }}
+        className="head w-full h-fit flex flex-wrap gap-4 items-start justify-between"
+      >
+        <h1 className="heading w-fit h-fit text-xl sm:text-2xl dark:text-white text-neutral-900 flex items-end gap-1">
+          <span className="dark:text-[#c778dd] text-[#6d2f7f]">$</span>
+          <span className="font-mono">projects</span>
+        </h1>
+
+        <button
+          onClick={toggleSortOrder}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm border dark:border-[#47494e] hover:border-[#ab54c4] dark:hover:border-[#6d2f7f] duration-300 ${
+            sortOrder !== "none"
+              ? "dark:bg-[#543e5e] bg-[#6d2f7f] text-white"
+              : "dark:bg-[#2d2d2d] bg-gray-100 dark:text-white text-neutral-900"
+          }`}
+        >
+          <FaSort
+            className={
+              sortOrder !== "none"
+                ? "text-white"
+                : "dark:text-gray-400 text-gray-500"
+            }
+          />
+          <span>
+            {sortOrder === "none" && "Sort by date"}
+            {sortOrder === "desc" && "Newest first"}
+            {sortOrder === "asc" && "Oldest first"}
+          </span>
+        </button>
+      </motion.div>
+      {/* All content - projects + view more + bot projects */}
+      <div className="content w-full h-fit flex flex-col gap-10">
+        {/* Projects */}
+        <div className="projects w-fit h-fit flex flex-row flex-wrap gap-10 items-center justify-center font-mono">
+          {sortedProjects
+            .slice(0, maxProjectOnOnePage * Math.min(pageNo, maxPages))
+            .map((project: (typeof sortedProjects)[number], index: number) => (
+              <ProjectCard
+                key={index}
+                name={project.name}
+                description={project.description}
+                image={project.image}
+                techStack={project.techStack}
+                github={project.github}
+                deployedLink={project.deployedLink}
+                date={project.date}
+              />
+            ))}
+        </div>
+        {/* View more tab  */}
+        <motion.div
+          initial={{ filter: "blur(8px)" }}
+          animate={{
+            opacity: pageNo < maxPages ? 1 : 0,
+            filter: "blur(0px)",
+          }}
+          transition={{
+            delay: 0.7,
+            duration: 0.6,
+          }}
+          viewport={{ once: true }}
+          className={`viewmore-tab w-full h-fit relative justify-center items-center mt-8 mb-8 ${
+            pageNo < maxPages ? "flex" : "hidden"
+          }`}
+        >
+          <button
+            onClick={() => setPageNo(pageNo + 1)}
+            className="view-more-button cursor-pointer border-2 border-black dark:border-neutral-200 px-3 py-2 font-mono font-semibold duration-300 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
+            type="button"
+          >
+            View More
+          </button>
+        </motion.div>
+        {/* Bots projects */}
         <motion.div
           initial={{
             opacity: 0,
-            x: 10,
+            scale: 0.95,
           }}
           whileInView={{
             opacity: 1,
-            x: 0,
+            scale: 1,
           }}
           transition={{
             delay: 0.4,
@@ -51,117 +138,26 @@ export function Projects(): JSX.Element {
             ease: "easeIn",
           }}
           viewport={{ once: true }}
-          className="head w-full h-fit flex flex-wrap gap-4 items-start justify-between"
+          className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base"
         >
-          <h1 className="heading w-fit h-fit text-xl sm:text-2xl dark:text-white text-neutral-900 flex items-end gap-1">
-            <span className="dark:text-[#c778dd] text-[#6d2f7f]">$</span>
-            <span className="font-mono">projects</span>
-          </h1>
-
-          <button
-            onClick={toggleSortOrder}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm border dark:border-[#47494e] hover:border-[#ab54c4] dark:hover:border-[#6d2f7f] duration-300 ${
-              sortOrder !== "none"
-                ? "dark:bg-[#543e5e] bg-[#6d2f7f] text-white"
-                : "dark:bg-[#2d2d2d] bg-gray-100 dark:text-white text-neutral-900"
-            }`}
-          >
-            <FaSort
-              className={
-                sortOrder !== "none"
-                  ? "text-white"
-                  : "dark:text-gray-400 text-gray-500"
-              }
-            />
-            <span>
-              {sortOrder === "none" && "Sort by date"}
-              {sortOrder === "desc" && "Newest first"}
-              {sortOrder === "asc" && "Oldest first"}
-            </span>
-          </button>
-        </motion.div>
-        {/* All content - projects + view more + bot projects */}
-        <div className="content w-full h-fit flex flex-col gap-10">
-          {/* Projects */}
-          <div className="projects w-fit h-fit flex flex-row flex-wrap gap-10 items-center justify-center font-mono">
-            {sortedProjects
-              .slice(0, maxProjectOnOnePage * Math.min(pageNo, maxPages))
-              .map(
-                (project: (typeof sortedProjects)[number], index: number) => (
-                  <ProjectCard
-                    key={index}
-                    name={project.name}
-                    description={project.description}
-                    image={project.image}
-                    techStack={project.techStack}
-                    github={project.github}
-                    deployedLink={project.deployedLink}
-                    date={project.date}
-                  />
-                )
-              )}
+          <div className="info-text ">
+            Apart from these deployed projects I have also built Gen-AI powered
+            discord bots by use of gemini-api and wrote terminal based games.
+            Some of these are:{" "}
+            {botProjectData.map((project, index) => (
+              <Link
+                target="_blank"
+                key={index}
+                href={project.link}
+                className="w-auto h-auto dark:text-cyan-200 text-cyan-800 font-semibold"
+              >
+                <span className="hover:underline">{project.name}</span>
+                {index < botProjectData.length - 1 && <span>, </span>}
+              </Link>
+            ))}
+            {"."}
           </div>
-          {/* View more tab  */}
-          <motion.div
-            initial={{ filter: "blur(8px)" }}
-            animate={{
-              opacity: pageNo < maxPages ? 1 : 0,
-              filter: "blur(0px)",
-            }}
-            transition={{
-              delay: 0.7,
-              duration: 0.6,
-            }}
-            viewport={{ once: true }}
-            className={`viewmore-tab w-full h-fit relative justify-center items-center mt-8 mb-8 ${
-              pageNo < maxPages ? "flex" : "hidden"
-            }`}
-          >
-            <button
-              onClick={() => setPageNo(pageNo + 1)}
-              className="view-more-button cursor-pointer border-2 border-black dark:border-neutral-200 px-3 py-2 font-mono font-semibold duration-300 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600"
-              type="button"
-            >
-              View More
-            </button>
-          </motion.div>
-          {/* Bots projects */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.95,
-            }}
-            whileInView={{
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              delay: 0.4,
-              duration: 0.6,
-              ease: "easeIn",
-            }}
-            viewport={{ once: true }}
-            className="further-info-and-comments font-mono text-neutral-900 dark:text-neutral-100 text-sm sm:text-base"
-          >
-            <div className="info-text ">
-              Apart from these deployed projects I have also built Gen-AI
-              powered discord bots by use of gemini-api and wrote terminal based
-              games. Some of these are:{" "}
-              {botProjectData.map((project, index) => (
-                <Link
-                  target="_blank"
-                  key={index}
-                  href={project.link}
-                  className="w-auto h-auto dark:text-cyan-200 text-cyan-800 font-semibold"
-                >
-                  <span className="hover:underline">{project.name}</span>
-                  {index < botProjectData.length - 1 && <span>, </span>}
-                </Link>
-              ))}
-              {"."}
-            </div>
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
