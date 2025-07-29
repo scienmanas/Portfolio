@@ -24,7 +24,7 @@ export default function Home() {
         </div>
         {/* For less space at bottom */}
         <div className="wrapper relative w-full max-w-screen-xl h-fit flex overflow-hidden px-5 items-center justify-center">
-          <UserInfo />
+          {/* <UserInfo /> */}
         </div>
       </div>
     </div>
