@@ -32,7 +32,7 @@ async function fetchLocationFromIP(): Promise<string> {
 }
 
 export function UserInfo() {
-  const [location, setLocation] = useState<string | null>("");
+  const [location, setLocation] = useState<string | null>("Fetching location");
 
   // Get location from IP, no prompt to user, and call once only
   useEffect(() => {
