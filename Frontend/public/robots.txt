@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://scienmanas.xyz
+Host: https://scienmanas.dev
 
 # Sitemaps
-Sitemap: https://scienmanas.xyz/sitemap.xml
+Sitemap: https://scienmanas.dev/sitemap.xml
