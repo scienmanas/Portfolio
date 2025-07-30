@@ -1,8 +1,10 @@
 "use client";
 
+
+import { motion } from "framer-motion";
+import Link from "next/link";
 // import { useState, useRef, useEffect } from "react";
 // import { SubmissionLoader } from "@/app/ui/loaders";
-import { motion } from "framer-motion";
 // import JSConfetti from "js-confetti";
 // import { v4 as uuidv4 } from "uuid";
 
@@ -17,7 +19,7 @@ import { motion } from "framer-motion";
 export function Contact(): JSX.Element {
   return (
     <section className="contact relative w-full h-fit justify-center items-start flex flex-col gap-6">
-      <div className="heading-andd-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
+      <div className="heading-and-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
         <motion.div
           initial={{
             opacity: 0,
@@ -62,7 +64,7 @@ export function Contact(): JSX.Element {
           <span className="dark:text-[#c778dd] text-[#6d2f7f]">
             reachable through email
           </span>{" "}
-          📧 ✨. (iamscientistmanas@gmail.com)
+          📧 ✨ <Link target="_blank" href="https://mail.google.com/mail/?view=cm&to=iamscientistmanas@gmail.com">(iamscientistmanas@gmail.com)</Link>
         </motion.div>
       </div>
     </section>

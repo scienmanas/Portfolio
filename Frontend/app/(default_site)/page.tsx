@@ -4,7 +4,7 @@ import { Projects } from "@/app/ui/landing/Projects";
 import { Flex } from "@/app/ui/landing/Flex";
 import { CommunityWork } from "@/app/ui/landing/CommunityWork";
 import { MoreAboutMe } from "@/app/ui/landing/MoreAboutMe";
-// import { Contact } from "@/app/ui/landing/Contact";
+import { Contact } from "@/app/ui/landing/Contact";
 import { GithubMap } from "@/app/ui/components/github-map";
 import { UserInfo } from "@/app/ui/landing/UserInfo";
 
@@ -19,7 +19,7 @@ export default function Home() {
           <Flex />
           <CommunityWork />
           <MoreAboutMe />
-          {/* <Contact /> */}
+          <Contact />
           <GithubMap />
         </div>
         {/* For less space at bottom */}
