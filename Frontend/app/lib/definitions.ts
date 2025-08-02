@@ -1,7 +1,7 @@
 import { IconType } from "react-icons";
 import { StaticImageData } from "next/image";
 
-// ---------------- Blog Post Meta data ---------------------------
+// ---------------- Blog Post Meta data -------------------
 
 export type BlogPostMetaDataProps = {
   cardData: {
@@ -43,6 +43,7 @@ export type projectDataType = {
   name: string;
   description: string;
   image: StaticImageData;
+  gif?: StaticImageData;
   techStack: string[];
   github: string;
   deployedLink?: string;

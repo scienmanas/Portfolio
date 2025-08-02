@@ -95,6 +95,7 @@ export function Projects(): JSX.Element {
                 github={project.github}
                 deployedLink={project.deployedLink}
                 date={project.date}
+                gif={project.gif}
               />
             ))}
         </div>
@@ -171,6 +172,7 @@ function ProjectCard({
   github,
   deployedLink,
   date,
+  gif,
 }: projectDataType): JSX.Element {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -257,8 +259,8 @@ function ProjectCard({
               />
               {/* Do not strect image */}
               <Image
-                src={image}
-                alt={`${name}-img`}
+                src={gif ? gif : image}
+                alt={`${name}-proj`}
                 width={340}
                 height={270}
                 className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
@@ -267,7 +269,7 @@ function ProjectCard({
             </div>
           </Link>
         </div>
-        <div className="all-contents flex flex-col w-full h-[230px] py-5 px-4 dark:bg-[#543e5e] bg-white items-start gap-4">
+        <div className="all-contents flex flex-col w-full h-[230px] py-5 px-4 dark:bg-[#2b1e2e] bg-white items-start gap-4">
           <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
             <div className="name-links w-full h-fit flex flex-row items-center justify-between">
               <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900 relative after:absolute after:-bottom-[2px] after:left-0 after:h-[2px] after:w-full after:bg-cyan-500 dark:after:bg-cyan-400">
@@ -299,7 +301,7 @@ function ProjectCard({
           <div className="tech-stack w-fit h-fit flex flex-row flex-wrap gap-2">
             {techStack.map((tech, index) => (
               <div
-                className="tech px-2 py-1 rounded-lg  dark:bg-neutral-800 bg-black text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
+                className="tech px-2 py-1 rounded-lg dark:bg-[#373724] bg-black text-[0.6rem] sm:text-xs dark:text-neutral-100 text-neutral-100"
                 key={index}
               >
                 {tech.toLocaleLowerCase()}

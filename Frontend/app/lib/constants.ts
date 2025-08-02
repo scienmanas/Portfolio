@@ -25,20 +25,27 @@ import awslambdaSvg from "@/public/assets/svg/awslambda.svg";
 import { SiApachekafka } from "react-icons/si";
 import { SiPrisma } from "react-icons/si";
 // Projects image import
-import myPookieImg from "@/public/assets/projects/my-pookie.png";
-import envStoreImg from "@/public/assets/projects/envstore.png";
-import mybuddyImg from "@/public/assets/projects/my-buddy.png";
-import portfolioImg from "@/public/assets/projects/portfolio.png";
-import certimailerImg from "@/public/assets/projects/certimailer.png";
-import landifyImg from "@/public/assets/projects/landify.png";
-import infopulseImg from "@/public/assets/projects/infopulse.png";
-import valentinerImg from "@/public/assets/projects/valentiner.png";
-import hackbellsbotImg from "@/public/assets/projects/hackbells-bot.png";
-import stickersmashImg from "@/public/assets/projects/sticker-smash.png";
-import microsoftlandingpageImg from "@/public/assets/projects/microsoft-landing-page.png";
-import maafkaroImg from "@/public/assets/projects/maaf-karo.png";
-import sandyImg from "@/public/assets/projects/sandy.png";
-import summaraizeImg from "@/public/assets/projects/summaraize.png";
+import myPookieImg from "@/public/assets/projects/images/my-pookie.png";
+import envStoreImg from "@/public/assets/projects/images/envstore.png";
+import mybuddyImg from "@/public/assets/projects/images/my-buddy.png";
+import portfolioImg from "@/public/assets/projects/images/portfolio.png";
+import certimailerImg from "@/public/assets/projects/images/certimailer.png";
+import landifyImg from "@/public/assets/projects/images/landify.png";
+import infopulseImg from "@/public/assets/projects/images/infopulse.png";
+import valentinerImg from "@/public/assets/projects/images/valentiner.png";
+import hackbellsbotImg from "@/public/assets/projects/images/hackbells-bot.png";
+import stickersmashImg from "@/public/assets/projects/images/sticker-smash.png";
+import microsoftlandingpageImg from "@/public/assets/projects/images/microsoft-landing-page.png";
+import maafkaroImg from "@/public/assets/projects/images/maaf-karo.png";
+import sandyImg from "@/public/assets/projects/images/sandy.png";
+import summaraizeImg from "@/public/assets/projects/images/summaraize.png";
+// Projects gifs
+import portfolioGif from "@/public/assets/projects/gifs/portfolio.gif";
+import certimailerGif from "@/public/assets/projects/gifs/certimailer.gif";
+import envStoreGif from "@/public/assets/projects/gifs/envstore.gif";
+import myPookieGif from "@/public/assets/projects/gifs/mypookie.gif";
+import landifyGif from "@/public/assets/projects/gifs/landify.gif";
+import maafKaroGif from "@/public/assets/projects/gifs/maaf-karo.gif";
 
 // ---------------- Skills ---------------------------
 
@@ -93,6 +100,7 @@ export const projectData: projectDataType[] = [
     description:
       "A platform for automated certificate generation and distribution, featuring a Python script for developers and a web app with admin panels, verification, and scalability for organizations.",
     image: certimailerImg,
+    gif: certimailerGif,
     techStack: [
       "Python",
       "TypeScript",
@@ -108,8 +116,9 @@ export const projectData: projectDataType[] = [
   {
     name: "EnvStore",
     description:
-      "EnStore is an Open Source solution to to manage the env files for your projects. Stored encrypted, and decrypted when required.",
+      "EnStore is an Open Source solution to to manage the env files for your projects/images. Stored encrypted, and decrypted when required.",
     image: envStoreImg,
+    gif: envStoreGif,
     techStack: ["Next JS", "Typescript", "Postgres", "Encryption", "OAuth"],
     github: "https://github.com/scienmanas/EnvStore",
     deployedLink: "https://envstore.scienmanas.dev",
@@ -144,6 +153,7 @@ export const projectData: projectDataType[] = [
     description:
       "A terminal themed portfolio webisted build using framer, Next JS and lambda function along with custom trained Geni-AI model for chatbot.",
     image: portfolioImg,
+    gif: portfolioGif,
     techStack: ["Next Js", "Framer-motion", "lambda", "Typescript", "Gen-AI"],
     github: "https://github.com/scienmanas/Portfolio",
     deployedLink: "https://scienmanas.dev",
@@ -154,6 +164,7 @@ export const projectData: projectDataType[] = [
     description:
       "A no-code Valentine / Birthday / Anniversary wisher customizable according to the user.",
     image: myPookieImg,
+    gif: myPookieGif,
     techStack: ["Next Js", "Prisma", "OAuth", "Typescript", "Framer Motion"],
     github: "https://github.com/scienmanas.My-Pookie",
     deployedLink: "https://mypookie.scienmanas.dev",
@@ -181,6 +192,7 @@ export const projectData: projectDataType[] = [
     description:
       "A responsive landing page template with sections for pricing, testimonials, and a blog, featuring a gradient background and Markdown-based content management for easy customization and deployment",
     image: landifyImg,
+    gif: landifyGif,
     techStack: ["TypeScript", "Next Js", "Blog Engine", "Mongo DB"],
     github: "https://github.com/scienmanas/Landify",
     deployedLink: "https://landify.scienmanas.dev",
@@ -191,6 +203,7 @@ export const projectData: projectDataType[] = [
     description:
       "An AI powered web-app enabling you to compare yourself with some of the legends on the earth",
     image: maafkaroImg,
+    gif: maafKaroGif,
     techStack: ["Next Js", "gen-ai", "aws-lambda", "TypeScript"],
     github: "https://github.com/scienmanas/Maaf-Karo",
     deployedLink: "https://maaf-karo.scienmanas.dev",
