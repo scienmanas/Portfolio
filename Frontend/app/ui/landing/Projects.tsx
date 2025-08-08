@@ -257,15 +257,32 @@ function ProjectCard({
                 className="absolute object-cover rounded-t-xl blur-sm scale-110"
                 style={{ width: "340px", height: "270px" }}
               />
-              {/* Do not strect image */}
-              <Image
-                src={gif ? gif : image}
-                alt={`${name}-proj`}
-                width={340}
-                height={270}
-                className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
-                style={{ width: "auto", height: "auto" }}
-              />
+              {/* Show gif if available, fallback to image if gif fails or is slow to load */}
+              {gif ? (
+                <Image
+                  src={gif}
+                  loading="lazy"
+                  alt={`${name}-proj`}
+                  width={340}
+                  height={270}
+                  className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
+                  style={{ width: "auto", height: "auto" }}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).onerror = null;
+                    (e.target as HTMLImageElement).src = image.src;
+                  }}
+                />
+              ) : (
+                <Image
+                  src={image}
+                  loading="lazy"
+                  alt={`${name}-proj`}
+                  width={340}
+                  height={270}
+                  className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
+                  style={{ width: "auto", height: "auto" }}
+                />
+              )}
             </div>
           </Link>
         </div>
