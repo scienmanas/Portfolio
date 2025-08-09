@@ -174,7 +174,19 @@ function ProjectCard({
   date,
   gif,
 }: projectDataType): JSX.Element {
+  // Refs and states
   const cardRef = useRef<HTMLDivElement>(null);
+  const [gifError, setGifError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleGifError = () => {
+    setGifError(true);
+    setIsLoading(false);
+  };
+
+  const handleGifLoad = () => {
+    setIsLoading(false);
+  };
 
   // Format date to display only month and year
   const formattedDate = date
@@ -258,7 +270,7 @@ function ProjectCard({
                 style={{ width: "340px", height: "270px" }}
               />
               {/* Show gif if available, fallback to image if gif fails or is slow to load */}
-              {gif ? (
+              {gif && !gifError ? (
                 <Image
                   src={gif}
                   loading="lazy"
@@ -267,10 +279,8 @@ function ProjectCard({
                   height={270}
                   className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
                   style={{ width: "auto", height: "auto" }}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).onerror = null;
-                    (e.target as HTMLImageElement).src = image.src;
-                  }}
+                  onError={handleGifError}
+                  onLoad={handleGifLoad}
                 />
               ) : (
                 <Image
@@ -282,6 +292,12 @@ function ProjectCard({
                   className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
                   style={{ width: "auto", height: "auto" }}
                 />
+              )}
+              {/* Optional loading indicator */}
+              {gif && isLoading && !gifError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 dark:bg-gray-800/50 z-20">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
+                </div>
               )}
             </div>
           </Link>
