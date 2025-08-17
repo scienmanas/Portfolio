@@ -64,7 +64,7 @@ export function Contact(): JSX.Element {
           <span className="dark:text-[#c778dd] text-[#6d2f7f]">
             reachable through email
           </span>{" "}
-          📧 ✨ <Link target="_blank" className="text-black dark:text-white duration-200 hover:underline decoration-cyan-400 dark:decoration-cyan-400" href="https://mail.google.com/mail/?view=cm&to=iamscientistmanas@gmail.com">(iamscientistmanas@gmail.com)</Link>
+          📧 ✨ <Link target="_blank" className="text-black dark:text-white duration-200 hover:underline decoration-cyan-400 dark:decoration-cyan-400" href="https://mail.google.com/mail/?view=cm&to=hi@scienmanas.dev">(hi@scienmanas.dev)</Link>
         </motion.div>
       </div>
     </section>
