@@ -2,8 +2,6 @@
 
 Welcome to the **RAG Pipeline**! This is where the magic of data ingestion and transformation happens. Buckle up, because you're about to dive into a world of CSVs, JSONs, and Python scripts. Let's make data dance! 💃🕺
 
----
-
 ## 🚀 Quick Start Guide
 
 1. **Clone the Repository** 🐑:
@@ -38,7 +36,6 @@ Welcome to the **RAG Pipeline**! This is where the magic of data ingestion and t
      python data_ingestion.py
      ```
 
----
 
 ## 📂 Project Structure
 
@@ -50,7 +47,6 @@ Here's what you'll find in this folder:
 - **`.env`**: Your secret keeper. 🤫
 - **`pyproject.toml`**: Project configuration file. Fancy, right? 😎
 
----
 
 ## 🔑 Environment Variables
 
@@ -80,7 +76,6 @@ To ensure everything runs smoothly, here's how your data should look:
    - The JSON file will be generated in the `data/` folder as `gpt_data.json`.
    - Each row in the CSV will be converted into a JSON object. Simple, right? 😎
 
----
 
 ## 🕒 When to Run `csv_to_json.py`
 
@@ -98,8 +93,6 @@ python scripts/csv_to_json.py
 
 Pro Tip: Always double-check your CSV file before running the script. Garbage in, garbage out! 🗑️➡️🚀
 
----
-
 ## 🛠️ Troubleshooting
 
 - **Dependency Issues?** 🤔
@@ -111,18 +104,13 @@ Pro Tip: Always double-check your CSV file before running the script. Garbage in
 - **Script Not Working?** 😱
   Double-check your `.env` file and ensure all required values are set. If all else fails, blame the computer. 💻
 
----
 
 ## 🥳 Contributing
 
 Want to make this project even better? Fork it, make your changes, and submit a pull request. We'll review it faster than you can say "merge conflict." 😅
 
----
 
 ## 📜 License
 
 This project is licensed under the MIT License. Because sharing is caring. ❤️
 
----
-
-Happy coding! 🎉
