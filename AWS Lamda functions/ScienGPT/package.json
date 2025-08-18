@@ -12,6 +12,7 @@
   "author": "Manas",
   "license": "ISC",
   "dependencies": {
-    "@google/generative-ai": "^0.21.0"
+    "@google/generative-ai": "^0.21.0",
+    "@pinecone-database/pinecone": "^6.1.2"
   }
 }

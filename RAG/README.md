@@ -2,6 +2,8 @@
 
 Welcome to the **RAG Pipeline**! This is where the magic of data ingestion and transformation happens. Buckle up, because you're about to dive into a world of CSVs, JSONs, and Python scripts. Let's make data dance! 💃🕺
 
+Please note the project is configured for 3072 token dimension and gemini-embedding model, modification on models and embedding needs to updated if you want to use other embedding models and dimension configuration.
+
 ## 🚀 Quick Start Guide
 
 1. **Clone the Repository** 🐑:
@@ -36,7 +38,6 @@ Welcome to the **RAG Pipeline**! This is where the magic of data ingestion and t
      python data_ingestion.py
      ```
 
-
 ## 📂 Project Structure
 
 Here's what you'll find in this folder:
@@ -47,18 +48,18 @@ Here's what you'll find in this folder:
 - **`.env`**: Your secret keeper. 🤫
 - **`pyproject.toml`**: Project configuration file. Fancy, right? 😎
 
-
 ## 🔑 Environment Variables
 
 To get started, you'll need to set up a `.env` file in the root of the `RAG` folder. Here's what it should include:
 
 ```env
 PINECONE_API_KEY=your_pinecone_api_key_here
+GEMINI_API_KEY=your_gemini_api_key
 INDEX_NAME=index_name_here
 CLOUD_PROVIDER=your_cloud_provider_here(eg. aws, gcp)
 REGION=your_region_here(eg. us-east-1)
-EMBEDDING_MODEL=all-MiniLM-L6-v2
-EMBEDDING_DIMENSION=384
+EMBEDDING_MODEL=gemini-embedding-001
+EMBEDDING_DIMENSION=3072
 BATCH_SIZE=100(general recommendation is 100)
 ```
 
@@ -75,7 +76,6 @@ To ensure everything runs smoothly, here's how your data should look:
 
    - The JSON file will be generated in the `data/` folder as `gpt_data.json`.
    - Each row in the CSV will be converted into a JSON object. Simple, right? 😎
-
 
 ## 🕒 When to Run `csv_to_json.py`
 
@@ -104,13 +104,10 @@ Pro Tip: Always double-check your CSV file before running the script. Garbage in
 - **Script Not Working?** 😱
   Double-check your `.env` file and ensure all required values are set. If all else fails, blame the computer. 💻
 
-
 ## 🥳 Contributing
 
 Want to make this project even better? Fork it, make your changes, and submit a pull request. We'll review it faster than you can say "merge conflict." 😅
 
-
 ## 📜 License
 
 This project is licensed under the MIT License. Because sharing is caring. ❤️
-

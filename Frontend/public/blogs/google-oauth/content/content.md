@@ -20,7 +20,7 @@ Follow the steps given below, additionally, you can watch the video for better u
 
 <div style="text-align: center;">
   <img 
-    src="http://scienmanas.xyz/blogs/google-oauth/images/diagram.png" 
+    src="http://scienmanas.dev/blogs/google-oauth/images/diagram.png" 
     alt="OAuth Flow Diagram" 
     style="max-width: 100%; height: auto;" 
   />

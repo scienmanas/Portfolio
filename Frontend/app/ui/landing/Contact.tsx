@@ -110,7 +110,7 @@ export function Contact(): JSX.Element {
 //           toEmail: email,
 //           subject: `Thanks ${name}! 😊 I'll connect with you soon!`,
 //           message:
-//             "Hi there! ✨\n\nThank you for reaching out—you're awesome! 🤩 Just a quick note to let you know that I've received your message, and I'll get back to you as soon as I can.\n\nEven though this is an automated email sent from the server, I check my inbox regularly 📬, so feel free to reply if you'd like! Don’t think of this as just another automated message—I personally wrote the template at least 😉.\n\nAlright, that’s all for now! I’ll respond to your message soon. Until then, take care and cheers! 🥂\n\n--\n\nManas Poddar\n📧 Email: manas@scienmanas.xyz\n🐙 Github: https://github.com/scienmanas\n🌐 Web: https://scienmanas.xyz",
+//             "Hi there! ✨\n\nThank you for reaching out—you're awesome! 🤩 Just a quick note to let you know that I've received your message, and I'll get back to you as soon as I can.\n\nEven though this is an automated email sent from the server, I check my inbox regularly 📬, so feel free to reply if you'd like! Don’t think of this as just another automated message—I personally wrote the template at least 😉.\n\nAlright, that’s all for now! I’ll respond to your message soon. Until then, take care and cheers! 🥂\n\n--\n\nManas Poddar\n📧 Email: manas@scienmanas.dev\n🐙 Github: https://github.com/scienmanas\n🌐 Web: https://scienmanas.dev",
 //         };
 //         await fetch(EMAIL_API, {
 //           method: "POST",

@@ -4,10 +4,9 @@ from typing import List, Dict, Optional, Union
 from pydantic import BaseModel, Field, ValidationError, field_validator
 from pathlib import Path
 import pinecone
+from google import genai
+from google.genai import types
 import json
-from sentence_transformers import SentenceTransformer
-import logging
-from dotenv.main import logger
 from dotenv import load_dotenv
 import time
 
@@ -46,16 +45,17 @@ class PineconeVector(BaseModel):
 
 class DataIngestionConfig(BaseModel):
     pinecone_api_key: str = Field(..., description="Pinecone API Key")
+    gemini_api_key: str = Field(..., description="Gemini API Key")
     pinecone_environment: str = Field(..., description="Pinecone Environment")
     index_name: str = Field(..., description="Pinecone index name")
     embedding_model: str = Field(
-        default="all-MiniLM-L6-v2", description="Sentence transformer model")
+        default="gemini-embedding-001", description="Sentence transformer model")
     embedding_dimension: int = Field(
-        default=384, ge=1, description="Embedding dimension")
+        default=3072, ge=1, description="Embedding dimension")
     batch_size: int = Field(default=100, ge=1, le=1000,
                             description="Batch size for uploading")
 
-    @field_validator("pinecone_api_key", "pinecone_environment", "index_name")
+    @field_validator("pinecone_api_key", "gemini_api_key", "pinecone_environment", "index_name")
     @classmethod
     def validate_not_empty(cls, v):
         if not v.strip():
@@ -65,7 +65,8 @@ class DataIngestionConfig(BaseModel):
 
 class DataSource(BaseModel):
     file_path: Optional[str] = Field(None, description="Path to JSON file")
-    data_list: Optional[List[Dict]] = Field(None, description="Direct data list")
+    data_list: Optional[List[Dict]] = Field(
+        None, description="Direct data list")
 
     @field_validator('file_path')
     @classmethod
@@ -90,7 +91,7 @@ class DataIngestion:
     def __init__(self, config: DataIngestionConfig) -> None:
         """"Initialize with validated configuration"""
         self.config = config
-        self.embedding_model = SentenceTransformer(self.config.embedding_model)
+        self.genai_client = genai.Client()
         self._initialize_pinecone()
 
     def _initialize_pinecone(self):
@@ -132,19 +133,27 @@ class DataIngestion:
 
     def create_embeddings(self, text: str) -> List[float]:
         """Create embeddings for the given text with validation"""
-        try:
-            if not text.strip():
-                raise ValueError("Text cannot be empty")
+        if not text.strip():
+            raise ValueError("Text cannot be empty")
 
-            embeddings = self.embedding_model.encode([text])
-            result = embeddings[0].tolist()
+        try:
+            result = self.genai_client.models.embed_content(
+                model=self.config.embedding_model,
+                contents=text,
+                config=types.EmbedContentConfig(
+                    output_dimensionality=self.config.embedding_dimension)
+            )
+
+            # Getting embedding object
+            [embedding_obj] = result.embeddings
+            embedding_data = embedding_obj.values
 
             # Validate embedddings dimension
-            if len(result) != self.config.embedding_dimension:
+            if len(embedding_data) != self.config.embedding_dimension:
                 raise ValueError(
                     f"Unexpected embedding dimension: {len(result)} != {self.config.embedding_dimension}")
 
-            return result
+            return embedding_data
 
         except Exception as e:
             raise ValueError("Error creating embeddings: %s", e)
@@ -214,7 +223,7 @@ class DataIngestion:
 
                 vectors.append(vector)
 
-                if (i + 1) % 100 == 0:
+                if (i + 1) % 100 != 0:
                     print(
                         f"  📊 Processed {i + 1}/{len(data_pairs)} embeddings")
 
@@ -246,10 +255,12 @@ class DataIngestion:
                     self.index.upsert(vectors=batch_data)
                     successful_uploads += len(batch)
                     batches_uploaded += 1
-                    print(f"  📤 Uploaded batch {batches_uploaded} ({len(batch)} vectors)")
+                    print(
+                        f"  📤 Uploaded batch {batches_uploaded} ({len(batch)} vectors)")
                 except Exception as e:
                     failed_uploads += len(batch)
-                    print(f"❌ Failed to upload batch {batches_uploaded + 1}: {str(e)}")
+                    print(
+                        f"❌ Failed to upload batch {batches_uploaded + 1}: {str(e)}")
             processing_time = time.time() - start_time
             stats = IngestionStats(
                 total_items=len(vectors),
@@ -288,10 +299,6 @@ class DataIngestion:
             print("\nStep 3: Uploading to Pinecone")
             stats = self.upload_vectors(vectors=vectors)
 
-            # Step 4: Get the final index statistics
-            print("\nStep 4: Getting index statistics")
-            self.get_index_stats()
-
             print(f"\n🎉 Data ingestion completed successfully!")
             return stats
 
@@ -303,10 +310,11 @@ class DataIngestion:
 def get_config() -> DataIngestion:
     return DataIngestionConfig(
         pinecone_api_key=os.getenv("PINECONE_API_KEY"),
+        gemini_api_key=os.getenv("GEMINI_API_KEY"),
         pinecone_environment=os.getenv("REGION"),
         index_name=os.getenv("INDEX_NAME"),
-        embedding_model=os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2"),
-        embedding_dimension=int(os.getenv("EMBEDDING_DIMENSION", "384")),
+        embedding_model=os.getenv("EMBEDDING_MODEL", "gemini-embedding-001"),
+        embedding_dimension=int(os.getenv("EMBEDDING_DIMENSION", "3072")),
         batch_size=int(os.getenv("BATCH_SIZE", "100"))
     )
 
@@ -317,17 +325,18 @@ def main():
         # Step 1: Create and validate configuraiton
         print("Creating configuration...")
         config = get_config()
-        
+
         # Step 2: Initialize data ingestion
         print("Initializing the data ingestion...")
         ingestion = DataIngestion(config=config)
-        
+
         # Step 3: Get the data source
-        data_source = DataSource(file_path=os.getenv("DATA_SOURCE_FILE_PATH", "data/gpt_data.json"))
-    
+        data_source = DataSource(file_path=os.getenv(
+            "DATA_SOURCE_FILE_PATH", "data/gpt_data.json"))
+
         # Step: 4 Run the complete ingestion pipeline
         stats = ingestion.run_full_ingestion(data_source=data_source)
-    
+
         if stats:
             print(f"\n✨ Final Results:")
             print(f"  📊 Total processed: {stats.total_items}")
@@ -347,12 +356,6 @@ def main():
 
 if __name__ == "__main__":
     load_dotenv()  # Load env variables
-
-    # # Logger config
-    # logger = logging.getLogger()
-    # logger.setLevel(logger.info)
-    # formatter = logging.Formatter("%(asctime)s %(levelname)s %(message)s")
-    # log_timestamp = time.strftime("%Y%m%d_%H$M%S")
 
     # Run the main function
     main()

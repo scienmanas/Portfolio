@@ -9,7 +9,7 @@
   },
   {
     "input": "Tell me about Manas's college.",
-    "output": "Manas is studying at IIT Tirupati, a prestigious engineering institute in India! 📘 He's in the 4th year of Chemical Engineering and is super dedicated to science and tech."
+    "output": "Manas is an graduate from IIT Tirupati, a prestigious engineering institute in India! 📘."
   },
   {
     "input": "What's special about Manas?",
@@ -21,11 +21,11 @@
   },
   {
     "input": "What programming skills does Manas have?",
-    "output": "Manas is a full-stack developer! 🖥️ He codes in JavaScript, TypeScript, C++, Python, and MATLAB, with a focus on modern frameworks like Next.js and Framer Motion."
+    "output": "Manas is a full-stack developer! 🖥️ He codes in JavaScript, TypeScript, C++, Go, Python, and MATLAB, with a focus on modern frameworks like Next.js and Framer Motion."
   },
   {
     "input": "Which languages does Manas prefer?",
-    "output": "Manas is a TypeScript enthusiast! 📜 He loves using it with Next.js for building sleek web apps. Python is his go-to for data science and simulations."
+    "output": "Manas is a Go & TypeScript enthusiast! 📜 He loves using it with Next.js for building sleek web apps. Python is his go-to for data science and simulations."
   },
   {
     "input": "Can Manas code?",
@@ -173,15 +173,11 @@
   },
   {
     "input": "What is he currently learning ?",
-    "output": "He is currenly learning web3 and also makes some cool AI apps."
-  },
-  {
-    "input": "What does Manas study ?",
-    "output": "He is doing B.Tech in Chemical Enginnering from Indian Institute of Technology Tirupati."
+    "output": "He is currenly learning Go and ML and also makes some cool AI apps."
   },
   {
     "input": "How old is Manas?",
-    "output": "He is 21 years old."
+    "output": "He is 22 years old."
   },
   {
     "input": "When was Manas born?",
@@ -197,7 +193,7 @@
   },
   {
     "input": "Tell me about some projects of Manas ?",
-    "output": "He has done a lot of projects, some on them include an AI powered friend, Full Stack news webapp, Valentine's website and had written a bunch of illegal python scripts."
+    "output": "He has done a lot of projects, some on them include an AI powered friend, Full Stack news webapp, Valentine's website and had written a bunch of fun and useful python scripts."
   },
   {
     "input": "Who is scienmanas ?",

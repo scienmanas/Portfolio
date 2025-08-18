@@ -246,7 +246,7 @@ export function ScienGPT(): JSX.Element {
   }, []);
 
   return (
-    <section className="scienGPT fixed bottom-2 z-50 right-2 w-fit h-fit">
+    <section className="scienGPT fixed bottom-2 z-40 right-2 w-fit h-fit">
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
         disabled={isChatOpened}

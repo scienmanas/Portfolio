@@ -45,7 +45,7 @@ export function Navbar(): JSX.Element {
     <Fragment>
       <WebsiteLoader mounted={mounted} />
       <nav
-        className={`relative w-full h-fit flex items-center justify-center z-50`}
+        className={`relative w-full h-fit flex items-center justify-center z-30`}
       >
         <div className="wrapper w-full max-w-screen-xl flex flex-row flex-wrap items-center justify-around sm:justify-between px-6 pt-8 gap-2">
           <motion.div

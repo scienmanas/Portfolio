@@ -1,7 +1,7 @@
 # 🔰 Portfolio
 
-- This repository hold the code for my portfolio website deployed at **[link](https://scienmanas.xyz)**, The website used NextJS as frontend and framer for animaitions. Additionally aws lambda function is used to send emails upon form filling leviaging the power of serverless.
-- The frontend is deployed on `vercel` and the lambda function is deplyed on `aws api-gateway`. Additonally for security, only `scienmanas.xyz` is allowed to access the lambda function, preventing attacks on the service.
+- This repository hold the code for my portfolio website deployed at **[link](https://scienmanas.dev)**, The website used NextJS as frontend and framer for animaitions. Additionally aws lambda function is used to send emails upon form filling leviaging the power of serverless.
+- The frontend is deployed on `vercel` and the lambda function is deplyed on `aws api-gateway`. Additonally for security, only `scienmanas.dev` is allowed to access the lambda function, preventing attacks on the service.
 - `Vercel Analytics` is can be enabled for user monitoring.
 
 ## 📚 Tech Stack
@@ -13,9 +13,9 @@
 
 This project requirement .env configuration in `Frontend` folder to handle the dynamicity of the metadata generated when deployed everytime. The `.env` file should be created in the `Frontend` folder with the following variables:
 
-| Varibale           | Description                                         |
-| :----------------- | :-------------------------------------------------- |
-| `SITE_URL`       | Domain name of the website (https://scienmanas.xyz) |
+| Varibale         | Description                                         |
+| :--------------- | :-------------------------------------------------- |
+| `SITE_URL`       | Domain name of the website (https://scienmanas.dev) |
 | `SITE_NAME`      | Name of the site (Here I kept it- Manas)            |
 | `G_ANALYTICS_ID` | Google Analytics ID for tracking user activity      |
 
@@ -28,18 +28,20 @@ This project requirement .env configuration in `Frontend` folder to handle the d
 
 The project uses rest APIs hosted on AWS which is made using lambda functions. the API is protected using CORS policy
 
-| Endpoint    | Purpose                                                 |
-| ----------- | ------------------------------------------------------- |
-| /send-email | Send notification to the contacted person as well as me |
-| /scienGPT   | Used to get response from Fine-tuned AI model           |
+| Endpoint             | Purpose                                                 |
+| -------------------- | ------------------------------------------------------- |
+| /send-email          | Send notification to the contacted person as well as me |
+| /scienGPT            | Used to get response from Fine-tuned AI model           |
+| /github-contribution | To get the data for contribution graph                  |
 
 Additionally to make these API works, we need to `environment` variables for both the lambda functions
 
-| Variables      | Description                            |
-| -------------- | -------------------------------------- |
-| EMAIL          | Email                                  |
-| PASSWORD       | App password of email id               |
-| GEMINI_API_KEY | Gemini API Key (from google AI Studio) |
+| Variables        | Description                            |
+| ---------------- | -------------------------------------- |
+| EMAIL            | Email                                  |
+| PASSWORD         | App password of email id               |
+| GEMINI_API_KEY   | Gemini API Key (from google AI Studio) |
+| PINECONE_API_KEY | Pinecone API Key                       |
 
 `Also need to note here is that change the model to your fined tuned model in index.mjs of scienGPT lambda function folder. Additionally this function can be removed by just removing scienGPT component in the page.tsx in root of default_site folder.`
 
@@ -58,8 +60,12 @@ Additionally to make these API works, we need to `environment` variables for bot
 
 ```
 .
+├── RAG
+│   └── Pipieline to upload data to pinecone (Details in its folder README) 
 ├── AWS Lambda Function
 │   │── ScienGPT
+│   │   └── Files for aws lambda function
+│   │──	GithubContribution
 │   │   └── Files for aws lambda function
 │   └── Emailer
 │     	└── Files for aws lambda function
@@ -124,7 +130,7 @@ Additionally to make these API works, we need to `environment` variables for bot
 
 ## 🔥 Contributing
 
-Contributions are always welcome! Additionally you can contact me by my email: **manas@scienmanas.xyz**. I am currently working on a .md based blog engine for this template
+Contributions are always welcome! Additionally you can contact me by my email: **manas@scienmanas.dev**. I am currently working on a .md based blog engine for this template
 
 ## 📷 Video
 

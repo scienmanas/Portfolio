@@ -66,13 +66,14 @@ export default function Layout({
           <div className="contents-wrapper relative flex flex-col w-full h-fit gap-10 z-10">
             <section className="navbar w-full h-fit relative z-30">
               <Navbar />
+              <ScienGPT />
             </section>
             <section className="w-full h-full page-contents relative z-20">
               {children}
             </section>
             <section className="footer-and-gpt w-full h-fit flex items-center justify-center z-20">
               <Footer />
-              <ScienGPT />
+              
             </section>
           </div>
         </div>

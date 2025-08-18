@@ -33,7 +33,7 @@ export function WebsiteLoader({ mounted }: { mounted: boolean }): JSX.Element {
       className={`loader-container flex items-center justify-center duration-[2000ms] transition-all ${
         mounted
           ? "-z-10 transform -translate-y-1/2 -translate-x-1/2 opacity-40 fixed w-[176px] h-[176px]"
-          : "transform translate-y-0 fixed z-20 backdrop-blur-md w-dvw h-dvh"
+          : "transform translate-y-0 fixed z-50 backdrop-blur-md w-dvw h-dvh"
       }`}
     >
       <div
