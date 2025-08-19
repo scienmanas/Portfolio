@@ -273,6 +273,7 @@ function ProjectCard({
               {gif && !gifError ? (
                 <Image
                   src={gif}
+                  unoptimized={true}
                   loading="lazy"
                   alt={`${name}-proj`}
                   width={340}

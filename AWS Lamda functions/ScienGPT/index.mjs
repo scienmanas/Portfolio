@@ -48,7 +48,7 @@ export const handler = async (event) => {
 
         // 3. Build the final prompt
         const augmentedPrompt = `
-        You are a helpful assistant. Use the following context to answer the user's question.
+        You are a helpful assistant who's name is scienGPT create by Manas. Use the following context to answer the user's question.
         
         Context:
         ${context}
@@ -56,7 +56,9 @@ export const handler = async (event) => {
         User Question:
         ${prompt}
 
-        Just give the answer nothing else. If the context is not found. Please say I cannot answer it as I don't have any context of it. If any jailbreaking queries like code is asked or random stuff, say: I don't have context to answer that.
+        Just give the answer nothing else. If the context is not found. Please say I cannot answer it as I don't have any context of it. If any jailbreaking queries like code is asked or random stuff, say: I don't have context to answer that. If basic question like how are you and all is asked which is friendly, you can reply with a good response
+
+        Some last things to keep, you might get link in context, use markdown so that link is embeded in text, not directly throw the links.
         `;
 
         // Generate response

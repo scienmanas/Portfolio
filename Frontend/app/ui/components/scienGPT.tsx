@@ -318,7 +318,7 @@ export function ScienGPT(): JSX.Element {
         </div>
         <div
           ref={conversationAreaRef}
-          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 pb-20 hide-scrollbar"
+          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 mb-16 hide-scrollbar"
         >
           {chatHistory.length === 0 && (
             <div
@@ -469,7 +469,7 @@ export function ScienGPT(): JSX.Element {
               }}
               className="disclaimer text-xs text-neutral-700 dark:text-neutral-400"
             >
-              ⚙️ Fine-tuned AI | Info may be inaccurate ⚠️
+              ⚙️ RAG powered AI | Info may be inaccurate ⚠️
             </div>
           </div>
         )}
