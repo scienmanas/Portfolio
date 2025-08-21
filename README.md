@@ -13,8 +13,8 @@
 
 This project requirement .env configuration in `Frontend` folder to handle the dynamicity of the metadata generated when deployed everytime. The `.env` file should be created in the `Frontend` folder with the following variables:
 
-| Varibale         | Description                                         |
-| :--------------- | :-------------------------------------------------- |
+| Varibale           | Description                                         |
+| :----------------- | :-------------------------------------------------- |
 | `SITE_URL`       | Domain name of the website (https://scienmanas.dev) |
 | `SITE_NAME`      | Name of the site (Here I kept it- Manas)            |
 | `G_ANALYTICS_ID` | Google Analytics ID for tracking user activity      |
@@ -33,17 +33,6 @@ The project uses rest APIs hosted on AWS which is made using lambda functions. t
 | /send-email          | Send notification to the contacted person as well as me |
 | /scienGPT            | Used to get response from Fine-tuned AI model           |
 | /github-contribution | To get the data for contribution graph                  |
-
-Additionally to make these API works, we need to `environment` variables for both the lambda functions
-
-| Variables        | Description                            |
-| ---------------- | -------------------------------------- |
-| EMAIL            | Email                                  |
-| PASSWORD         | App password of email id               |
-| GEMINI_API_KEY   | Gemini API Key (from google AI Studio) |
-| PINECONE_API_KEY | Pinecone API Key                       |
-
-`Also need to note here is that change the model to your fined tuned model in index.mjs of scienGPT lambda function folder. Additionally this function can be removed by just removing scienGPT component in the page.tsx in root of default_site folder.`
 
 ## Deployment
 
