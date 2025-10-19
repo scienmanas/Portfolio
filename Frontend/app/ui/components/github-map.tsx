@@ -8,7 +8,7 @@ const USER_NAME = "scienmanas";
 const API_URI =
   "https://2zazwk200k.execute-api.us-east-1.amazonaws.com/Production/github-contribution";
 
-export function GithubMap(): JSX.Element {
+export function GithubMap() {
   const [mounted, setMounted] = useState<boolean>(false);
   const [isFetchSuccessful, setIsFetchSuccessful] = useState<boolean | null>(
     null

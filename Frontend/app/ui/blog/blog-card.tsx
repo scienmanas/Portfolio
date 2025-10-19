@@ -6,7 +6,7 @@ import Link from "next/link"; // Link component for navigation
 import { BlogPostMetaDataProps } from "@/app/lib/definitions"; // Type definitions for props
 
 // Component to display a blog card with image, metadata, and tags
-export function BlogCard({ cardData }: BlogPostMetaDataProps): JSX.Element {
+export function BlogCard({ cardData }: BlogPostMetaDataProps) {
   return (
     <div className="relative blog-card flex flex-row flex-wrap items-start justify-center w-fit gap-6">
       {/* Container for the blog image */}

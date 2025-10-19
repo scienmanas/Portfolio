@@ -5,7 +5,7 @@ import Image from "next/image";
 import { skills } from "@/app/lib/constants";
 import { FaSortDown } from "react-icons/fa";
 
-export function Skills(): JSX.Element {
+export function Skills() {
   return (
     <section className="skills w-full flex h-fit flex-col gap-4 items-start justify-center">
       <motion.div

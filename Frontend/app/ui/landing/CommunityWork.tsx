@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export function CommunityWork(): JSX.Element {
+export function CommunityWork() {
   return (
     <section className="community-work w-full h-fit flex justify-center flex-col gap-6 items-start">
       <motion.div

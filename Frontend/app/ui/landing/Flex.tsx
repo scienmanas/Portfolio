@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { achievementsData } from "@/app/lib/constants";
 
-export function Flex(): JSX.Element {
+export function Flex() {
   // Ref for achievements
   const achievementRef = useRef<HTMLDivElement>(null);
   const achievementRefIsInView = useInView(achievementRef, { once: true });

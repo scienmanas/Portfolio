@@ -12,7 +12,7 @@ interface navBarTabsType {
   link: string;
 }
 
-export function Navbar(): JSX.Element {
+export function Navbar() {
   const [mounted, setMounted] = useState<boolean>(false);
   const [websiteTheme, setWebsiteTheme] = useState<string>("light");
   const { theme, setTheme } = useTheme();

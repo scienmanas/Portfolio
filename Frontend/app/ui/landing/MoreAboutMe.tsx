@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-export function MoreAboutMe(): JSX.Element {
+export function MoreAboutMe() {
   return (
     <section className="more-about-me w-full h-fit flex justify-center flex-col items-start gap-4">
       <motion.div

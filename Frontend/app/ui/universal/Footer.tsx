@@ -17,7 +17,7 @@ interface socialLinksType {
   clasName?: string;
 }
 
-export function Footer(): JSX.Element {
+export function Footer() {
   const socialLinks: socialLinksType[] = [
     {
       name: "github",

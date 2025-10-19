@@ -4,7 +4,7 @@ export function SubmissionLoader({
   width,
   height,
   color,
-}: submissionLoaderProps): JSX.Element {
+}: submissionLoaderProps) {
   return (
     <div className="flex justify-center items-center w-fit h-fit">
       {/* Spinner element with dynamic styles */}
@@ -20,7 +20,7 @@ export function SubmissionLoader({
   );
 }
 
-export function WebsiteLoader({ mounted }: { mounted: boolean }): JSX.Element {
+export function WebsiteLoader({ mounted }: { mounted: boolean }) {
   const boxes: { color: string }[] = [
     { color: "bg-purple-500" },
     { color: "bg-orange-500" },
@@ -61,7 +61,7 @@ export function GPTResponseLoader({
   width,
   height,
   color,
-}: submissionLoaderProps): JSX.Element {
+}: submissionLoaderProps) {
   return (
     <div className="flex justify-center items-center w-fit h-fit">
       <div

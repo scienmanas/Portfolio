@@ -10,7 +10,7 @@ import { FaSort } from "react-icons/fa";
 import { projectData, botProjectData } from "@/app/lib/constants";
 import { projectDataType } from "@/app/lib/definitions";
 
-export function Projects(): JSX.Element {
+export function Projects() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "none">("none");
   const [pageNo, setPageNo] = useState<number>(1);
   const maxProjectOnOnePage: number = 6;
@@ -173,7 +173,7 @@ function ProjectCard({
   deployedLink,
   date,
   gif,
-}: projectDataType): JSX.Element {
+}: projectDataType) {
   // Refs and states
   const cardRef = useRef<HTMLDivElement>(null);
   const [gifError, setGifError] = useState(false);

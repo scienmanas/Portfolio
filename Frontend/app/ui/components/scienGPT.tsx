@@ -31,7 +31,7 @@ declare global {
   }
 }
 
-export function ScienGPT(): JSX.Element {
+export function ScienGPT() {
   // Refence variables
   const conversationAreaRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -480,7 +480,7 @@ export function ScienGPT(): JSX.Element {
   );
 }
 
-function UserQuery({ query }: { query: string }): JSX.Element {
+function UserQuery({ query }: { query: string }) {
   return (
     <div className="user-query w-full h-fit flex justify-end">
       <div className="message-container w-fit h-fit max-w-[200px] flex flex-row-reverse  items-start gap-1">
@@ -492,7 +492,7 @@ function UserQuery({ query }: { query: string }): JSX.Element {
   );
 }
 
-function BotResponse({ response }: { response: string }): JSX.Element {
+function BotResponse({ response }: { response: string }) {
   // Parse the response (Markdown to HTML)
   const parsedResponse = md.render(response);
 
@@ -519,7 +519,7 @@ function BotResponse({ response }: { response: string }): JSX.Element {
   );
 }
 
-function AIChatSVG(): JSX.Element {
+function AIChatSVG() {
   return (
     <svg
       className="text-white w-6 h-6"

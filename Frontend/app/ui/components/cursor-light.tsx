@@ -7,7 +7,7 @@ interface Position {
   y: number;
 }
 
-export function CursorLight(): JSX.Element {
+export function CursorLight() {
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [isSmallScreen, setIsSmallScreen] = useState<null | boolean>(null);
 

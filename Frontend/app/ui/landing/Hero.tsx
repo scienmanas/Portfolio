@@ -10,7 +10,7 @@ import Image from "next/image";
 import { ReactTyped } from "react-typed";
 import { motion } from "framer-motion";
 
-export function Hero(): JSX.Element {
+export function Hero() {
   // For rough line animation
   const [isRendered, setIsRendered] = useState<boolean>(false);
 

@@ -16,7 +16,7 @@ import Link from "next/link";
 //   message: string;
 // }
 
-export function Contact(): JSX.Element {
+export function Contact() {
   return (
     <section className="contact relative w-full h-fit justify-center items-start flex flex-col gap-6">
       <div className="heading-and-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
@@ -72,7 +72,7 @@ export function Contact(): JSX.Element {
 }
 
 // To implement the form submission, you can use the following code snippet:
-// export function Contact(): JSX.Element {
+// export function Contact() {
 //   // Submission management
 //   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 //   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);

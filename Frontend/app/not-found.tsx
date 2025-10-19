@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // Component to display a 404 error page when a route is not found
-export default function NotFound(): JSX.Element {
+export default function NotFound() {
   return (
     <div className="w-dvw h-dvh flex items-center justify-center">
       <div className="content-wrapper w-fit h-fit flex flex-col items-center max-w-[448px] text-wrap gap-4 p-4">
