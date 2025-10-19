@@ -2,7 +2,7 @@
 
 - This repository hold the code for my portfolio website deployed at **[link](https://scienmanas.dev)**, The website used NextJS as frontend and framer for animaitions. Additionally aws lambda function is used to send emails upon form filling leviaging the power of serverless.
 - The frontend is deployed on `vercel` and the lambda function is deplyed on `aws api-gateway`. Additonally for security, only `scienmanas.dev` is allowed to access the lambda function, preventing attacks on the service.
-- `Vercel Analytics` is can be enabled for user monitoring.
+- `Google Analytics` is enabled for user monitoring.
 
 ## 📚 Tech Stack
 
