@@ -16,8 +16,9 @@ import Link from "next/link"; // Link component from Next.js for navigation
 
 // Define the BlogPageProps type for the BlogPage component
 type BlogPageProps = {
-  params: { slug: string }; // Blog post slug received as a parameter
+  params: Promise <{ slug: string }>; // Blog post slug received as a parameter
 };
+
 
 // Define SharingLinkConfigProps as an array of objects for social sharing links
 type SharingLinkConfigProps = {
@@ -31,7 +32,8 @@ type SharingLinkConfigProps = {
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const blogData = getBlogPostData("blogs", params.slug); // Fetch blog data based on slug
+  const { slug } = await params;
+  const blogData = getBlogPostData("blogs", slug); // Fetch blog data based on slug
 
   // Construct a dynamic OpenGraph image URL based on environment variables
   const ogImageURL = `${process.env.SITE_URL}` + blogData.image;
@@ -46,7 +48,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${blogData.title} - Blogs`, // OpenGraph title
       description: blogData.description, // OpenGraph description
-      url: `${process.env.SITE_URL}/blog/${params.slug}`, // Dynamic URL for the blog post
+      url: `${process.env.SITE_URL}/blog/${slug}`, // Dynamic URL for the blog post
       images: [ogImageURL], // Dynamic image for OpenGraph
       type: "article", // OpenGraph type
       siteName: `Manas Blogs`, // Site name for OpenGraph
@@ -58,15 +60,16 @@ export async function generateMetadata({
       description: blogData.description, // Twitter description
       images: [ogImageURL], // Dynamic image for Twitter
       creator: "@scienmanas", // Twitter handle of the creator
-      site: `${process.env.SITE_URL}/blog/${params.slug}`,
+      site: `${process.env.SITE_URL}/blog/${slug}`,
     },
   };
 }
 
 // Blog page component that renders the blog post content and sharing links
-export default function BlogsPage({ params }: BlogPageProps): JSX.Element {
-  const pageURL = process.env.SITE_URL + `/blog/${params.slug}`; // Construct page URL for sharing
-  const blogData = getBlogPostData("blogs", params.slug); // Fetch blog post data
+export default async function BlogsPage({ params }: BlogPageProps) {
+  const { slug } = await params;
+  const pageURL = process.env.SITE_URL + `/blog/${slug}`; // Construct page URL for sharing
+  const blogData = getBlogPostData("blogs", slug); // Fetch blog post data
 
   // Calculate the total number of words and reading time
   const totalWords = blogData.content.split(/\s+/).filter((element) => {
@@ -163,7 +166,7 @@ export default function BlogsPage({ params }: BlogPageProps): JSX.Element {
                 width={900}
                 height={506}
                 src={blogData.image} // Display the blog image
-                alt={`${params.slug}-image`}
+                alt={`${slug}-image`}
                 className="w-fit h-fit rounded-lg object-cover"
               />
             </div>
