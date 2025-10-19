@@ -119,10 +119,10 @@ export const projectData: projectDataType[] = [
       "EnStore is an Open Source solution to to manage the env files for your projects/images. Stored encrypted, and decrypted when required.",
     image: envStoreImg,
     gif: envStoreGif,
-    techStack: ["Next JS", "Typescript", "Postgres", "Encryption", "OAuth"],
+    techStack: ["Go", "Next JS", "Typescript", "Postgres", "Encryption", "OAuth"],
     github: "https://github.com/scienmanas/EnvStore",
     deployedLink: "https://envstore.scienmanas.dev",
-    date: new Date("2025-08-10"),
+    date: new Date("2025-11-10"),
   },
   {
     name: "Sandy AI",

@@ -1,13 +1,12 @@
 ---
 publishedDate: 2024-09-21T00:00:00Z
 title: A Poem to my crush.
-description: I wrote a poem for my crush (doesn't exits 😅). But I think you may like it. Who doesn't have a crush in his lifetime 🤨,
+description: I wrote a poem for my crush (doesn't exits 😅). But I think you may like it. Who doesn't have a crush in his lifetime 🤨
 tags:
   - poetry
   - love
 #  All the comtents of the blog goes here.
 ---
-
 The Poem name is - **"Rose Blooming"**. I wrote this on 21st June, 2024, when I was doing my internship in **IISc Banglore** and the **CEA NITE** was on that day. **CEA NITE** is a cultural event of **Chemical Department** of IISc which happens every year during June month. As always I was not going to perform but my mentor insisted (iykuk 😅).
 
 So before I start the poem let me set the plot. There was a girl junior to me, when I was in 9th, she was in 8th. My first crush. I never talked to her, never had the courage to do so. But I always had a feeling for her. So this poem is dedicated to her.

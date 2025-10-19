@@ -1,0 +1,14 @@
+# scienmanas.dev
+
+> Hi, My name is Manas, currently working as a Software Engineer.
+> This is minimalist portfolio, component registry, and blog to showcase my work as a Software Engineer and outside of the it too.
+
+
+## Blog
+
+- [Google oAuth Implementation](https://scienmanas.dev/blogs/google-oauth/content/content.md): Learn how to implement Google oAuth in any web application raw without using any library.
+- [My Pookie | Launch](https://scienmanas.dev/blogs/my-pookie/content/content.md): See the launch and demo of "My Pookie", the no-code, SaaS webapp to wish your loved one on special occasions.
+- [Satoshi Cracker | Demo](https://scienmanas.dev/blogs/satoshi-cracker/content/content.md): In this blog, I will tell you why bruteforcing btc wallet in nearly impossible and yeah who knows u get lucky, try it out.
+- [Demo | Smart Reach](https://scienmanas.dev/blogs/smart-reach/content/content.md): This blog discusses the Smart Reach project and how to use it for automating the cold email process.
+- [The Light](https://scienmanas.dev/blogs/the-light/content/content.md): Some emotions, some fantasy, some learning, some childishness. Read more to find out.
+- [A Poem to my crush](https://scienmanas.dev/blogs/poem-to-my-crush): I wrote a poem for my crush (doesn't exits 😅). But I think you may like it. Who doesn't have a crush in his lifetime 🤨

@@ -38,6 +38,7 @@ export function Navbar(): JSX.Element {
       setTheme(theme);
       setWebsiteTheme(theme);
       document.body.style.overflowY = "auto";
+      document.body.style.overflowX = "hidden";
     }
   }, [theme, setTheme, mounted]);
 

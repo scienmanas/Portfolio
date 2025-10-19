@@ -272,6 +272,8 @@ export function ScienGPT(): JSX.Element {
         initial={{
           opacity: 0,
           backdropFilter: "blur(5px)",
+          width: "0rem",
+          height: "0rem",
         }}
         animate={{
           width: screenSize >= 640 ? "24rem" : "20rem",

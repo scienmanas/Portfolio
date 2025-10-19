@@ -63,8 +63,8 @@ export default function Layout({
           className="wrapper flex w-full h-fit relative overflow-hidden"
         >
           <div className="gradient-blurred fixed w-full h-dvh -z-10 bg-transparent bg-gradient-to-br top-0 left-0 from-pink-700 dark:to-[#282c33] to-[#eaeaea] to-45% opacity-30 blur-md"></div>
-          <div className="contents-wrapper relative flex flex-col w-full h-fit gap-10 z-10">
-            <section className="navbar w-full h-fit relative z-30">
+          <div className="contents-wrapper relative flex flex-col w-full h-fit gap-10 z-10 overflow-x-hidden">
+            <section className="navbar w-full h-fit relative z-30 overflow-x-hidden">
               <Navbar />
               <ScienGPT />
             </section>

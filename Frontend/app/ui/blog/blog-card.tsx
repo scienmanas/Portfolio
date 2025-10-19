@@ -38,8 +38,8 @@ export function BlogCard({ cardData }: BlogPostMetaDataProps): JSX.Element {
           </div>
           {/* Container for title and description */}
           <div className="title-and-description flex flex-col text-wrap gap-1 w-fit h-fit">
-            <Link href={`/blog/${cardData.slug}`}>
-              <div className="title font-bold text-neutral-800 dark:text-neutral-200 text-xl sm:text-2xl duration-200 hover:text-purple-700 dark:hover:text-purple-300">
+            <Link href={`/blog/${cardData.slug}`} className="w-fit h-fit">
+              <div className="title font-bold text-neutral-800 dark:text-neutral-200 text-xl sm:text-2xl duration-200 hover:text-purple-700 dark:hover:text-purple-300 w-fit h-fit">
                 {cardData.title} {/* Blog post title */}
               </div>
             </Link>
