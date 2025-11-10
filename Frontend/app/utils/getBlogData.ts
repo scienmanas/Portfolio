@@ -36,6 +36,7 @@ export function getBlogPostMetadata(folderPath: string) {
 
     return postMetadata;
   } catch (error) {
+    console.log(`Error is: ${error}`);
     notFound();
   }
 }
@@ -64,6 +65,7 @@ export function getBlogPostData(folderPath: string, slug: string) {
       slug: slug, // Folder name as the slug
     };
   } catch (error) {
+    console.log(`Error is: ${error}`);
     notFound();
   }
 }

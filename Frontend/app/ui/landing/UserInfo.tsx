@@ -27,6 +27,7 @@ async function fetchLocationFromIP(): Promise<string> {
       return "Unable to fetch (⌐■_■)";
     }
   } catch (e) {
+    console.log(`Error while getting location: ${e}`)
     return "Unable to determine location (⌐■_■)";
   }
 }

@@ -56,6 +56,7 @@ export function GithubMap() {
       }
     } catch (error) {
       setIsFetchSuccessful(false);
+      console.log(`Error while fetching github data: ${error}`)
     } finally {
       setMounted(true);
     }

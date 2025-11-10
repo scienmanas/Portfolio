@@ -22,6 +22,7 @@ import gitSvg from "@/public/assets/svg/git.svg";
 import dockerSvg from "@/public/assets/svg/docker.svg";
 import gcpSvg from "@/public/assets/svg/google-cloud.svg";
 import awslambdaSvg from "@/public/assets/svg/awslambda.svg";
+import angularSvg from "@/public/assets/svg/angular.svg"
 import { SiApachekafka } from "react-icons/si";
 import { SiPrisma } from "react-icons/si";
 // Projects image import
@@ -64,6 +65,7 @@ export const skills: SkillsCategorised[] = [
     category: "Frontend",
     skills: [
       { name: "Next.js", icon: SiNextdotjs },
+      {name: "Angular.js", icon: angularSvg},
       { name: "React.js", icon: reactSvg },
       { name: "Tailwind CSS", icon: tailwindSvg },
       { name: "React Native", icon: reactNativeSvg },
