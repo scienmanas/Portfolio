@@ -1,6 +1,5 @@
 "use client";
 
-
 import { motion } from "framer-motion";
 import Link from "next/link";
 // import { useState, useRef, useEffect } from "react";
@@ -58,13 +57,32 @@ export function Contact() {
             ease: "easeInOut",
           }}
           viewport={{ once: true }}
-          className="description font-mono w-fit h-fit text-sm sm:text-base"
+          className="description font-mono w-fit h-fit text-sm sm:text-base flex flex-col gap-1 "
         >
-          👋 Hola! I'm always{" "}
-          <span className="dark:text-[#c778dd] text-[#6d2f7f]">
-            reachable through email
-          </span>{" "}
-          📧 ✨ <Link target="_blank" className="text-black dark:text-white duration-200 hover:underline decoration-cyan-400 dark:decoration-cyan-400" href="https://mail.google.com/mail/?view=cm&to=hi@scienmanas.dev">(hi@scienmanas.dev)</Link>
+          <div className="line-1 w-fit h-fit dark:text-white text-black">
+            👋 Hola! I'm always{" "}
+            <span className="dark:text-[#c778dd] text-[#6d2f7f]">
+              reachable through email
+            </span>{" "}
+            📧 ✨{" "}
+            <Link
+              target="_blank"
+              className="text-purple-600 dark:text-cyan-200 duration-200 hover:underline decoration-cyan-400 dark:decoration-cyan-400"
+              href="https://mail.google.com/mail/?view=cm&to=hi@scienmanas.dev"
+            >
+              (hi@scienmanas.dev)
+            </Link>
+          </div>
+          <div className="line-2 w-fit h-fit dark:text-white text-black">
+            🗓️ 15 minutes talking with me?{" "}
+            <Link
+              target="_blank"
+              href={"https://cal.com/scienmanas/15min"}
+              className="text-purple-600 dark:text-cyan-200 underline decoration-cyan-400 dark:decoration-cyan-400"
+            >
+              [link]
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>

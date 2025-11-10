@@ -163,7 +163,7 @@ export function ScienGPT() {
         ]);
       }
     } catch (error) {
-      console.error(error);
+      console.log(`Error is: ${error}`)
       setIsResponding(true);
       // Update chat historu with error message
       setChatHistory((prevChats) => [
@@ -235,9 +235,18 @@ export function ScienGPT() {
 
   // Cleanup effect when the component unmounts
   useEffect(() => {
-    typeof window.webkitSpeechRecognition !== "undefined"
-      ? setIsSpeechRecognitionAvailable(true)
-      : setIsSpeechRecognitionAvailable(false);
+    // This line caused the warning because it is a conditional (ternary) expression used as a standalone statement,
+    // which is discouraged according to the lint rule "@typescript-eslint/no-unused-expressions".
+    // typeof window.webkitSpeechRecognition !== "undefined"
+    //   ? setIsSpeechRecognitionAvailable(true)
+    //   : setIsSpeechRecognitionAvailable(false);
+    
+    // So we use this, pls note there is no problem is using the above ur choice hehe :)
+    if (typeof window.webkitSpeechRecognition !== "undefined") {
+      setIsSpeechRecognitionAvailable(true);
+    } else {
+      setIsSpeechRecognitionAvailable(false);
+    }
 
     return () => {
       // Stop the speech recognition & streaming
@@ -320,7 +329,7 @@ export function ScienGPT() {
         </div>
         <div
           ref={conversationAreaRef}
-          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 mb-16 hide-scrollbar"
+          className="chats h-full w-full flex flex-col gap-2 overflow-y-auto px-2 pt-4 pb-2 mb-16 hide-scrollbar"
         >
           {chatHistory.length === 0 && (
             <div
