@@ -3,12 +3,21 @@ import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
 
+// Sanitize a value so it can be safely used as a URL slug and path segment.
+// Allows only lowercase letters, digits and hyphens; collapses other characters to "-".
+function sanitizeSlug(value: string): string {
+  const str = String(value).toLowerCase();
+  const sanitized = str.replace(/[^a-z0-9-]+/g, "-").replace(/^-+|-+$/g, "");
+  return sanitized || "post";
+}
+
 export function getBlogPostMetadata(folderPath: string) {
   const directory = path.join(process.cwd(), "public", folderPath);
   const folderNames = fs.readdirSync(directory); // Get all blog post folders
 
   try {
     const postMetadata = folderNames.map((folderName) => {
+      const safeSlug = sanitizeSlug(folderName);
       const contentPath = path.join(
         directory,
         folderName,
@@ -26,8 +35,8 @@ export function getBlogPostMetadata(folderPath: string) {
         publishedDate: matterResult.data.publishedDate,
         description: matterResult.data.description,
         tags: matterResult.data.tags,
-        image: `/blogs/${folderName}/images/header.png`, // Image path relative to the public folder
-        slug: folderName, // Folder name as the slug
+        image: `/blogs/${safeSlug}/images/header.png`, // Image path relative to the public folder
+        slug: safeSlug, // Sanitized folder name as the slug
       };
     });
 
@@ -42,7 +51,8 @@ export function getBlogPostMetadata(folderPath: string) {
 }
 
 export function getBlogPostData(folderPath: string, slug: string) {
-  const directory = path.join(process.cwd(), "public", folderPath, slug);
+  const safeSlug = sanitizeSlug(slug);
+  const directory = path.join(process.cwd(), "public", folderPath, safeSlug);
   const file = path.join(directory, "content", "content.md");
 
   try {
@@ -60,9 +70,9 @@ export function getBlogPostData(folderPath: string, slug: string) {
       publishedDate: matterResult.data.publishedDate,
       description: matterResult.data.description,
       tags: matterResult.data.tags,
-      image: `/blogs/${slug}/images/header.png`, // Image path relative to the public folder
+      image: `/blogs/${safeSlug}/images/header.png`, // Image path relative to the public folder
       content: matterResult.content,
-      slug: slug, // Folder name as the slug
+      slug: safeSlug, // Sanitized slug
     };
   } catch (error) {
     console.log(`Error is: ${error}`);
