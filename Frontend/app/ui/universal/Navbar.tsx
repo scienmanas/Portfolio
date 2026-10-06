@@ -48,7 +48,7 @@ export function Navbar() {
       <nav
         className={`relative w-full h-fit flex items-center justify-center z-30`}
       >
-        <div className="wrapper w-full max-w-screen-xl flex flex-row flex-wrap items-center justify-around sm:justify-between px-6 pt-8 pb-4 gap-2">
+        <div className="wrapper w-full max-w-(--breakpoint-xl) flex flex-row flex-wrap items-center justify-around sm:justify-between px-6 pt-8 pb-4 gap-2">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: [0, -10, 0], opacity: 1 }}
@@ -79,7 +79,7 @@ export function Navbar() {
               >
                 <Link
                   href={item.link}
-                  className="text-base sm:text-xl w-fit h-fit group relative after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[2px] dark:after:bg-[#d5a3e2] after:bg-[#9656a7] after:transition-all after:duration-300 after:hover:w-full"
+                  className="text-base sm:text-xl w-fit h-fit group relative after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[2px] dark:after:bg-[#d5a3e2] after:bg-[#9656a7] after:transition-all after:duration-300 hover:after:w-full"
                 >
                   <span className="w-fit h-fit text-[#593563] dark:text-[#b870ce]">
                     /

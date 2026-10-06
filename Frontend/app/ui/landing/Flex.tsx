@@ -100,7 +100,7 @@ export function Flex() {
               }}
               ref={achievementRef}
               viewport={{ once: true }}
-              className="timeline w-full -left-[2px] top-0 h-full border-l-2 border-neutral-900 dark:border-neutral-300 absolute z-10 rounded-lg"
+              className="timeline w-full left-[-2px] top-0 h-full border-l-2 border-neutral-900 dark:border-neutral-300 absolute z-10 rounded-lg"
             ></motion.div>
             <div className="list z-10 flex flex-col gap-5">
               {achievementsData.map((achievement, index) => (
@@ -123,7 +123,7 @@ export function Flex() {
                     ease: "easeInOut",
                   }}
                   key={index}
-                  className="timeline-item relative px-5 before:absolute before:w-3 before:h-3 dark:before:bg-white before:bg-pink-800 before:-left-[7px] before:border before:border-cyan-400 dark:before:border-red-400 before:rounded-full "
+                  className="timeline-item relative px-5 before:absolute before:w-3 before:h-3 dark:before:bg-white before:bg-pink-800 before:left-[-7px] before:border before:border-cyan-400 dark:before:border-red-400 before:rounded-full "
                 >
                   <div className="timeline-content">
                     <span className="text-[#6d2f7f] dark:text-[#d4a3e6] font-semibold">

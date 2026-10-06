@@ -66,7 +66,7 @@ export function Footer() {
 
   return (
     <footer className="w-full h-fit flex items-center justify-center mt-10">
-      <div className="wrapper w-full max-w-screen-xl h-fit flex flex-col gap-1 items-start justify-center font-mono px-5">
+      <div className="wrapper w-full max-w-(--breakpoint-xl) h-fit flex flex-col gap-1 items-start justify-center font-mono px-5">
         <div className="footer-contents-wrapper w-full h-fit border-t dark:border-[#48484f] border-[#d4d4d8] flex flex-col gap-1 items-center justify-center pt-4 pb-4">
           <div className="made-by w-fit h-fit text-center text-base sm:text-lg md:text-xl dark:text-white text-neutral-900 font-semibold">
             Made by Manas 🕵️‍♂️

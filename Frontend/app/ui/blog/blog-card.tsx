@@ -53,7 +53,7 @@ export function BlogCard({ cardData }: BlogPostMetaDataProps) {
           {cardData.tags.map((tag: string, index: number) => (
             <div
               key={index}
-              className="tag text-xs sm:text-sm px-2 py-1 bg-neutral-300 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200 rounded-sm"
+              className="tag text-xs sm:text-sm px-2 py-1 bg-neutral-300 text-neutral-800 dark:bg-neutral-600 dark:text-neutral-200 rounded-xs"
             >
               {tag} {/* Display each tag */}
             </div>

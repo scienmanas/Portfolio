@@ -266,7 +266,7 @@ function ProjectCard({
                 alt={`${name}-img`}
                 width={340}
                 height={270}
-                className="absolute object-cover rounded-t-xl blur-sm scale-110"
+                className="absolute object-cover rounded-t-xl blur-xs scale-110"
                 style={{ width: "340px", height: "270px" }}
               />
               {/* Show gif if available, fallback to image if gif fails or is slow to load */}
@@ -306,7 +306,7 @@ function ProjectCard({
         <div className="all-contents flex flex-col w-full h-[230px] py-5 px-4 dark:bg-[#2b1e2e] bg-white items-start gap-4">
           <div className="name-links-description w-full h-fit flex flex-col justify-between  gap-2">
             <div className="name-links w-full h-fit flex flex-row items-center justify-between">
-              <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900 relative after:absolute after:-bottom-[2px] after:left-0 after:h-[2px] after:w-full after:bg-cyan-500 dark:after:bg-cyan-400">
+              <div className="name w-fit h-fit text-base sm:text-lg font-semibold dark:text-white text-neutral-900 relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:bg-cyan-500 dark:after:bg-cyan-400">
                 {name}
               </div>
               <div className="links w-fit h-fit flex flex-row gap-2 items-center">

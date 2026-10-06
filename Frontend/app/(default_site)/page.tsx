@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="home relative w-full h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden py-4">
       <div className="contents-all w-full h-fit flex items-center justify-center flex-col gap-10">
-        <div className="wrapper relative w-full max-w-screen-xl h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden py-4 px-5 items-center justify-center">
+        <div className="wrapper relative w-full max-w-(--breakpoint-xl) h-fit flex flex-col gap-14 lg:gap-28 overflow-hidden py-4 px-5 items-center justify-center">
           <Hero />
           <Skills />
           <Projects />
@@ -23,7 +23,7 @@ export default function Home() {
           <GithubMap />
         </div>
         {/* For less space at bottom */}
-        <div className="wrapper relative w-full max-w-screen-xl h-fit flex overflow-hidden px-5 items-center justify-center">
+        <div className="wrapper relative w-full max-w-(--breakpoint-xl) h-fit flex overflow-hidden px-5 items-center justify-center">
           <UserInfo />
         </div>
       </div>

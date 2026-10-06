@@ -136,7 +136,7 @@ export default async function BlogsPage({ params }: BlogPageProps) {
   // JSX for rendering the blog page content
   return (
     <section className="w-full p-4 h-fit flex items-center justify-center">
-      <div className="wrapper w-full h-fit max-w-screen-xl flex items-center justify-center">
+      <div className="wrapper w-full h-fit max-w-(--breakpoint-xl) flex items-center justify-center">
         <article className="post p-2 flex flex-col gap-6 w-[900px] h-fit items-center justify-center">
           <section className="title-time-description-and-image flex flex-col items-center justify-center w-full h-fit gap-4">
             <div className="content w-full h-fit items-start justify-start p-1 flex flex-col gap-2">
@@ -181,7 +181,7 @@ export default async function BlogsPage({ params }: BlogPageProps) {
                 {blogData.tags.map((tag: string, index: number) => (
                   <div
                     key={index}
-                    className="tag px-2 py-1 bg-neutral-300 text-neutral-700 dark:text-neutral-300 dark:bg-neutral-600 rounded-sm"
+                    className="tag px-2 py-1 bg-neutral-300 text-neutral-700 dark:text-neutral-300 dark:bg-neutral-600 rounded-xs"
                   >
                     {tag} {/* Display blog tags */}
                   </div>
