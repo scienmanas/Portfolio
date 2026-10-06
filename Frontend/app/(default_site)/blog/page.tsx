@@ -10,7 +10,7 @@ export default function Blog() {
 
   return (
     <section className="blogs flex w-full h-fit items-center justify-center  p-4">
-      <div className="wrapper w-full max-w-screen-2xl h-fit flex items-center justify-center">
+      <div className="wrapper w-full max-w-(--breakpoint-2xl) h-fit flex items-center justify-center">
         <div className="all-contents w-fit h-fit flex flex-col gap-14 md:gap-16 items-center justify-center">
           {/* Blog Page Title and Description */}
           <div className="hero-and-description flex flex-col gap-1 items-center justify-center">

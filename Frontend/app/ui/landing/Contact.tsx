@@ -189,9 +189,9 @@ export function Contact() {
 //       <canvas
 //         ref={confettiRef}
 //         id="confetti-canvas"
-//         className="fixed -z-20 bottom-0 w-full h-[40rem]"
+//         className="fixed -z-20 bottom-0 w-full h-160"
 //       ></canvas>
-//       <div className="wrapper w-full max-w-screen-xl h-fit items-start px-5 flex flex-col gap-6">
+//       <div className="wrapper w-full max-w-(--breakpoint-xl) h-fit items-start px-5 flex flex-col gap-6">
 //         <div className="heading-andd-description w-fit h-fit text-xl sm:text-2xl flex flex-col gap-3">
 //           <motion.div
 //             initial={{
@@ -273,9 +273,9 @@ export function Contact() {
 //                   type="text"
 //                   name="name"
 //                   id=""
-//                   className="relative z-10 rounded-md px-2 py-1 border-2 border-neutral-300 dark:border-neutral-500 w-full sm:w-60 h-10 bg-white dark:bg-[#2b2a33] text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 text-neutral-800 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
+//                   className="relative z-10 rounded-md px-2 py-1 border-2 border-neutral-300 dark:border-neutral-500 w-full sm:w-60 h-10 bg-white dark:bg-[#2b2a33] text-sm sm:text-base outline-hidden hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 text-neutral-800 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
 //                 />
-//                 <div className="placeholder absolute z-20 top-0 left-0 translate-x-2 text-sm -translate-y-[9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-gradient-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">
+//                 <div className="placeholder absolute z-20 top-0 left-0 translate-x-2 text-sm translate-y-[-9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-linear-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">
 //                   Name
 //                 </div>
 //               </label>
@@ -290,10 +290,10 @@ export function Contact() {
 //                   type="email"
 //                   name="email"
 //                   id=""
-//                   className="relative z-10 rounded-md px-2 py-1 border-2 border-neutral-300 dark:border-neutral-500 w-full sm:w-60 h-10 bg-white dark:bg-[#2b2a33] text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 text-neutral-800 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
+//                   className="relative z-10 rounded-md px-2 py-1 border-2 border-neutral-300 dark:border-neutral-500 w-full sm:w-60 h-10 bg-white dark:bg-[#2b2a33] text-sm sm:text-base outline-hidden hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 text-neutral-800 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
 //                 />
 
-//                 <div className="placeholder absolute z-20 top-0 left-0 translate-x-2 text-sm -translate-y-[9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-gradient-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">
+//                 <div className="placeholder absolute z-20 top-0 left-0 translate-x-2 text-sm translate-y-[-9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-linear-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">
 //                   Email
 //                 </div>
 //               </label>
@@ -305,10 +305,10 @@ export function Contact() {
 //                 disabled={isSubmitting || isSubmitted}
 //                 name="message"
 //                 id=""
-//                 className="relative z-10 bg-white dark:bg-[#2b2a33] rounded-md w-full border-2 border-neutral-300 dark:border-neutral-500 h-28 px-3 py-3 text-sm sm:text-base outline-none hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
+//                 className="relative z-10 bg-white dark:bg-[#2b2a33] rounded-md w-full border-2 border-neutral-300 dark:border-neutral-500 h-28 px-3 py-3 text-sm sm:text-base outline-hidden hover:border-yellow-700 dark:hover:border-yellow-700 focus:border-yellow-700 dark:focus:border-yellow-700 duration-300 placeholder:text-neutral-400 dark:placeholder:text-neutral-400"
 //                 placeholder="Hmm, I think I am gonna get a special message today😏."
 //               ></textarea>
-//               <div className="placeholder absolute z-10 top-0 left-0 translate-x-2 text-sm -translate-y-[9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-gradient-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">
+//               <div className="placeholder absolute z-10 top-0 left-0 translate-x-2 text-sm translate-y-[-9px] px-[3px] w-fit h-fit duration-100 bg-transparent bg-linear-to-b from-[#eaeaea] to-white dark:from-[#282c33] dark:to-[#2b2a33] font-mono text-neutral-800 dark:text-neutral-100">
 //                 Message
 //               </div>
 //             </label>
@@ -346,7 +346,7 @@ export function Contact() {
 //                   />
 //                 )}
 //               </button>
-//               <div className="gradient absolute z-0 w-[100%] h-[100%] bg-transparent bg-gradient-to-tr from-yellow-500 to-pink-400 dark:from-yellow-800 dark:bg-pink-800 blur-sm"></div>
+//               <div className="gradient absolute z-0 w-full h-full bg-transparent bg-linear-to-tr from-yellow-500 to-pink-400 dark:from-yellow-800 dark:bg-pink-800 blur-xs"></div>
 //             </label>
 //           </div>
 //         </motion.form>

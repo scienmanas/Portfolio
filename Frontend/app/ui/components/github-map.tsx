@@ -137,7 +137,7 @@ export function GithubMap() {
               ease: "easeInOut",
             }}
             viewport={{ once: true }}
-            className="github-map w-[98%] sm:w-[30rem] md:w-[35rem] lg:w-[40rem]"
+            className="github-map w-[98%] sm:w-120 md:w-140 lg:w-160"
           >
             <CalendarHeatmap
               startDate={contributionTimeBounds?.startDate}

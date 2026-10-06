@@ -297,7 +297,7 @@ export function ScienGPT() {
         }}
         className="ai-chat-container z-10 rounded-2xl shadow-lg flex flex-col justify-between overflow-hidden"
       >
-        <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-gradient-to-b from-pink-900 to-neutral-800 rounded font-mono">
+        <div className="top-header w-full border-gray-300 h-fit flex flex-row justify-between py-3 px-3 bg-transparent bg-linear-to-b from-pink-900 to-neutral-800 rounded-sm font-mono">
           <div className="about-content-ai-bot">
             <h1 className="font-bold text-white">scienGPT</h1>
             <p className="w-fit h-fit text-neutral-100 text-xs sm:text-sm">
@@ -375,22 +375,22 @@ export function ScienGPT() {
                 className="rounded-full border"
               />
               <div className="loading-animation flex flex-row items-end gap-1 h-6 ml-2">
-                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-sm animate-[bounce_1s_ease-in-out_0s_infinite]"></span>
-                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-sm animate-[bounce_1s_ease-in-out_0.2s_infinite]"></span>
-                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-sm animate-[bounce_1s_ease-in-out_0.4s_infinite]"></span>
+                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-xs animate-[bounce_1s_ease-in-out_0s_infinite]"></span>
+                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-xs animate-[bounce_1s_ease-in-out_0.2s_infinite]"></span>
+                <span className="w-2 h-3 bg-purple-500 dark:bg-purple-400 rounded-xs animate-[bounce_1s_ease-in-out_0.4s_infinite]"></span>
               </div>
             </div>
           )}
         </div>
         {!isResponseBlocked && (
-          <div className="input-box absolute bottom-0 w-full h-fit pb-1 px-2 flex flex-col items-center justify-center backdrop-blur-sm gap-[2px]">
+          <div className="input-box absolute bottom-0 w-full h-fit pb-1 px-2 flex flex-col items-center justify-center backdrop-blur-xs gap-[2px]">
             <form
               onSubmit={handleUserQuery}
               className="input-box flex flex-row items-center w-full h-fit rounded-xl gap-1 focus:outline-1  duration-300"
             >
               <div className="group w-full flex">
                 <div
-                  className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400 group-focus-within:border-opacity-60 transition duration-200"
+                  className="all-input w-full flex flex-row items-center justify-between dark:bg-[#1e1e20] bg-neutral-300 p-[6px] rounded-3xl group border border-transparent group-focus-within:border-pink-400/60 transition duration-200"
                   style={{
                     transitionProperty: "border-color",
                   }}
@@ -405,7 +405,7 @@ export function ScienGPT() {
                     value={userQuery}
                     disabled={isResponding}
                     onChange={(e) => setUserQuery(e.target.value)}
-                    className={`w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-none dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm ${
+                    className={`w-full h-full dark:bg-[#1e1e20] bg-neutral-300 dark:text-neutral-300 text-neutral-800 rounded-md  outline-hidden dark:placeholder:text-neutral-400 placeholder:text-neutral-600 px-2 py-1 text-xs sm:text-sm ${
                       isResponding ? "cursor-not-allowed" : ""
                     }`}
                     placeholder="Type your message"
@@ -493,7 +493,7 @@ function UserQuery({ query }: { query: string }) {
   return (
     <div className="user-query w-full h-fit flex justify-end">
       <div className="message-container w-fit h-fit max-w-[200px] flex flex-row-reverse  items-start gap-1">
-        <p className="w-fit h-fit text-xs sm:text-sm px-2 py-1 rounded-md  bg-transparent bg-gradient-to-br from-[#3f5870] to-[#783b38] text-white">
+        <p className="w-fit h-fit text-xs sm:text-sm px-2 py-1 rounded-md  bg-transparent bg-linear-to-br from-[#3f5870] to-[#783b38] text-white">
           {query}
         </p>
       </div>
@@ -516,7 +516,7 @@ function BotResponse({ response }: { response: string }) {
           className="rounded-full border"
         />
       </div>
-      <p className="w-fit h-fit text-xs sm:text-sm px-3 py-2 bg-transparent bg-gradient-to-br from-[#3f5870] to-[#783b38] rounded-r-2xl rounded-bl-2xl rounded-tl-sm text-white text-wrap max-w-[220px]">
+      <p className="w-fit h-fit text-xs sm:text-sm px-3 py-2 bg-transparent bg-linear-to-br from-[#3f5870] to-[#783b38] rounded-r-2xl rounded-bl-2xl rounded-tl-sm text-white text-wrap max-w-[220px]">
         <ReactTyped
           strings={[parsedResponse]}
           startDelay={100}
