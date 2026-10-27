@@ -1,5 +1,4 @@
 import js from "@eslint/js"
-import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import next from "@next/eslint-plugin-next";
 import tseslint from "typescript-eslint";
@@ -15,18 +14,13 @@ export default [
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
     plugins: {
-      react,
       "react-hooks": reactHooks,
       "@next/next": next,
     },
     rules: {
       ...next.configs["core-web-vitals"].rules,
 
-      "react/no-unescaped-entities": "off",
       "@typescript-eslint/no-explicit-any": "off",
-    },
-    settings: {
-      react: { version: "detect" },
     },
   },
 ];

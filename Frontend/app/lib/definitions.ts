@@ -43,7 +43,7 @@ export type projectDataType = {
   name: string;
   description: string;
   image: StaticImageData;
-  gif?: StaticImageData;
+  video?: string;
   techStack: string[];
   github: string;
   deployedLink?: string;

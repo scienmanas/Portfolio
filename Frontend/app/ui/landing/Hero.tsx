@@ -18,17 +18,20 @@ export function Hero() {
     const svg = document.getElementById(
       "rough-line"
     ) as unknown as SVGSVGElement;
-    if (svg) {
-      const rc = rough.svg(svg);
-      const roughLine = rc.line(0, 0, 300, 10, {
-        stroke: "#ffa500",
-        strokeWidth: 2,
-        roughness: 4,
-      });
-      svg.appendChild(roughLine); // Append the generated line to the SVG
-      setIsRendered(true);
-    }
-  }, []); // Ensure SVG is initialized once on mount
+    if (!svg) return;
+
+    const rc = rough.svg(svg);
+    const roughLine = rc.line(0, 0, 300, 10, {
+      stroke: "#ffa500",
+      strokeWidth: 2,
+      roughness: 4,
+    });
+    svg.appendChild(roughLine); // Append the generated line to the SVG
+    setIsRendered(true);
+
+    // Remove the line on unmount so a re-mount doesn't draw a second one
+    return () => roughLine.remove();
+  }, []);
 
   return (
     <section className="hero w-full h-fit flex items-center justify-center flex-col">
@@ -37,6 +40,9 @@ export function Hero() {
           <Image
             alt="bg-img"
             src={heroImg}
+            loading="eager"
+            fetchPriority="high"
+            quality={60}
             className="dark:opacity-30 opacity-15"
           />
         </div>
@@ -189,9 +195,8 @@ export function Hero() {
             <Image
               src={roughArrowImg}
               alt="rough-arrow"
-              width={100}
-              height={100}
               className="pointer-events-none"
+              style={{ width: "100px", height: "auto" }}
             />
           </motion.div>
           <motion.div

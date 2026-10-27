@@ -20,26 +20,12 @@
   }
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-color:  #25272b;
-  clip-path: circle(0% at top right);
-  transition: clip-path 0.4s ease-in-out;
-  pointer-events: none;
-  z-index: -50;
-}
-
-
-/* When dark mode is enabled, expand the circle */
-.dark body::before {
-  clip-path: circle(150% at top right);
-}
-
-/* Your existing body styles */
-body {
-  transition: background-color 0.4s ease-in-out;
+/* Theme toggle: the new theme is revealed with a circle animated from the
+   toggle button (see Navbar.tsx), so disable the default cross-fade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 

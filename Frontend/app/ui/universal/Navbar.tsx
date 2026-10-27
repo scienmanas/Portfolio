@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
+import { flushSync } from "react-dom";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
 import { motion } from "framer-motion";
 import { WebsiteLoader } from "@/app/ui/loaders";
@@ -14,8 +15,8 @@ interface navBarTabsType {
 
 export function Navbar() {
   const [mounted, setMounted] = useState<boolean>(false);
-  const [websiteTheme, setWebsiteTheme] = useState<string>("light");
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const isDark = mounted && resolvedTheme === "dark";
 
   const navbarTabs: navBarTabsType[] = [
     {
@@ -34,13 +35,51 @@ export function Navbar() {
 
   useEffect(() => {
     setMounted(true);
-    if (mounted && theme) {
-      setTheme(theme);
-      setWebsiteTheme(theme);
-      document.body.style.overflowY = "auto";
-      document.body.style.overflowX = "hidden";
+    document.body.style.overflowY = "auto";
+    document.body.style.overflowX = "hidden";
+  }, []);
+
+  // Switch theme inside a view transition so the whole page (background,
+  // text, cards) is revealed together by a circle growing from the button.
+  const toggleTheme = (e: MouseEvent<HTMLButtonElement>) => {
+    const newTheme = isDark ? "light" : "dark";
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (typeof document.startViewTransition !== "function" || reduceMotion) {
+      setTheme(newTheme);
+      return;
     }
-  }, [theme, setTheme, mounted]);
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => setTheme(newTheme));
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${radius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    });
+  };
 
   return (
     <Fragment>
@@ -99,14 +138,11 @@ export function Navbar() {
                 duration: 1,
                 ease: "easeInOut",
               }}
-              onClick={() => {
-                const newTheme = websiteTheme === "dark" ? "light" : "dark";
-                setWebsiteTheme(newTheme);
-                setTheme(newTheme);
-              }}
-              className="theme-button w-fit h-fit"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+              className="theme-button w-fit h-fit cursor-pointer"
             >
-              {websiteTheme === "dark" ? (
+              {isDark ? (
                 <MdOutlineDarkMode className="dark:text-pink-200 text-lg w-fit h-fit" />
               ) : (
                 <MdOutlineLightMode className="text-pink-800 text-lg w-fit h-fit" />

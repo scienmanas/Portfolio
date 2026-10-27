@@ -1,7 +1,18 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
+import { parse } from "yaml";
 import { notFound } from "next/navigation";
+
+// Split a markdown file into its YAML front matter and body.
+// Uses the YAML 1.1 schema so unquoted timestamps parse to Date objects.
+function matter(fileContents: string) {
+  const match = fileContents.match(/^---\r?\n([\s\S]*?)\r?\n---[^\S\r\n]*(?:\r?\n|$)/);
+  if (!match) return { data: {} as Record<string, any>, content: fileContents };
+  return {
+    data: (parse(match[1], { schema: "yaml-1.1" }) ?? {}) as Record<string, any>,
+    content: fileContents.slice(match[0].length),
+  };
+}
 
 // Sanitize a value so it can be safely used as a URL slug and path segment.
 // Allows only lowercase letters, digits and hyphens; collapses other characters to "-".

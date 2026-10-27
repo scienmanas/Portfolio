@@ -259,6 +259,7 @@ export function ScienGPT() {
       <motion.button
         onClick={() => setIsChatOpened(!isChatOpened)}
         disabled={isChatOpened}
+        aria-label="Open scienGPT chat"
         className="opener-icons absolute bottom-0 right-0 z-20 p-3 bg-[#7726d9]"
         initial={{
           borderRadius: "1.5rem",
@@ -307,6 +308,7 @@ export function ScienGPT() {
           <div className="close-and-reset flex flex-row gap-1 items-center">
             <button
               disabled={chatHistory.length === 0 || isResponding}
+              aria-label="Reset chat"
               className={`p-2 bg-red-800 rounded-lg ${
                 chatHistory.length > 0 && !isResponding
                   ? "hover:bg-red-900"
@@ -322,6 +324,7 @@ export function ScienGPT() {
             <button
               className="p-2 bg-cyan-700 rounded-lg hover:bg-cyan-800 duration-200 border border-neutral-600"
               onClick={() => setIsChatOpened(false)}
+              aria-label="Close chat"
             >
               <IoMdArrowDropdown className="text-xl text-white" />
             </button>
@@ -421,6 +424,7 @@ export function ScienGPT() {
                       }}
                       type="button"
                       disabled={isResponding}
+                      aria-label={isRecording ? "Stop voice input" : "Start voice input"}
                       className={`speech-button w-fit h-fit
                         ${isResponding ? "cursor-not-allowed" : ""}
                         `}
@@ -459,6 +463,7 @@ export function ScienGPT() {
               <button
                 disabled={isResponding || isRecording}
                 type="submit"
+                aria-label="Send message"
                 className={`${
                   isResponding
                     ? "bg-[#0057ff] cursor-not-allowed"

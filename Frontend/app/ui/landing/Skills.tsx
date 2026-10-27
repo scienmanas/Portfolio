@@ -78,7 +78,10 @@ export function Skills() {
                         className="dark:text-white text-neutral-900 w-[48px] h-[48px] scale-90"
                       />
                     ) : (
-                      <skill.icon className="dark:text-white text-neutral-900 w-[48px] h-[48px] scale-90" />
+                      <skill.icon
+                        aria-label={skill.name}
+                        className="dark:text-white text-neutral-900 w-[48px] h-[48px] scale-90"
+                      />
                     )}
 
                     <div className="placeholder w-auto whitespace-nowrap h-fit absolute -top-7 opacity-0 group-hover:opacity-100 flex transition-all transform flex-col items-center justify-center duration-300">
