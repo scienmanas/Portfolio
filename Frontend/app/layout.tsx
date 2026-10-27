@@ -21,7 +21,7 @@ export default function RootLayout({
         }}
         className={`antialiase dark:bg-[#282c33] bg-[#eaeaea] scroll-smooth`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           {children}
           <GoogleAnalytics
             gaId={process.env.G_ANALYTICS_ID as string}

@@ -73,8 +73,14 @@ export function Footer() {
           </div>
           <div className="links w-fit h-fit flex flex-row flex-wrap items-center justify-center gap-3">
             {socialLinks.map((social, index) => (
-              <Link key={index} href={social.link} className="w-fit h-fit p-1">
+              <Link
+                key={index}
+                href={social.link}
+                aria-label={social.name}
+                className="w-fit h-fit p-1"
+              >
                 <social.icon
+                  aria-hidden="true"
                   className={`w-fit h-fit text-lg sm:text-xl ${social.clasName}`}
                 />
               </Link>

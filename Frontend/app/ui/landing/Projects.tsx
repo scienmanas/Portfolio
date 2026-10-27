@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiGithub } from "react-icons/fi";
 import { LuExternalLink } from "react-icons/lu";
 import { FaSort } from "react-icons/fa";
@@ -95,7 +95,7 @@ export function Projects() {
                 github={project.github}
                 deployedLink={project.deployedLink}
                 date={project.date}
-                gif={project.gif}
+                video={project.video}
               />
             ))}
         </div>
@@ -172,19 +172,37 @@ function ProjectCard({
   github,
   deployedLink,
   date,
-  gif,
+  video,
 }: projectDataType) {
   // Refs and states
   const cardRef = useRef<HTMLDivElement>(null);
-  const [gifError, setGifError] = useState(false);
+  const videoBoxRef = useRef<HTMLDivElement>(null);
+  const [videoError, setVideoError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isInView, setIsInView] = useState(false);
 
-  const handleGifError = () => {
-    setGifError(true);
+  // Only start downloading the preview video once the card is near the viewport
+  useEffect(() => {
+    if (!video || !videoBoxRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(videoBoxRef.current);
+    return () => observer.disconnect();
+  }, [video]);
+
+  const handleVideoError = () => {
+    setVideoError(true);
     setIsLoading(false);
   };
 
-  const handleGifLoad = () => {
+  const handleVideoLoad = () => {
     setIsLoading(false);
   };
 
@@ -259,29 +277,30 @@ function ProjectCard({
       >
         <div className="relative image-box w-full h-fit">
           <Link target="_blank" className="w-full h-fit" href={github}>
-            <div className="image group relative w-full h-[270px] overflow-hidden rounded-t-xl border-[#dbd5d5] dark:border-[#484a50] flex items-center justify-center border-2">
+            <div
+              ref={videoBoxRef}
+              className="image group relative w-full h-[270px] overflow-hidden rounded-t-xl border-[#dbd5d5] dark:border-[#484a50] flex items-center justify-center border-2">
               {/* Blurred image as a placeholder */}
               <Image
                 src={image}
                 alt={`${name}-img`}
-                width={340}
-                height={270}
-                className="absolute object-cover rounded-t-xl blur-xs scale-110"
-                style={{ width: "340px", height: "270px" }}
+                fill
+                sizes="340px"
+                className="object-cover rounded-t-xl blur-xs scale-110"
               />
-              {/* Show gif if available, fallback to image if gif fails or is slow to load */}
-              {gif && !gifError ? (
-                <Image
-                  src={gif}
-                  unoptimized={true}
-                  loading="lazy"
-                  alt={`${name}-proj`}
-                  width={340}
-                  height={270}
-                  className="relative rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
-                  style={{ width: "auto", height: "auto" }}
-                  onError={handleGifError}
-                  onLoad={handleGifLoad}
+              {/* Show preview video if available, fallback to image if it fails to load */}
+              {video && !videoError ? (
+                <video
+                  src={isInView ? video : undefined}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="none"
+                  aria-label={`${name}-proj`}
+                  className="relative w-full h-auto rounded-t-xl pointer-events-none z-10 group-hover:scale-105 duration-500"
+                  onError={handleVideoError}
+                  onLoadedData={handleVideoLoad}
                 />
               ) : (
                 <Image
@@ -295,7 +314,7 @@ function ProjectCard({
                 />
               )}
               {/* Optional loading indicator */}
-              {gif && isLoading && !gifError && (
+              {video && isInView && isLoading && !videoError && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-100/50 dark:bg-gray-800/50 z-20">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
                 </div>
@@ -310,16 +329,22 @@ function ProjectCard({
                 {name}
               </div>
               <div className="links w-fit h-fit flex flex-row gap-2 items-center">
-                <Link target="_blank" href={github} className="w-fit h-fit">
-                  <FiGithub className="dark:text-white text-neutral-900 text-base sm:text-lg" />
+                <Link
+                  target="_blank"
+                  href={github}
+                  aria-label={`${name} on GitHub`}
+                  className="w-fit h-fit"
+                >
+                  <FiGithub aria-hidden="true" className="dark:text-white text-neutral-900 text-base sm:text-lg" />
                 </Link>
                 {deployedLink && (
                   <Link
                     target="_blank"
                     href={deployedLink as string}
+                    aria-label={`${name} live site`}
                     className="w-fit h-fit"
                   >
-                    <LuExternalLink className="dark:text-white text-neutral-900 text-base sm:text-lg" />
+                    <LuExternalLink aria-hidden="true" className="dark:text-white text-neutral-900 text-base sm:text-lg" />
                   </Link>
                 )}
               </div>
