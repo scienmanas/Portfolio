@@ -71,7 +71,9 @@ export function Skills() {
                     }}
                     viewport={{ once: true }}
                   >
-                    {typeof skill.icon === "string" ? (
+                    {/* .svg imports are image objects ({ src, width, height }) shown with <Image>;
+                        react-icons are components (functions, no `src`) rendered directly */}
+                    {"src" in skill.icon ? (
                       <Image
                         src={skill.icon}
                         alt={skill.name}

@@ -28,6 +28,16 @@
   mix-blend-mode: normal;
 }
 
+/* The loader (loaders.tsx) is its own layer: show only its live "new" view,
+   so the wheel keeps spinning while the circle reveals the new theme. */
+::view-transition-group(site-loader),
+::view-transition-new(site-loader) {
+  animation: none;
+}
+::view-transition-old(site-loader) {
+  display: none;
+}
+
 
 
 
