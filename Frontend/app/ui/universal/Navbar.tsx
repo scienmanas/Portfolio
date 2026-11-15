@@ -43,12 +43,16 @@ export function Navbar() {
   // text, cards) is revealed together by a circle growing from the button.
   const toggleTheme = (e: MouseEvent<HTMLButtonElement>) => {
     const newTheme = isDark ? "light" : "dark";
+    // Accessibility (WCAG 2.3.3 Animation from Interactions): users who enabled
+    // "Reduce motion" in their OS get an instant switch instead of the circle.
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
     if (typeof document.startViewTransition !== "function" || reduceMotion) {
-      setTheme(newTheme);
+      const enableTransitions = disableTransitions();
+      flushSync(() => setTheme(newTheme));
+      enableTransitions();
       return;
     }
 
@@ -60,9 +64,13 @@ export function Navbar() {
       Math.max(y, window.innerHeight - y)
     );
 
+    // Keep CSS transitions off while the circle runs so the new theme is
+    // revealed in its final colors rather than mid-fade.
+    const enableTransitions = disableTransitions();
     const transition = document.startViewTransition(() => {
       flushSync(() => setTheme(newTheme));
     });
+    transition.finished.finally(enableTransitions);
 
     transition.ready.then(() => {
       document.documentElement.animate(
@@ -139,6 +147,7 @@ export function Navbar() {
                 ease: "easeInOut",
               }}
               onClick={toggleTheme}
+              // Icon-only button: give screen readers a name (WCAG 4.1.2 Name, Role, Value)
               aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
               className="theme-button w-fit h-fit cursor-pointer"
             >
@@ -153,4 +162,18 @@ export function Navbar() {
       </nav>
     </Fragment>
   );
+}
+
+// Turn off CSS transitions while the theme changes (what next-themes'
+// `disableTransitionOnChange` does, but only for the toggle, so the loader's
+// slide-up on first load still animates). Returns a function that turns them back on.
+function disableTransitions() {
+  const style = document.createElement("style");
+  style.textContent =
+    "*,*::before,*::after{transition:none!important}";
+  document.head.appendChild(style);
+  return () => {
+    window.getComputedStyle(document.body); // apply the new colors before re-enabling
+    setTimeout(() => style.remove(), 1);
+  };
 }

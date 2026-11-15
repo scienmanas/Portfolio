@@ -30,6 +30,9 @@ export function WebsiteLoader({ mounted }: { mounted: boolean }) {
 
   return (
     <div
+      // Own view-transition layer: keeps spinning during the theme switch
+      // instead of freezing in the old-theme snapshot (see globals.css)
+      style={{ viewTransitionName: "site-loader" }}
       className={`loader-container flex items-center justify-center duration-2000 transition-all ${
         mounted
           ? "-z-10 transform -translate-y-1/2 -translate-x-1/2 opacity-40 fixed w-[176px] h-[176px]"

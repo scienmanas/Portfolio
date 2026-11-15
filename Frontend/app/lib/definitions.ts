@@ -28,7 +28,7 @@ export type submissionLoaderProps = {
 
 export type Skill = {
   name: string;
-  icon: IconType | React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  icon: IconType | StaticImageData;
 };
 
 export type SkillsCategorised = {

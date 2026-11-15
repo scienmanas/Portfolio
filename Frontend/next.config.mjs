@@ -1,14 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     productionBrowserSourceMaps: false,  // Disable the source map - the file structure is not revealed, a good practice
-    turbopack: {
-        rules: {
-            '*.svg': {
-                loaders: ['@svgr/webpack'],
-                as: '*.js',
-            },
-        },
-    },
     images: {
         qualities: [60, 75],  // 75 is the default; 60 is used for the faded hero background
     },
